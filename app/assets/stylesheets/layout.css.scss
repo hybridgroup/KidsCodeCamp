@@ -1,9 +1,28 @@
 @import "compass";
 @import "compass/reset";
 
+$color-blue : #1e527d;
+$color-orange : #d35d00;
+
 body {
   background: image-url("bg.png");
   font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+}
+
+.brought {
+  @include pie-clearfix;
+
+  img {
+    display: block;
+    margin: 0px auto 5px;
+  }
+
+  .text {
+    color: $color-orange;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
 }
 
 .content {
@@ -18,10 +37,37 @@ body {
 }
 
 .followus {
+  @include pie-clearfix;
+
   background-color: #fff;
+  margin-bottom: 20px;
   margin-left: -40px;
   margin-right: -40px;
-  padding: 2px 0px;
+  padding: 3px 80px;
+
+  a {
+    color: $color-blue;
+    float: left;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 8px;
+    text-decoration: none;
+  }
+
+  img {
+    float: left;
+    margin-right: 8px;
+  }
+
+  span {
+    color: $color-orange;
+    float: left;
+    font-size: 18px;
+    font-weight: 600;
+    margin-right: 10px;
+    margin-top: 6px;
+    padding: 2px 0px;
+  }
 }
 
 .intro {
@@ -29,8 +75,7 @@ body {
     background: image-url("logo.png") no-repeat;
     display: block;
     height: 142px;
-    margin-bottom: 20px;
-    margin-left: 42px;
+    margin: 0px auto 20px;
     text-indent: -9999px;
     width: 339px;
   }
@@ -45,9 +90,11 @@ body {
 
 .mailinglist {
   form {
+    margin-bottom: 10px;
+
     input[type="text"] {
       @include border-radius(8px);
-      @include box-shadow(rgba(0, 0, 0, 0.15) 0px 1px 2px inset);
+      @include box-shadow(rgba(0, 0, 0, 0.35) 0px 1px 2px inset);
 
       border: none;
       display: block;
@@ -58,7 +105,7 @@ body {
   }
 
   h1 {
-    color: #d35d00;
+    color: $color-orange;
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 10px;

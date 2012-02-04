@@ -10,12 +10,11 @@
       = image_submit_tag "submit.png"
 
   %section.followus
-    Follow Us
+    = image_tag "twitter.png"
+    %span Follow Us
     = link_to "@kidscodecamp", "http://www.twitter.com/kidscodecamp", :target => "_blank"
 
   %section.brought
-    Brought to you by:
-    = link_to "The Hybrid Group", "http://hybridgroup.com"
-    .andfriends
-      & Friends
-
+    .text Brought to you by:
+    = link_to image_tag("hybrid.png"), "http://hybridgroup.com"
+    = link_to image_tag("retreat.png", :width => 182), "http://coderetreat.org"
