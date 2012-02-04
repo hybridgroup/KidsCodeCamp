@@ -17,6 +17,6 @@ class PagesController < ApplicationController
         :password             => ENV['SENDGRID_PASSWORD'], 
         :authentication       => 'plain', 
         :domain               => ENV['SENDGRID_DOMAIN']
-      }) if Rails.env == :production
+      }) if Rails.env == 'production'
   end
 end
