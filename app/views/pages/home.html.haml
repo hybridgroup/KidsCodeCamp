@@ -1,0 +1,21 @@
+.content
+  .intro
+    %h1 Kids Code Camp
+    %h2 Coming Soon...
+
+  %section.mailinglist
+    %h1 Subscribe to our Mailing List
+    %form
+      = text_field_tag :placeholder
+      = image_submit_tag "submit.png"
+
+  %section.followus
+    Follow Us
+    = link_to "@kidscodecamp", "http://www.twitter.com/kidscodecamp", :target => "_blank"
+
+  %section.brought
+    Brought to you by:
+    = link_to "The Hybrid Group"
+    .andfriends
+      & Friends
+
