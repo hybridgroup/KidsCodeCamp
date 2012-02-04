@@ -2,4 +2,65 @@
 @import "compass/reset";
 
 body {
+  background: image-url("bg.png");
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+}
+
+.content {
+  @include border-radius(10px);
+  @include box-shadow(rgba(0, 0, 0, 0.6) 0px 2px 3px);
+
+  background: #eeeae6;
+  margin: 100px auto 0px;
+  padding: 42px;
+  text-align: center;
+  width: 393px;
+}
+
+.followus {
+  background-color: #fff;
+  margin-left: -40px;
+  margin-right: -40px;
+  padding: 2px 0px;
+}
+
+.intro {
+  h1 {
+    background: image-url("logo.png") no-repeat;
+    display: block;
+    height: 142px;
+    margin-bottom: 20px;
+    margin-left: 42px;
+    text-indent: -9999px;
+    width: 339px;
+  }
+
+  h2 {
+    color: #1e527d;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+}
+
+.mailinglist {
+  form {
+    input[type="text"] {
+      @include border-radius(8px);
+      @include box-shadow(rgba(0, 0, 0, 0.15) 0px 1px 2px inset);
+
+      border: none;
+      display: block;
+      margin-bottom: 10px;
+      padding: 10px 20px;
+      width: 342px;
+    }
+  }
+
+  h1 {
+    color: #d35d00;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
 }
