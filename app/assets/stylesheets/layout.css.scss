@@ -9,6 +9,22 @@ body {
   font-family: "Helvetica Neue", helvetica, arial, sans-serif;
 }
 
+.created {
+  @include pie-clearfix;
+
+  img {
+    display: block;
+    margin: 0px auto 20px;
+  }
+
+  .text {
+    color: $color-orange;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+}
+
 .brought {
   @include pie-clearfix;
 
@@ -21,7 +37,7 @@ body {
     color: $color-orange;
     font-size: 12px;
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-bottom: 20px;
   }
 }
 
