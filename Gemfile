@@ -18,6 +18,7 @@ gem 'haml-rails'
 gem 'jquery-rails'
 gem "compass", "~> 0.12.alpha.4"
 gem 'pony'
+gem 'hominid'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
