@@ -1,0 +1,13 @@
+= form_for @message, :url => { :action=>"new", :controller=>"contact"} do |form|
+  %fieldset.fields
+    .field
+      = form.label :name
+      = form.text_field :name
+    .field
+      = form.label :email
+      = form.text_field :email
+    .field
+      = form.label :body
+      = form.text_area :body
+  %fieldset.actions
+    = form.submit "Send"
