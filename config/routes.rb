@@ -4,8 +4,8 @@ App::Application.routes.draw do
   devise_for :users
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  match 'contact' => 'contact#new', :as => 'contact', :via => :get
-  match 'contact' => 'contact#create', :as => 'contact', :via => :post
+  match 'contact' => 'contact_forms#new', :as => 'contact_forms', :via => :get
+  match 'contact' => 'contact_forms#create', :as => 'contact_forms', :via => :post
   match 'signup' => 'pages#signup'
 
   root :to => 'pages#home'
