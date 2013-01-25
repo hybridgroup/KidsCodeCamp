@@ -1,0 +1,9 @@
+= form_for @contact_form do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :email
+    = f.email_field :email
+  .actions
+    = f.submit
