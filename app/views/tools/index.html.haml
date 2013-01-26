@@ -1,0 +1,9 @@
+%h1 Tools & Toys
+%br
+-@categories.each do |category|
+	-if category.tools.size > 0
+		%h3= category.name
+	-category.tools.each do |tool|
+		%h3= link_to tool.name, tool
+		%br
+%br
