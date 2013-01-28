@@ -1,0 +1,10 @@
+!!!
+%html
+  %head
+    %title Kids Code Camp - Teaching The Kids of Planet Earth To Code
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    = javascript_include_tag "jquery.tweetable.js"
+    = csrf_meta_tags
+  %body
+    = yield
