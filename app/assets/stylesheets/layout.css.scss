@@ -44,12 +44,13 @@ body {
 .content {
   @include border-radius(10px);
   @include box-shadow(rgba(0, 0, 0, 0.6) 0px 2px 3px);
+  @include pie-clearfix;
 
-  background: #eeeae6;
-  margin: 100px auto 0px;
-  padding: 42px;
+  background: #ffffff;
+  margin: 250px auto 0px;
+  padding: 0px;
   text-align: center;
-  width: 393px;
+  width: 940px;
 }
 
 .followus {
@@ -114,9 +115,15 @@ body {
 
       border: none;
       display: block;
-      margin-bottom: 10px;
+      margin-top: 20px;
+      margin-left: 30px;
       padding: 10px 20px;
-      width: 342px;
+      width: 140px;
+      float: left;
+    }
+
+    input[type="image"] {
+      margin-top: 16px;
     }
   }
 
@@ -152,4 +159,97 @@ body {
   p {
     margin-bottom: 10px;
   }
+}
+
+.header {
+  position: relative;
+}
+
+.header_logo {
+  position: absolute;
+  top:50px;
+  left:479px;
+  z-index:1;
+}
+
+.header_sun {
+  position: absolute;
+  top:110px;
+  left:515px;
+  z-index:2;
+}
+
+.menu_bar {
+  position: absolute;
+  top:226px;
+  left:147px;
+  z-index:0;
+}
+
+.home-container {
+  padding: 80px 60px 20px 60px;
+  line-height: 130%;
+  width: 500px;
+  float: left;
+}
+
+.sidebar-container {
+  background: image-url("sidebar_bg.png") repeat-y;
+  padding-top: 30px;
+  text-align: center;
+  width: 310px;
+  float: right;
+}
+
+.news {
+  h1 {
+    color: $color-orange;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  p {
+    color: $color-blue;
+    text-align: justify;
+    font-size: 14px;
+    margin-bottom: 50px;
+  }
+}
+
+.social-box {
+  @include border-radius(5px);
+  @include box-shadow(rgba(0, 0, 0, 0.6) 0px 2px 3px);
+  @include pie-clearfix;
+
+  background: #F7E9DB;
+  margin: 25px auto 0px;
+  padding: 0px;
+  text-align: center;
+  width: 280px;
+}
+
+.newsletter-text {
+  color: #F7E9DB;
+  text-align: justify;
+  font-size: 14px;
+  padding-left: 30px;
+  padding-right: 30px;
+  line-height: 130%;
+}
+
+.twitter-container {
+  background: image-url("twitter_bg.png") repeat-y;
+  text-align: center;
+  width: 316px;
+  float: right;
+  margin-top: 16px;
+}
+
+.twitter-title {
+  color: #FFFFFF;
+  text-align: justify;
+  font-size: 14px;
+  padding: 30px;
 }
