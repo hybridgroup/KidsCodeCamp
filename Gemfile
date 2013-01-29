@@ -38,9 +38,12 @@ gem 'mail_form'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 group :development, :test do
   gem 'sqlite3'
+  gem 'rspec-rails', '2.11.0'
+  gem "factory_girl_rails", "~> 4.0"
 end
 
 group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
+  gem 'email_spec'
 end
