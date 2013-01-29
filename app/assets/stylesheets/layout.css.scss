@@ -216,16 +216,38 @@ body {
   }
 }
 
-.social-box {
+#social-box {
   @include border-radius(5px);
   @include box-shadow(rgba(0, 0, 0, 0.6) 0px 2px 3px);
   @include pie-clearfix;
 
   background: #F7E9DB;
   margin: 25px auto 0px;
-  padding: 0px;
-  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
   width: 280px;
+}
+
+#social-box a { padding-left: 32px; }
+
+#social-box .counter { 
+  padding-left: 40px; 
+  padding-right: 17px;
+  padding-bottom: 10px;
+  float: left; 
+  text-align: center; 
+  color: #790706;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#social-box .text { 
+  padding-left: 27px;
+  float: left; 
+  text-align: center; 
+  color: #1E537D;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .newsletter-text {
