@@ -2,7 +2,6 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 # require 'email_spec'
-=======
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
