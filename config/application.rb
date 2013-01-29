@@ -2,6 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 # require 'email_spec'
+=======
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -61,7 +62,6 @@ module App
         :controller_specs => true,
         :request_specs => true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
-end
-
+    end
   end
 end
