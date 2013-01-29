@@ -242,6 +242,7 @@ body {
   width: 316px;
   float: right;
   margin-top: 16px;
+  display: block;
 }
 
 .twitter-title {
@@ -253,25 +254,28 @@ body {
 
 #tweets {
   margin-left: 25px;
-  margin-right: 10px  
+  margin-right: 10px;
+  font-size: 12px;
 }
 
 #tweets li {
   padding: 5px;
-  color:#FFFFFF;
-  border-bottom:1px solid #000000;
-  border-top:1px solid #353434;
-  line-height:150%;
+  color: orange;
+  border-bottom: 1px solid #000000;
+  border-top: 1px solid #353434;
+  line-height: 150%;
 }
 
 #tweets li .timestamp {text-align:right;}
 
 #tweets li.tweet_content_0 {
-  border-top:0px none;
+  border-top: 0px none;
 }
 #tweets li:last-child{
-  border-bottom:0px none; 
+  border-bottom: 0px none; 
 }
 
 #tweets .hash { color:#FFF; } 
 #tweets .reply { color:#FFF; } 
+
+#tweets a { color: #FFF }
