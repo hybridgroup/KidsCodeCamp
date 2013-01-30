@@ -3,6 +3,23 @@
 
 $color-blue : #1e527d;
 $color-orange : #d35d00;
+$color-grey : #f2edea;
+$color-light-blue: #1f5380;
+$color-medium-blue: #3f729f;
+
+@font-face {
+    font: {
+       family: 'Ranger';
+       weight: 'normal';
+       style: 'normal';
+    }
+    src: asset-url('ranger-webfont.eot', font);
+    src: asset-url('ranger-webfont.eot', font) format('embedded-opentype'),
+         asset-url('ranger-webfont.woff', font) format('woff'),
+         asset-url('ranger-webfont.ttf', font) format('truetype'),
+         asset-url('ranger-webfont.svg#JunctionRegular', font) format('svg')
+}
+
 
 body {
   background: image-url("bg.png");

@@ -28,35 +28,26 @@ GEM
     activesupport (3.2.11)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-<<<<<<< HEAD
     addressable (2.3.2)
     ansi (1.4.3)
-    arel (2.2.3)
+    arel (3.0.2)
     bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
     builder (3.0.4)
     chunky_png (1.2.7)
-    coffee-rails (3.1.1)
-=======
-    ansi (1.4.3)
-    arel (3.0.2)
-    builder (3.0.4)
-    chunky_png (1.2.7)
     coffee-rails (3.2.2)
->>>>>>> e46845f23890687240531606816b78781e20942c
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
-<<<<<<< HEAD
-    compass (0.13.alpha.0)
+    compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
-      sass (~> 3.2.0.alpha.93)
+      sass (~> 3.1)
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
     devise (2.2.3)
@@ -80,18 +71,6 @@ GEM
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
     fssm (0.2.10)
-=======
-    compass (0.12.2)
-      chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
-    compass-rails (1.0.3)
-      compass (>= 0.12.2, < 0.14)
-    erubis (2.7.0)
-    execjs (1.4.0)
-      multi_json (~> 1.0)
-    fssm (0.2.9)
->>>>>>> e46845f23890687240531606816b78781e20942c
     haml (3.1.7)
     haml-rails (0.3.5)
       actionpack (>= 3.1, < 4.1)
@@ -101,7 +80,7 @@ GEM
     hike (1.2.1)
     hominid (3.0.5)
     i18n (0.6.1)
-<<<<<<< HEAD
+    journey (1.0.4)
     jquery-rails (2.2.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -114,7 +93,7 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.1.2)
       addressable (~> 2.3)
-    mail (2.3.3)
+    mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -131,35 +110,13 @@ GEM
     polyglot (0.3.3)
     pony (1.4)
       mail (> 2.0)
-    rack (1.3.9)
-    rack-cache (1.2)
-      rack (>= 0.4)
-    rack-mount (0.8.3)
-      rack (>= 1.0.0)
-    rack-pjax (0.7.0)
-      nokogiri (~> 1.5)
-      rack (~> 1.3)
-=======
-    journey (1.0.4)
-    jquery-rails (2.2.0)
-      railties (>= 3.0, < 5.0)
-      thor (>= 0.14, < 2.0)
-    json (1.7.6)
-    mail (2.4.4)
-      i18n (>= 0.4.0)
-      mime-types (~> 1.16)
-      treetop (~> 1.4.8)
-    mime-types (1.19)
-    multi_json (1.5.0)
-    pg (0.14.1)
-    polyglot (0.3.3)
-    pony (1.4)
-      mail (> 2.0)
     rack (1.4.4)
     rack-cache (1.2)
       rack (>= 0.4)
->>>>>>> e46845f23890687240531606816b78781e20942c
-    rack-ssl (1.3.2)
+    rack-pjax (0.7.0)
+      nokogiri (~> 1.5)
+      rack (~> 1.3)
+    rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -170,8 +127,7 @@ GEM
       activeresource (= 3.2.11)
       activesupport (= 3.2.11)
       bundler (~> 1.0)
-<<<<<<< HEAD
-      railties (= 3.1.3)
+      railties (= 3.2.11)
     rails_admin (0.4.3)
       bootstrap-sass (~> 2.2)
       builder (~> 3.0)
@@ -186,19 +142,17 @@ GEM
       rails (~> 3.1)
       remotipart (~> 1.0)
       sass-rails (~> 3.1)
-    railties (3.1.3)
-      actionpack (= 3.1.3)
-      activesupport (= 3.1.3)
+    railties (3.2.11)
+      actionpack (= 3.2.11)
+      activesupport (= 3.2.11)
       rack-ssl (~> 1.3.2)
       rake (>= 0.8.7)
       rdoc (~> 3.4)
-      thor (~> 0.14.6)
+      thor (>= 0.14.6, < 2.0)
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)
     remotipart (1.0.2)
-    rest-client (1.6.7)
-      mime-types (>= 1.16)
     rspec (2.11.0)
       rspec-core (~> 2.11.0)
       rspec-expectations (~> 2.11.0)
@@ -213,50 +167,18 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.11.0)
     sass (3.2.5)
-    sass-rails (3.1.7)
-      actionpack (~> 3.1.0)
-      railties (~> 3.1.0)
-      sass (>= 3.1.10)
-      tilt (~> 1.3.2)
-    sequel (3.20.0)
-    sinatra (1.0)
-      rack (>= 1.0)
-    sprockets (2.0.4)
-=======
-      railties (= 3.2.11)
-    railties (3.2.11)
-      actionpack (= 3.2.11)
-      activesupport (= 3.2.11)
-      rack-ssl (~> 1.3.2)
-      rake (>= 0.8.7)
-      rdoc (~> 3.4)
-      thor (>= 0.14.6, < 2.0)
-    rake (10.0.3)
-    rdoc (3.12)
-      json (~> 1.4)
-    sass (3.2.5)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
     sprockets (2.2.2)
->>>>>>> e46845f23890687240531606816b78781e20942c
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.7)
-<<<<<<< HEAD
     sqlite3 (1.3.7-x86-mingw32)
-    taps (0.3.24)
-      rack (>= 1.0.1)
-      rest-client (>= 1.4.0, < 1.7.0)
-      sequel (~> 3.20.0)
-      sinatra (~> 1.0.0)
-    thor (0.14.6)
-=======
-    thor (0.16.0)
->>>>>>> e46845f23890687240531606816b78781e20942c
+    thor (0.17.0)
     tilt (1.3.3)
     treetop (1.4.12)
       polyglot
@@ -267,11 +189,8 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-<<<<<<< HEAD
     warden (1.2.1)
       rack (>= 1.0)
-=======
->>>>>>> e46845f23890687240531606816b78781e20942c
 
 PLATFORMS
   ruby
@@ -279,35 +198,23 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-<<<<<<< HEAD
-  coffee-rails (~> 3.1.1)
-  compass (~> 0.12.alpha.4)
+  coffee-rails (~> 3.2.1)
+  compass (~> 0.12.2)
   compass-rails
   devise
   email_spec
   factory_girl_rails (~> 4.0)
-=======
-  coffee-rails (~> 3.2.1)
-  compass (~> 0.12.2)
-  compass-rails
->>>>>>> e46845f23890687240531606816b78781e20942c
   haml-rails
   hominid
   jquery-rails
   mail_form
   pg
   pony
-<<<<<<< HEAD
-  rails (= 3.1.3)
+  rails (= 3.2.11)
   rails_admin
   rake (>= 10.0.3)
   rspec-rails (= 2.11.0)
-  sass-rails (~> 3.1.5)
-=======
-  rails (= 3.2.11)
   sass-rails (~> 3.2.3)
->>>>>>> e46845f23890687240531606816b78781e20942c
   sqlite3
-  taps
   turn (= 0.8.2)
   uglifier (>= 1.3.0)

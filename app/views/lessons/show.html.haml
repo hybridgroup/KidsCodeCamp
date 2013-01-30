@@ -1,7 +1,8 @@
-%p#notice= notice
-%h1= @lesson.title
-%p=	@lesson.description
+.content
+  .home-container
 
-= link_to 'Edit', edit_lesson_path(@lesson)
-|
-\#{link_to 'Back', lessons_path}
+    %p#notice= notice
+    %h1.headline= @lesson.title.upcase
+    %p=	@lesson.description
+    %br
+    = link_to 'Back', lessons_path

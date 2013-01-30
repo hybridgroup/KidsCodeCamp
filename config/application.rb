@@ -49,6 +49,8 @@ module App
       g.template_engine :haml
     end
 
+    config.assets.paths << "#{Rails.root}/app/assets/fonts"
+
     # config.include(EmailSpec::Helpers)
     # config.include(EmailSpec::Matchers)
 
