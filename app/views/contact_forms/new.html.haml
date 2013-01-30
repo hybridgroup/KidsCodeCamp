@@ -9,9 +9,9 @@
           = f.text_field :name
         .field.column
           = f.label :email, "EMAIL"
-          = f.email_field :email
+          = f.email_field :email, :cols => 20 
         .field
           = f.label :message, "MESSAGE"
-          = f.text_area :message, :size => "53x19"
+          = f.text_area :message, :size => "54x19"
         .actions
           = f.submit "Submit", :class => "contact-submit"
