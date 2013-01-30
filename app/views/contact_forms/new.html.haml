@@ -1,12 +1,17 @@
-= form_for @contact_form do |f|
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :email
-    = f.email_field :email
-  .field
-    = f.label :message
-    = f.text_field :message
-  .actions
-    = f.submit
+.content
+  .home-container
+    %h1.headline CONTACT US
+    %br
+    .contact-container
+      = form_for @contact_form do |f|
+        .field.column
+          = f.label :name, "NAME"
+          = f.text_field :name
+        .field.column
+          = f.label :email, "EMAIL"
+          = f.email_field :email
+        .field
+          = f.label :message, "MESSAGE"
+          = f.text_area :message, :size => "53x19"
+        .actions
+          = f.submit "Submit", :class => "contact-submit"
