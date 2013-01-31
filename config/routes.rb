@@ -2,6 +2,8 @@ App::Application.routes.draw do
 
   resources :lessons
   resources :tools
+  resources :boards
+  resources :posts
 
   devise_for :users
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'

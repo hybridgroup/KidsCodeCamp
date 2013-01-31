@@ -1,0 +1,10 @@
+= form_for @post do |f|
+  .field
+    = f.label :title, "SUBJECT"
+    = f.text_field :title
+  .field
+    = f.label :body, "MESSAGE"
+    = f.text_area :body, :size => "54x19"
+  = f.hidden_field :parent_id
+  .actions
+    = f.submit "POST", :class => "contact-submit"
