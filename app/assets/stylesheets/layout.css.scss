@@ -131,15 +131,16 @@ body {
 
       border: none;
       display: block;
-      margin-top: 20px;
-      margin-left: 30px;
+      margin-left: 20px;
       padding: 10px 20px;
-      width: 140px;
+      width: 160px;
       float: left;
     }
 
     input[type="image"] {
-      margin-top: 16px;
+      margin-top: -2px;
+      padding-right: 10px;
+      float: right;
     }
   }
 
@@ -233,24 +234,45 @@ body {
   }
 }
 
-.social-box {
+#social-box {
   @include border-radius(5px);
   @include box-shadow(rgba(0, 0, 0, 0.6) 0px 2px 3px);
   @include pie-clearfix;
 
   background: #F7E9DB;
   margin: 25px auto 0px;
-  padding: 0px;
-  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
   width: 280px;
+}
+
+#social-box a { padding-left: 32px; }
+
+#social-box .counter { 
+  padding-left: 40px; 
+  padding-right: 17px;
+  padding-bottom: 10px;
+  float: left; 
+  text-align: center; 
+  color: #790706;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#social-box .text { 
+  padding-left: 27px;
+  float: left; 
+  text-align: center; 
+  color: #1E537D;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .newsletter-text {
   color: #F7E9DB;
   text-align: justify;
   font-size: 14px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding: 20px;
   line-height: 130%;
 }
 
@@ -259,6 +281,7 @@ body {
   width: 316px;
   float: right;
   margin-top: 16px;
+  display: block;
 }
 
 .twitter-title {
@@ -270,25 +293,28 @@ body {
 
 #tweets {
   margin-left: 25px;
-  margin-right: 10px  
+  margin-right: 10px;
+  font-size: 12px;
 }
 
 #tweets li {
   padding: 5px;
-  color:#FFFFFF;
-  border-bottom:1px solid #000000;
-  border-top:1px solid #353434;
-  line-height:150%;
+  color: orange;
+  border-bottom: 1px solid #000000;
+  border-top: 1px solid #353434;
+  line-height: 150%;
 }
 
 #tweets li .timestamp {text-align:right;}
 
 #tweets li.tweet_content_0 {
-  border-top:0px none;
+  border-top: 0px none;
 }
 #tweets li:last-child{
-  border-bottom:0px none; 
+  border-bottom: 0px none; 
 }
 
 #tweets .hash { color:#FFF; } 
 #tweets .reply { color:#FFF; } 
+
+#tweets a { color: #FFF }

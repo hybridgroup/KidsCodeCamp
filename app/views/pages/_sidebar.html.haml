@@ -1,0 +1,27 @@
+.sidebar-container
+  #social-box
+    = link_to image_tag("button_rss.png"), "#"
+    = link_to image_tag("button_twitter.png"), "#"
+    = link_to image_tag("button_facebook.png"), "#"
+    .counter
+      123
+    .counter
+      456
+    .counter
+      789
+    .text
+      READERS
+    .text
+      FOLLOWERS
+    .text
+      FANS
+  %section.mailinglist
+    .newsletter-text
+      Subscribe to our newsletter to receive the latests news about KidsCodeCamp
+    %form#signup{:action => '/signup'}
+      = text_field_tag :email
+      = image_submit_tag "button_send.png"
+  .twitter-container
+    .twitter-title
+      KIDSCODECAMP on Twitter
+    #tweets
