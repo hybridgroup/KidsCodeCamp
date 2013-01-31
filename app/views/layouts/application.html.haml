@@ -13,16 +13,16 @@
       /= image_tag "menu_bar.png", :class => "menu_bar"
     #menu-container
       .menu-item
-        HOME
+        = link_to "HOME", root_path
       .menu-item
-        ABOUT
+        = link_to "ABOUT", "#"
       .menu-item
-        TOOLS & TOYS
+        = link_to "TOOLS & TOYS", tools_path
       .menu-item
-        LESSONS
+        = link_to "LESSONS", lessons_path
       .menu-item
-        COMMUNITY
+        = link_to "COMMUNITY", "#"
       .menu-item
-        CONTACT US
+        = link_to "CONTACT US", contact_forms_path
     .content
       = yield
