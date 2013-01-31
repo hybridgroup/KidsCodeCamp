@@ -202,3 +202,24 @@ body {
   left:147px;
   z-index:0;
 }
+
+#menu-container {
+  @include border-radius(10px);
+  @include box-shadow(rgba(109, 74, 74, 0.6) 0px 4px 8px);
+  @include pie-clearfix;
+  background: #ECE3DC;
+  margin: -13px 0px 0px 150px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  width: 950px;
+  position: absolute;
+}
+
+.menu-item {
+  float: left;
+  color: $color-orange;
+  font-size: 25px;
+  font-family: 'Ranger', Helvetica, Arial, serif;
+  padding-left: 35px;
+}
