@@ -11,6 +11,6 @@
 jQuery(document).ready(function($) {
   $('#tweets').tweetable({
     username: 'kidscodecamp',
-    limit: '5'
+    limit: '10'
   });
 });
