@@ -1,3 +1,119 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.home-container {
+  padding: 80px 60px 20px 60px;
+  line-height: 130%;
+  width: 500px;
+  float: left;
+}
+
+.sidebar-container {
+  background: image-url("sidebar_bg.png") repeat-y;
+  padding-top: 30px;
+  width: 310px;
+  float: right;
+}
+
+.news {
+  h1 {
+    color: $color-orange;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  p {
+    color: $color-blue;
+    text-align: justify;
+    font-size: 14px;
+    margin-bottom: 50px;
+  }
+}
+
+#social-box {
+  @include border-radius(5px);
+  @include box-shadow(rgba(0, 0, 0, 0.6) 0px 2px 3px);
+  @include pie-clearfix;
+
+  background: #F7E9DB;
+  margin: 25px auto 0px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 280px;
+}
+
+#social-box a { padding-left: 32px; }
+
+#social-box .counter { 
+  padding-left: 40px; 
+  padding-right: 17px;
+  padding-bottom: 10px;
+  float: left; 
+  text-align: center; 
+  color: #790706;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#social-box .text { 
+  padding-left: 27px;
+  float: left; 
+  text-align: center; 
+  color: #1E537D;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.newsletter-text {
+  color: #F7E9DB;
+  text-align: justify;
+  font-size: 14px;
+  padding: 20px;
+  line-height: 130%;
+}
+
+.twitter-container {
+  background: image-url("twitter_bg.png") repeat-y;
+  width: 316px;
+  float: right;
+  margin-top: 16px;
+  display: block;
+}
+
+.twitter-title {
+  color: #FFFFFF;
+  text-align: justify;
+  font-size: 14px;
+  padding: 30px;
+}
+
+#tweets {
+  margin-left: 25px;
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+#tweets li {
+  padding: 5px;
+  color: orange;
+  border-bottom: 1px solid #000000;
+  border-top: 1px solid #353434;
+  line-height: 150%;
+}
+
+#tweets li .timestamp {text-align:right;}
+
+#tweets li.tweet_content_0 {
+  border-top: 0px none;
+}
+#tweets li:last-child{
+  border-bottom: 0px none; 
+}
+
+#tweets .hash { color:#FFF; } 
+#tweets .reply { color:#FFF; } 
+
+#tweets a { color: #FFF }
