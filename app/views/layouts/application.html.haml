@@ -7,4 +7,9 @@
     = javascript_include_tag "jquery.tweetable.js"
     = csrf_meta_tags
   %body
-    = yield
+    .haeder
+      = image_tag "header_logo.png", :class => "header_sun"
+      = image_tag "header_sun.png", :class => "header_logo"
+      = image_tag "menu_bar.png", :class => "menu_bar"
+    .content
+      = yield
