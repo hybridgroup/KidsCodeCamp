@@ -216,6 +216,32 @@ body {
   position: absolute;
 }
 
+#menu-container-orange {
+  @include border-radius(10px);
+  @include box-shadow(rgba(109, 74, 74, 0.6) 0px 4px 8px);
+  @include pie-clearfix;
+  background: $color-orange;
+  margin: -16px 0px 0px 150px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  width: 950px;
+  position: absolute;
+}
+
+#menu-container-blue {
+  @include border-radius(10px);
+  @include box-shadow(rgba(109, 74, 74, 0.6) 0px 4px 8px);
+  @include pie-clearfix;
+  background: $color-blue;
+  margin: -21px 0px 0px 150px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  width: 950px;
+  position: absolute;
+}
+
 .menu-item {
   float: left;
   color: $color-orange;
