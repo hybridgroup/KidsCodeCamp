@@ -64,9 +64,11 @@ body {
   @include pie-clearfix;
 
   background: #ffffff;
-  margin: 250px auto 0px;
+  margin: -15px auto 0px;
   padding: 0px;
   width: 940px;
+  position: relative;
+  z-index:-1;
 }
 
 .followus {
@@ -201,12 +203,14 @@ body {
   @include box-shadow(rgba(109, 74, 74, 0.6) 0px 4px 8px);
   @include pie-clearfix;
   background: #ECE3DC;
-  margin: -13px 0px 0px 150px;
+  margin-top: -16px;
+  margin-left: auto;
+  margin-right: auto;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 30px;
   width: 950px;
-  position: absolute;
+  display: block;
 }
 
 #menu-container-orange {
@@ -214,12 +218,14 @@ body {
   @include box-shadow(rgba(109, 74, 74, 0.6) 0px 4px 8px);
   @include pie-clearfix;
   background: $color-orange;
-  margin: -17px 0px 0px 150px;
+  margin-top: -15px;
+  margin-left: auto;
+  margin-right: auto;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 30px;
   width: 950px;
-  position: absolute;
+  display: block;
 }
 
 #menu-container-blue {
@@ -227,12 +233,14 @@ body {
   @include box-shadow(rgba(109, 74, 74, 0.6) 0px 4px 8px);
   @include pie-clearfix;
   background: $color-blue;
-  margin: -22px 0px 0px 150px;
+  margin-top: 228px;
+  margin-left: auto;
+  margin-right: auto;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 30px;
   width: 950px;
-  position: absolute;
+  display: block;
 }
 
 .menu-item {
