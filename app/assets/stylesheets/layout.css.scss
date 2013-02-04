@@ -182,25 +182,18 @@ body {
   position: relative;
 }
 
-.header_logo {
+.header-sun {
   position: absolute;
   top:50px;
   left:479px;
   z-index:1;
 }
 
-.header_sun {
+.header-logo {
   position: absolute;
-  top:110px;
+  top:117px;
   left:515px;
   z-index:2;
-}
-
-.menu_bar {
-  position: absolute;
-  top:226px;
-  left:147px;
-  z-index:0;
 }
 
 #menu-container {
@@ -221,7 +214,7 @@ body {
   @include box-shadow(rgba(109, 74, 74, 0.6) 0px 4px 8px);
   @include pie-clearfix;
   background: $color-orange;
-  margin: -16px 0px 0px 150px;
+  margin: -17px 0px 0px 150px;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 30px;
@@ -234,7 +227,7 @@ body {
   @include box-shadow(rgba(109, 74, 74, 0.6) 0px 4px 8px);
   @include pie-clearfix;
   background: $color-blue;
-  margin: -21px 0px 0px 150px;
+  margin: -22px 0px 0px 150px;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 30px;
