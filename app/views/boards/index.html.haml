@@ -1,2 +1,22 @@
-%h1 Boards#index
-%p Find me in app/views/boards/index.html.haml
+.content
+  .home-container
+
+    %h1.headline Boards
+    %br
+    - if current_user
+      .user-controls
+        = link_to "Profile", edit_user_path(current_user.id)
+  |
+        \#{link_to "Logout", :logout}
+    - else
+      = link_to "Register", new_user_path
+  |
+    \#{link_to "Login", :login}
+    
+    - @boards.each do |board|
+      .lesson-container
+        %h3= board.name
+        -board.posts.each do |post|
+          %h4= link_to post.title, post
+      = link_to "New Topic", new_post_path(:board_id => board.id), :class => "contact-submit"
+    %br

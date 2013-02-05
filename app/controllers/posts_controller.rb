@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:show, :index]
+
   def index
      @posts = Post.all
   end
@@ -22,7 +24,12 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new :parent_id => params[:parent_id]
+    @post = Post.new(:board_id => params[:board_id])
+    @post.parent_id = params[:parent_id]
+    logger.debug "New post: #{@post.attributes.inspect}"
+    if @post.parent
+      @parent = @post.parent
+    end
   end
 
   def create

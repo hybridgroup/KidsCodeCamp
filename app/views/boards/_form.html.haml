@@ -1,0 +1,6 @@
+= form_for @board do |f|
+  .field
+    = f.label :name, "NAME"
+    = f.text_field :name
+  .actions
+    = f.submit "POST", :class => "contact-submit"

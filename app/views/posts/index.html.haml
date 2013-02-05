@@ -5,10 +5,7 @@
     %br
     - @posts.each do |post|
       .post-container
-        %h3= link_to post.title
-        %h5= post.created_at
-        %p= post.body
-        = link_to "Reply", new_post_path(:parent_id => post.id)
-        = link_to "Delete", destroy_post_path
+        -if post.parent == nil
+          = render "post", :post => post
     %br
     = link_to "New Topic", new_post_path

@@ -2,6 +2,9 @@ class PagesController < ApplicationController
   def home
   end
 
+  def community
+  end
+
   def signup
 =begin
     Pony.mail(

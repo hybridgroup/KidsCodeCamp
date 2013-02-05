@@ -5,13 +5,18 @@ App::Application.routes.draw do
   resources :boards
   resources :posts
 
+  devise_for :admins
   devise_for :users
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   match 'contact' => 'contact_forms#new', :as => 'contact_forms', :via => :get
   match 'contact' => 'contact_forms#create', :as => 'contact_forms', :via => :post
+  match 'community' => 'pages#community'
   match 'signup' => 'pages#signup'
 
+  devise_scope :user do
+    get "community/signup", :to => "devise/registrations#new"
+  end
   root :to => 'pages#home'
 
   # The priority is based upon order of creation:

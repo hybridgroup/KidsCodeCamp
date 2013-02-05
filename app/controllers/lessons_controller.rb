@@ -1,5 +1,5 @@
 class LessonsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show, :index]
+  before_filter :authenticate_admin!, :except => [:show, :index]
 
   def index
      @lessons = Lesson.all

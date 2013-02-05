@@ -3,4 +3,8 @@
     %h1.headline CREATE A NEW TOPIC
     %br
     .contact-container
-      render 'form'
+      - if @post.parent
+        %h3= @parent.title
+        %h5= @parent.created_at
+        %p= @parent.body
+      = render "form"

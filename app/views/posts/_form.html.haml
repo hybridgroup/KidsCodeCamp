@@ -5,6 +5,8 @@
   .field
     = f.label :body, "MESSAGE"
     = f.text_area :body, :size => "54x19"
+  = f.hidden_field :board_id
   = f.hidden_field :parent_id
+  = f.hidden_field :user_id
   .actions
     = f.submit "POST", :class => "contact-submit"
