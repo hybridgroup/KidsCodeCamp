@@ -19,14 +19,12 @@
       KIDSCODECAMP on Twitter
     #tweets
   .logo-container
-    .text
-      KidsCodeCamp is created by:
-    = link_to image_tag("hybrid.png"), "http://hybridgroup.com/", :class => "sponsor"
-    .text
-      And brought to you by:
-    = link_to image_tag("retreat.png"), "http://coderetreat.org", :class => "sponsor"   
-    = link_to image_tag("sponsor-att.png"), "http://www.att.com/", :class => "sponsor"
-    = link_to image_tag("logo-engineyard-horizontal.png"), "https://www.engineyard.com/", :class => "sponsor"
-    = link_to image_tag("sphero.png"), "http://www.gosphero.com/", :class => "sponsor"
-    = link_to image_tag("sponsor-famigo.png"), "http://www.famigo.com/", :class => "sponsor"
-    = link_to image_tag("ruby-central.png"), "http://rubycentral.org/", :class => "sponsor"
+    %p KidsCodeCamp is created by:
+    = link_to image_tag("hybrid.png", :size => "182x28"), "http://hybridgroup.com/", :class => "sponsor"
+    %p And brought to you by:
+    = link_to image_tag("retreat.png", :size => "182x93" ), "http://coderetreat.org", :class => "sponsor"
+    = link_to image_tag("sponsor-att.png", :size => "182x62"), "http://www.att.com/", :class => "sponsor"
+    = link_to image_tag("logo-engineyard-horizontal.png", :size => "182x55"), "https://www.engineyard.com/", :class => "sponsor"
+    = link_to image_tag("sphero.png", :size => "182x56"), "http://www.gosphero.com/", :class => "sponsor"
+    = link_to image_tag("sponsor-famigo.png", :size => "182x56"), "http://www.famigo.com/", :class => "sponsor"
+    = link_to image_tag("ruby-central.png", :size => "182x179"), "http://rubycentral.org/", :class => "sponsor"
