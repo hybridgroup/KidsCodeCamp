@@ -64,7 +64,7 @@ body {
   @include pie-clearfix;
 
   background: #ffffff;
-  margin: -10px auto 0px;
+  margin: -10px auto 30px;
   padding: 0px;
   position: relative;
   width: 940px;
@@ -87,6 +87,10 @@ body {
     font-weight: 600;
     margin-top: 8px;
     text-decoration: none;
+  }
+
+  a:hover {
+    color: #fffff; 
   }
 
   img {
