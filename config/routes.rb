@@ -9,6 +9,8 @@ App::Application.routes.draw do
   match 'contact' => 'contact_forms#new', :as => 'contact_forms', :via => :get
   match 'contact' => 'contact_forms#create', :as => 'contact_forms', :via => :post
   match 'signup' => 'pages#signup'
+  match 'about' => 'pages#about'
+  match 'community' => 'pages#community'
 
   root :to => 'pages#home'
 
