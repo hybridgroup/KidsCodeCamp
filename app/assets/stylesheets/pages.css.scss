@@ -132,3 +132,28 @@ a.social-media img {
 #tweets .reply { color:#FFF; } 
 
 #tweets a { color: #FFF }
+
+.footer {
+  margin: -10px auto 30px;
+  padding: 0px;
+  position: relative;
+  width: 940px;
+  padding-left: 10px;
+}
+.footer a {
+  float: left;
+  color: #340504;
+  margin-bottom: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-right: 2px solid #340504;
+}
+
+.footer a.last {
+  border-right: none;
+}
+.footer p {
+  color: #340504;
+  clear: both;
+  padding-left: 5px;
+}
