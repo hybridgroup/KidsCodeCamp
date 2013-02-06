@@ -66,12 +66,16 @@
 }
 
 #social-box .text { 
-  padding-left: 27px;
+  padding-left: 60px;
   float: left; 
   text-align: center; 
   color: #1E537D;
   font-size: 12px;
   font-weight: 600;
+}
+
+#social-box .text#fans { 
+  padding-left: 34px;
 }
 
 .newsletter-text {
@@ -80,6 +84,10 @@
   font-size: 14px;
   padding: 20px;
   line-height: 130%;
+}
+
+a.social-media img {
+  padding-left: 40px;
 }
 
 .twitter-container {
