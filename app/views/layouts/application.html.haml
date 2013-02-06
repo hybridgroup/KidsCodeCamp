@@ -7,24 +7,25 @@
     = javascript_include_tag "jquery.tweetable.js"
     = csrf_meta_tags
   %body
-    .haeder
+    .page-header
       = image_tag "header_logo.png", :class => "header-logo"
       = image_tag "header_sun.png", :class => "header-sun"
-    #menu-container-blue
-    #menu-container-orange
-    #menu-container
-      .menu-item
-        = link_to "HOME", root_path
-      .menu-item
-        = link_to "ABOUT", "#"
-      .menu-item
-        = link_to "TOOLS & TOYS", tools_path
-      .menu-item
-        = link_to "LESSONS", lessons_path
-      .menu-item
-        = link_to "COMMUNITY", "#"
-      .menu-item
-        = link_to "CONTACT US", contact_forms_path
-    .content
+    .page-nav
+      .page-nav-blue
+      .page-nav-orange
+      .page-nav-items
+        .nav-item
+          = link_to "Home", root_path
+        .nav-item
+          = link_to "About", "/"
+        .nav-item
+          = link_to "Tools & Toys", tools_path
+        .nav-item
+          = link_to "Lessons", lessons_path
+        .nav-item
+          = link_to "Community", "/"
+        .nav-item
+          = link_to "Contact Us", contact_forms_path
+    .page-content
       = yield
       = render :partial => "layouts/sidebar"
