@@ -1,25 +1,18 @@
 .sidebar-container
   #social-box
-    = link_to image_tag("button_rss.png"), "http://eepurl.com/u0LCj"
-    = link_to image_tag("button_twitter.png"), "http://www.twitter.com/kidscodecamp"
+    = link_to image_tag("button_twitter.png"), "http://www.twitter.com/kidscodecamp", :class => "social-media"
     = link_to image_tag("button_facebook.png"), "https://www.facebook.com/pages/Hybrid-Group/227992253946972"
-    .counter
-      123
-    .counter
-      456
-    .counter
-      789
-    .text
-      READERS
     .text
       FOLLOWERS
-    .text
+    .text#fans
       FANS
   %section.mailinglist
     .newsletter-text
       Subscribe to our newsletter to receive the latests news about KidsCodeCamp
-    %form#signup{:action => '/signup'}
-      = text_field_tag :email
+    %form#signup{:action => 'http://kanbanpad.us2.list-manage1.com/subscribe/post', :method => 'POST'}
+      %input{:autocapitalize => "off", :autocorrect => "off", :name => "MERGE0", :type => "text", :value => ""}
+      %input{:name => "u", :type => "hidden", :value => "281b52acbc791fcbe2127e282"}
+      %input{:name => "id", :type => "hidden", :value => "67c6dbfbd1"}
       = image_submit_tag "button_send.png"
   .twitter-container
     .twitter-title
