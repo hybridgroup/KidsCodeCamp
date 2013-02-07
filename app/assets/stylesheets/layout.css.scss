@@ -22,7 +22,8 @@ $color-medium-blue: #3f729f;
 
 
 body {
-  background: image-url("bg.png");
+  background: image-url("bg-small2.png");
+  background-repeat:repeat;
   font-family: "Helvetica Neue", helvetica, arial, sans-serif;
 }
 
