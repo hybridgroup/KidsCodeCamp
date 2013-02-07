@@ -2,11 +2,11 @@
 %html
   %head
     %title Kids Code Camp - Teaching The Kids of Planet Earth To Code
+    = favicon_link_tag
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = javascript_include_tag "jquery.tweetable.js"
     = csrf_meta_tags
-    %link{ href: 'favicon.ico', rel: 'icon', type: 'image/png' }
   %body
     .page-header
       = image_tag "header_logo.png", :class => "header-logo"
