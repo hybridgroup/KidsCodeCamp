@@ -24,7 +24,6 @@ gem 'rails_admin'
 gem 'devise'
 gem 'rake', '>= 10.0.3'
 gem 'mail_form'
-gem "psych", "~> 1.3.4"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
