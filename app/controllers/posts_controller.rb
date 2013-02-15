@@ -25,6 +25,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new(:board_id => params[:board_id])
+    @post.user_id = current_user.id
     @post.parent_id = params[:parent_id]
     logger.debug "New post: #{@post.attributes.inspect}"
     if @post.parent
