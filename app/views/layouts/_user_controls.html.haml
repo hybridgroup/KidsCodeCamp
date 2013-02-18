@@ -1,7 +1,7 @@
 - if current_user
   .user-controls
     = link_to "Profile", edit_user_registration_path(current_user.id)
-    = link_to "Logout", destroy_user_session_path
+    = link_to "Logout", destroy_user_session_path, :method => :delete
 - else
   .user-controls
     = link_to "Register", new_user_registration_path

@@ -3,12 +3,23 @@
 
     %h1.headline Boards
     %br
-    = render :partial => "user_controls"
-    
-    - @boards.each do |board|
-      .lesson-container
-        %h3= board.name
-        -board.posts.each do |post|
-          %h4= link_to post.title, post
-      = link_to "New Topic", new_post_path(:board_id => board.id), :class => "contact-submit"
-    %br
+    = render :partial => "layouts/user_controls"
+
+    %table
+      - @boards.each do |board|
+        -if board.posts.size > 0
+          %tr
+            %th= board.name
+            %th Replies
+            %th Views
+            %th Last Post
+          -board.posts.each do |post|
+            %tr
+              %td
+                = link_to post.title, post
+                %p= "by #{post.user.username} on #{post.created_at.strftime("%a %b %d, %Y %l:%M %P")}"
+              %td= post.descendants.size
+              %td= post.impressions_count
+              %td
+                = "by #{post.descendants.last.user.username}"
+                %p= "on #{post.descendants.last.created_at.strftime("%a %b %d, %Y %l:%M %P")}"

@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
-  attr_accessible :board_id, :body, :title, :user_id, :parent_id
+  attr_accessible :board_id, :body, :title, :user_id, :parent_id, :counter_cache
+  is_impressionable :counter_cache => true
 
   has_ancestry
   belongs_to :board

@@ -2,6 +2,7 @@
   .home-container
     %h1.headline CREATE A NEW TOPIC
     %br
+    = render :partial => "layouts/user_controls"
     .contact-container
       - if @post.parent
         %h3= @parent.title
