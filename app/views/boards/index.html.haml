@@ -5,21 +5,22 @@
     %br
     = render :partial => "layouts/user_controls"
 
-    %table
+    %table.forum
       - @boards.each do |board|
         -if board.posts.size > 0
-          %tr
-            %th= board.name
+          %tr.header
+            %th.topics= board.name
             %th Replies
             %th Views
             %th Last Post
           -board.posts.each do |post|
-            %tr
-              %td
+            %tr.posts
+              %td.topic
                 = link_to post.title, post
-                %p= "by #{post.user.username} on #{post.created_at.strftime("%a %b %d, %Y %l:%M %P")}"
-              %td= post.descendants.size
-              %td= post.impressions_count
-              %td
-                = "by #{post.descendants.last.user.username}"
-                %p= "on #{post.descendants.last.created_at.strftime("%a %b %d, %Y %l:%M %P")}"
+                %p.by= "by #{post.user.username} on #{post.created_at.strftime("%a %b %d, %Y %l:%M %P")}"
+              %td.replies= post.descendants.size
+              %td.views= post.impressions_count
+              %td.last
+                = "by #{post.subtree.last.user.username}"
+                %p.by= "on #{post.subtree.last.created_at.strftime("%a %b %d, %Y %l:%M %P")}"
+        = link_to "New Topic", new_post_path(:board_id => board.id), :class => "contact-submit"

@@ -1,3 +1,48 @@
 // Place all the styles related to the Boards controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$color-medium-blue: #3f729f;
+
+table.forum {
+  table-layout: fixed;
+  width: 610px;
+}
+
+table.forum td.topic {
+  overflow: hidden;
+  width: 205px;
+}
+
+table.forum td.replies {
+  width: 110px;
+}
+
+table.forum td.views {
+  width: 100px;
+}
+
+table.forum td.last {
+  width: 185px;
+}
+
+tr.header {
+  background-color: $color-medium-blue;
+  color: white;
+}
+
+tr.header th.topics {
+  font-family: 'Ranger', Helvetica, Arial, serif;
+}
+
+tr.posts:nth-child(odd) { 
+  background-color: #f8f8f8; 
+}
+tr.posts:nth-child(even) { 
+  background-color:#e8e8e8; 
+}
+
+p.by {
+  font-family: Helvetica, Arial, serif;
+  font-size: 10px;
+}
