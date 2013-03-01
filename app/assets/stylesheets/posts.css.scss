@@ -1,3 +1,91 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$color-medium-blue: #3f729f;
+$color-orange: #d35d00;
+
+.clear {
+  clear: both;
+}
+
+.field.post {
+  margin-top: 30px;
+}
+
+.field.post input {
+  margin-bottom: 20px;
+}
+
+.field.post label, .field.post input {
+  float: none;
+}
+
+.field.post textarea {
+  background-color: rgb(240, 240, 240);
+  border: medium none;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0px 1px 2px rgba(76, 42, 12, 0.27) inset, 0px 1px 0px rgba(255, 255, 255, 0.25);
+  margin-bottom: 15px;
+}
+
+.post-container {
+  background-color: $color-medium-blue;
+  margin-bottom: 50px;
+  width: 501px;
+  padding: 0px 5px;
+  -webkit-box-shadow: 0px 3px 4px rgba(184, 162, 134, 0.84);
+  -moz-box-shadow:    0px 3px 4px rgba(184, 162, 134, 0.84);
+  box-shadow:         0px 3px 4px rgba(184, 162, 134, 0.84);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.time {
+  color: white;
+  float: right;
+  font-family: Helvetica, Arial, serif;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 5px 5px 5px 0px;
+}
+
+.post-action {
+  @extend .time;
+  color: #c9952b;
+  margin: 0px 5px 0px 0px;
+}
+
+li.post-body-container {
+  background-color: #f8f8f8;
+  min-height: 190px;
+  padding: 15px 5px 11px 15px;
+  width: 330px;
+}
+
+li.user-container {
+  background-color: #e8e8e8;
+  color: $color-medium-blue;
+  padding: 15px 10px 50px 15px;
+}
+
+ul.post-content-container li {
+  float: left;
+}
+
+ul.post-content-container {
+  overflow: hidden;
+  min-height: 100%;
+}
+
+.post-container {
+  margin-top: 10px;
+}
+
+.user-container p.user {
+  color: $color-medium-blue;
+  font-family: Helvetica, Arial, serif;
+  font-size: 12px;
+  font-weight: bold;
+}

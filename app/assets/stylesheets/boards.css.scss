@@ -3,27 +3,133 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 $color-medium-blue: #3f729f;
+$color-orange : #d35d00;
+
+.new-topic {
+  font-family: "Ranger",Helvetica,Arial,serif;
+  color: rgb(255, 255, 255);
+  font-size: 24px;
+  border: medium none;
+  padding: 5px 30px;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.19);
+  background: linear-gradient(to bottom, rgb(222, 154, 25) 0%, rgb(211, 93, 0) 100%) repeat scroll 0% 0% transparent;
+}
+
+.rules {
+  background-color: #d45d00;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  float: left;
+  margin-bottom: 10px;
+  margin-right: 20px;
+  padding: 5px 0px 5px 10px;
+  width: 250px;
+}
+
+.rules h3 {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.rules p {
+  color: white;
+  font-size: 12px;
+}
+
+.search-forum input {
+  display: block;
+  width: 215px;
+  height: 23px;
+  float: left;
+  border:none;
+  background-color: #f0f0f0;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0px 1px 2px rgba(76, 42, 12, 0.27), 0px 1px 0px rgba(255, 255, 255, 0.25);
+  -moz-box-shadow: inset 0px 1px 2px rgba(76, 42, 12, 0.27), 0px 1px 0px rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0px 1px 2px rgba(76, 42, 12, 0.27), 0px 1px 0px rgba(255, 255, 255, 0.25);
+}
+
+.search-image {
+  background-image: url("magnifying-glass2.png");
+  background-repeat:no-repeat;
+}
+
+.search-submit {
+  font-family: 'Ranger', Helvetica, Arial, serif;
+  color: #ffffff;
+  font-size: 20px;
+  border:none; 
+  padding: 5px 10px 5px 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.19);
+  -moz-box-shadow:    0px 2px 4px rgba(0, 0, 0, 0.19);
+  box-shadow:         0px 2px 4px rgba(0, 0, 0, 0.19);
+  background: #de9a19;
+  background: -moz-linear-gradient(top,  #de9a19 0%, #d35d00 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#de9a19), color-stop(100%,#d35d00));
+  background: -webkit-linear-gradient(top,  #de9a19 0%,#d35d00 100%);
+  background: -o-linear-gradient(top,  #de9a19 0%,#d35d00 100%);
+  background: -ms-linear-gradient(top,  #de9a19 0%,#d35d00 100%);
+  background: linear-gradient(to bottom,  #de9a19 0%,#d35d00 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#de9a19', endColorstr='#d35d00',GradientType=0 );
+}
+
 
 table.forum {
+  border-bottom: 10px solid $color-medium-blue;
+  border-left: 5px solid $color-medium-blue;
+  border-right: 5px solid $color-medium-blue;
+  margin-bottom: 15px;
   table-layout: fixed;
-  width: 610px;
+  width: 525px;
+  font-family: Helvetica, Arial, serif;
 }
 
-table.forum td.topic {
+table.forum td.topics, th.topics {
   overflow: hidden;
-  width: 205px;
+  padding-left: 5px;
+  width: 265px;
+  font-family: Helvetica, Arial, serif;
 }
 
-table.forum td.replies {
-  width: 110px;
+table.forum td.replies, th.replies {
+  color: $color-orange;
+  font-weight: bold;
+  width: 50px;
 }
 
-table.forum td.views {
-  width: 100px;
+table.forum td.views, th.views {
+  color: $color-orange;
+  font-weight: bold;
+  width: 50px;
 }
 
-table.forum td.last {
-  width: 185px;
+table.forum td.last, th.last {
+  width: 150px;
+}
+
+table.forum th.replies, th.views, th.last {
+  font-family: Helvetica, Arial, serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+table.forum td.replies, td.views {
+   text-align: center;
+}
+td.topics a {
+  color: $color-medium-blue;
+  font-family: Helvetica, Arial, serif;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 tr.header {
@@ -31,8 +137,13 @@ tr.header {
   color: white;
 }
 
+tr.header th {
+  font-family: Helvetica, Arial, serif;
+}
+
 tr.header th.topics {
   font-family: 'Ranger', Helvetica, Arial, serif;
+  padding-left: 5px;
 }
 
 tr.posts:nth-child(odd) { 
@@ -42,7 +153,12 @@ tr.posts:nth-child(even) {
   background-color:#e8e8e8; 
 }
 
-p.by {
+.on {
+  color: $color-medium-blue;
   font-family: Helvetica, Arial, serif;
   font-size: 10px;
+}
+
+.on.by {
+  font-weight: bold;
 }

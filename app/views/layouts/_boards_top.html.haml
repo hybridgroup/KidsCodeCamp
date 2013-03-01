@@ -1,0 +1,11 @@
+.rules
+  %h3 Forum Rules
+  %p Please read forum rules before you post.
+
+= render :partial => "layouts/user_controls"
+
+.clear
+
+= form_tag("/search", :method => "get", :class => "search-forum") do
+  = text_field_tag :search, nil, :class => "search-image"
+.clear

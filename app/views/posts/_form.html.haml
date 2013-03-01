@@ -1,8 +1,8 @@
 = form_for @post do |f|
-  .field
+  .field.post
     = f.label :title, "SUBJECT"
     = f.text_field :title
-  .field
+  .field.post
     = f.label :body, "MESSAGE"
     = f.text_area :body, :size => "54x19"
   = f.hidden_field :board_id

@@ -1,6 +1,11 @@
 .content
   .home-container
-  
-    .post-container
+    %h1.headline COMMUNITY
+    %br
+    = render :partial => "layouts/boards_top"
+
+    .posts-container
       - @post.subtree.each do |post|
         = render "post", :post => post
+
+    = link_to "New Post", new_post_path(:parent_id => @post), :class => "new-topic"

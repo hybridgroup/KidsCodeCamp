@@ -27,6 +27,8 @@ gem 'rake', '>= 10.0.3'
 gem 'mail_form'
 gem 'ancestry'
 gem 'impressionist'
+gem 'acts_as_indexed'
+gem 'will_paginate'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,5 +1,13 @@
-%h3= post.title
-%h5= post.created_at.strftime("%a %b %d, %Y %l:%M %P")
-%p= post.body
-= link_to "Reply", new_post_path(:parent_id => post)
-= link_to "Delete", post, :confirm => "Are you sure?", :method => :delete
+.post-container
+  %h5.time= post.created_at.strftime("%a %b %d, %Y %l:%M %P")
+  .clear
+  %ul.post-content-container
+    %li.user-container
+      =image_tag("profile-picture.png")
+      %p.user= post.user.username
+    %li.post-body-container
+      %h3= post.title
+    %p= post.body
+  = link_to "Reply", new_post_path(:parent_id => post), :class => "post-action"
+  = link_to "Quote", "#", :class => "post-action"
+  .clear
