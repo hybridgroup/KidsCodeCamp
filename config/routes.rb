@@ -13,6 +13,7 @@ App::Application.routes.draw do
   match 'contact' => 'contact_forms#create', :as => 'contact_forms', :via => :post
   match 'community' => 'pages#community'
   match 'signup' => 'pages#signup'
+  match 'search' => 'boards#search', :as => 'search'
 
   devise_scope :user do
     get "community/signup", :to => "devise/registrations#new"

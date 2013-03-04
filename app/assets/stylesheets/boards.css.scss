@@ -39,7 +39,11 @@ $color-orange : #d35d00;
   font-size: 12px;
 }
 
-.search-forum input {
+.search-forum {
+  margin-bottom: 15px;
+}
+
+.search-forum input.search-text {
   display: block;
   width: 215px;
   height: 23px;
@@ -54,33 +58,9 @@ $color-orange : #d35d00;
   box-shadow: inset 0px 1px 2px rgba(76, 42, 12, 0.27), 0px 1px 0px rgba(255, 255, 255, 0.25);
 }
 
-.search-image {
-  background-image: url("magnifying-glass2.png");
-  background-repeat:no-repeat;
+.search-forum input.search-image {
+  margin-left: 5px;
 }
-
-.search-submit {
-  font-family: 'Ranger', Helvetica, Arial, serif;
-  color: #ffffff;
-  font-size: 20px;
-  border:none; 
-  padding: 5px 10px 5px 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.19);
-  -moz-box-shadow:    0px 2px 4px rgba(0, 0, 0, 0.19);
-  box-shadow:         0px 2px 4px rgba(0, 0, 0, 0.19);
-  background: #de9a19;
-  background: -moz-linear-gradient(top,  #de9a19 0%, #d35d00 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#de9a19), color-stop(100%,#d35d00));
-  background: -webkit-linear-gradient(top,  #de9a19 0%,#d35d00 100%);
-  background: -o-linear-gradient(top,  #de9a19 0%,#d35d00 100%);
-  background: -ms-linear-gradient(top,  #de9a19 0%,#d35d00 100%);
-  background: linear-gradient(to bottom,  #de9a19 0%,#d35d00 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#de9a19', endColorstr='#d35d00',GradientType=0 );
-}
-
 
 table.forum {
   border-bottom: 10px solid $color-medium-blue;

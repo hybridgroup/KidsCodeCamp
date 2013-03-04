@@ -41,4 +41,8 @@ class BoardsController < ApplicationController
 
     redirect_to boards_url
   end
+
+  def search
+    @search_result_posts = Post.find_with_index(params[:search])
+  end
 end
