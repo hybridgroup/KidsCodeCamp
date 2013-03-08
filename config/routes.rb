@@ -1,6 +1,4 @@
-Kids::Application.routes.draw do
-  match 'about' => 'home#about'
-
+KidsCodeCamp::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -13,7 +11,7 @@ Kids::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  resources :events
+  #   resources :products
 
   # Sample resource route with options:
   #   resources :products do
@@ -50,7 +48,7 @@ Kids::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#index'
+  # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
