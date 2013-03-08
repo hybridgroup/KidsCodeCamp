@@ -1,18 +1,5 @@
-App::Application.routes.draw do
-
-  resources :lessons
-  resources :tools
-
-  devise_for :users
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
-
-  match 'contact' => 'contact_forms#new', :as => 'contact_forms', :via => :get
-  match 'contact' => 'contact_forms#create', :as => 'contact_forms', :via => :post
-  match 'signup' => 'pages#signup'
-  match 'about' => 'pages#about'
-  match 'community' => 'pages#community'
-
-  root :to => 'pages#home'
+Kids::Application.routes.draw do
+  match 'about' => 'home#about'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -26,7 +13,7 @@ App::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  resources :events
 
   # Sample resource route with options:
   #   resources :products do
@@ -63,11 +50,11 @@ App::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+  # match ':controller(/:action(/:id))(.:format)'
 end
