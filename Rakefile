@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Kids::Application.load_tasks
+KidsCodeCamp::Application.load_tasks

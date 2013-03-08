@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Kids::Application.config.secret_token = '05a85bc0ee00fdaa972cedeabcb1b08ac84a70eb243eadfb44e590507b6e68dae20ac60f320733fc8011406d9a2c4b3b7a829dfb17a91ffe58a583719fef4299'
+KidsCodeCamp::Application.config.secret_token = 'f216d44f8b18f782b47bda5a1b5a1c757a8eda6c70629b5e201148b91e96accdcbc9929e9847f5953e22e4477787fad12b553a857dc0d037e2f487e7db0f6e80'
