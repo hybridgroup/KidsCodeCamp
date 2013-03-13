@@ -6,5 +6,9 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
+    - if flash[:notice]
+      %p= flash[:notice]
+    - if flash[:alert]
+      %p= flash[:alert]
     %h1 KidsCodeCamp
     = yield
