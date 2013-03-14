@@ -1,25 +1,7 @@
 class Admin::UsersController < Admin::AdminController
   #load_and_authorize_resource
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @users }
-    end
-  end
-
-  # GET /users/1
-  # GET /users/1.json
-  def show
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @user }
-    end
+  def dashboard
   end
 
   # GET /users/new
@@ -40,9 +22,9 @@ class Admin::UsersController < Admin::AdminController
   # POST /users
   # POST /users.json
   def create
-    @user.attributes = params[:user]
-    @user.role_ids = params[:user][:role_ids] if params[:user]
     @user = User.new(params[:user])
+    @user.role_ids = params[:user][:role_ids] if params[:user]
+    
     respond_to do |format|
       if @user.save
         flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages

@@ -1,6 +1,4 @@
 .post
   %h4= link_to post.title, post_path(post)
-  %p= post.content
-  %p= post_path(post)
-  %p= post_url(post)
-  %p= post_url(post)
+  %div.desc= post.content
+  %p= link_to 'Leer más', post
