@@ -12,4 +12,8 @@ Post.create([
   {title: 'Post 4 lorem ipsum', slug: 'post-4', content: 'Lorem ipsum dolor amet'},
   {title: 'Post 5 lorem ipsum', slug: 'post-5', content: 'Lorem ipsum dolor amet'}
 ])
-User.create(username: '', email: 'admin@a.com', password: 'admin123')
+User.create([
+  {username: 'admin', email: 'admin@a.com', password: 'admin123', is_admin: 1},
+  {username: 'admin2', email: 'admin2@a.com', password: 'admin123', is_admin: 1},
+  {username: 'admin3', email: 'admin3@a.com', password: 'admin123', is_admin: 0}
+])
