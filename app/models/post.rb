@@ -1,3 +1,4 @@
 class Post < ActiveRecord::Base
-  attr_accessible :content, :slug, :title
+  attr_accessible :content, :slug, :title, :user_id
+  belongs_to :user
 end

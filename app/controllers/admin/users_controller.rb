@@ -1,9 +1,19 @@
 class Admin::UsersController < Admin::AdminController
-  #load_and_authorize_resource
+  load_and_authorize_resource
+  skip_authorize_resource :only => :dashboard
 
   def dashboard
   end
 
+  def index
+    @users = User.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render :json => @users }
+    end
+  end
+  
   # GET /users/new
   # GET /users/new.json
   def new
@@ -23,7 +33,6 @@ class Admin::UsersController < Admin::AdminController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    @user.role_ids = params[:user][:role_ids] if params[:user]
     
     respond_to do |format|
       if @user.save

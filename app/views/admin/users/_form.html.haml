@@ -1,0 +1,36 @@
+= form_for @user, url: { action: (action_name == 'new' ? 'create'  : 'update') } do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+  .control-group
+    = f.label :email, t("activerecord.attributes.user.email", :default => "email"), :class => 'control-label'
+    .input
+      = f.text_field :email, :class => 'text_field'
+
+  .control-group
+    = f.label :username, t("activerecord.attributes.user.username", :default => "username"), :class => 'control-label'
+    .input
+      = f.text_field :username, :class => 'text_field', :div => false
+
+  .control-group
+    %label.control-label
+      .input
+        = f.check_box :is_admin, :class => 'check_box'
+      Admin?
+
+  .control-group
+    = f.label :password, t("activerecord.attributes.user.password", :default => "password"), :class => 'control-label'
+    .input
+      = f.password_field :password, :class => 'text_field'
+
+  .control-group
+    = f.label :password_confirmation, t("activerecord.attributes.user.password_confirmation", :default => "password_confirmation"), :class => 'control-label'
+    .input
+      = f.password_field :password_confirmation, :class => 'text_field'
+
+  .actions
+    = f.submit 'Save'

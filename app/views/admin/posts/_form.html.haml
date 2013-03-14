@@ -1,10 +1,30 @@
-= form_for @post do |f|
+= form_for @post, url: { action: (action_name == 'new' ? 'create'  : 'update') } do |f|
   - if @post.errors.any?
     #error_explanation
       %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
       %ul
         - @post.errors.full_messages.each do |msg|
           %li= msg
+
+  .control-group
+    = f.label :user_id, t("activerecord.attributes.post.user_id", :default => "User"), :class => 'control-label'
+    .input
+      = f.collection_select(:user_id, User.all, :id, :username, {:class => 'text_field'})
+
+  .control-group
+    = f.label :title, t("activerecord.attributes.post.title", :default => "Title"), :class => 'control-label'
+    .input
+      = f.text_field :title, :class => 'text_field'
+
+  .control-group
+    = f.label :slug, t("activerecord.attributes.post.slug", :default => "Slug"), :class => 'control-label'
+    .input
+      = f.text_field :slug, :class => 'text_field'
+
+  .control-group
+    = f.label :content, t("activerecord.attributes.post.content", :default => "Content"), :class => 'control-label'
+    .input
+      = f.text_area :content, :class => 'text_area'
 
   .actions
     = f.submit 'Save'
