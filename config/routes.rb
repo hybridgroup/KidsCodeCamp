@@ -8,7 +8,7 @@ KidsCodeCamp::Application.routes.draw do
   end
 
   # Admin
-  namespace :admin , :only => [:new, :create, :edit, :update, :delete, :index ] do
+  namespace :admin , :only => [:new, :create, :edit, :update, :destroy, :index ] do
     resources :posts, :events
     resources :users do
       collection do
