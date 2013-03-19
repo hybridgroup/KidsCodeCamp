@@ -1,5 +1,5 @@
 KidsCodeCamp::Application.routes.draw do
-  root :to => 'posts#index'
+  root :to => 'events#index'
   match 'signup' => 'pages#signup'
   match 'about' => 'pages#about'
 
@@ -8,20 +8,19 @@ KidsCodeCamp::Application.routes.draw do
   match "admin" => "admin/users#dashboard"
 
   # Devise
-  devise_for :users, :path_names => { :sign_in => "login", :sign_out => "logout" }, :path => "d", :controllers => { :registrations => "users/registrations" }
+  devise_for :users, :controllers => { :registrations => "users/registrations" }
 
   # Admin
   namespace :admin , :only => [:new, :create, :edit, :update, :destroy, :index ] do
     resources :posts, :events
     resources :users do
-      collection do
-        get "dashboard"
-      end
+      get "dashboard", :on => :collection
     end
   end
   
   # Public
   scope :only => [:index, :show] do
+    resources :posts, :path => 'community'
     resources :users, :posts, :events
   end
 end

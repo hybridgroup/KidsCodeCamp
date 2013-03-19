@@ -1,0 +1,15 @@
+%section.desc
+  %h2.title What Is KidsCodeCamp?
+
+  %p Here is how KidsCodeCamp works:
+  %p Local volunteers will run hands-on classes intended for a particular age group (elementary, middle, or high-school age kids). Each class is from 1 to 2 hours long.
+  %p Kids register for free, just so everyone knows how many people will be coming.
+  %p Everyone has fun on the day of KidsCodeCamp!
+
+%section
+  %h2.title.blue-title Our past events...
+
+  = render partial: 'events/event', collection: @events
+
+  %p.suscribe-home
+    %a{:href=> "http://eepurl.com/u0LCj"} Subscribe to our Mailing List

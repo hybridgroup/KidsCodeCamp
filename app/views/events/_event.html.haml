@@ -1,0 +1,8 @@
+
+%article.preview.event
+  %h3.title= event.title #link_to event.title, event_path(event)
+  %div.desc= event.content
+  / - if action_name == 'show'
+  /   %p= link_to 'Back', events_path
+  / - else
+  / %p.more= link_to 'Read more', event

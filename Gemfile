@@ -21,11 +21,13 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'pry'
-gem 'devise'
-gem 'cancan'
-gem 'mail_form'
-
+group :development do
+  gem 'pry'
+  gem 'devise'
+  gem 'cancan'
+  gem 'mail_form'
+  gem 'will_paginate', '~> 3.0.0'
+end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
