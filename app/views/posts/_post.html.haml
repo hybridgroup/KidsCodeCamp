@@ -1,7 +1,7 @@
-.post
-  %h4= link_to post.title, post_path(post)
+%article.post
+  %h3.title= link_to post.title, post_path(post)
   %div.desc= post.content
   - if action_name == 'show'
     %p= link_to 'Regresar', posts_path
   - else
-    %p= link_to 'Leer más', post
+    %p.more= link_to 'Leer más', post

@@ -13,6 +13,8 @@ gem 'sqlite3'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem "compass", "~> 0.12.2"
+  gem 'compass-rails'
   gem "haml"
   gem "haml-rails"
   gem 'jquery-rails'
@@ -22,6 +24,7 @@ end
 gem 'pry'
 gem 'devise'
 gem 'cancan'
+gem 'mail_form'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

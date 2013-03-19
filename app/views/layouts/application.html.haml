@@ -1,11 +1,26 @@
 !!!
 %html
   %head
-    %title KidsCodeCamp
-    = stylesheet_link_tag    "application", :media => "all"
+    %title KidsCodeCamp - Teaching The Kids of Planet Earth To Code
+    = favicon_link_tag "/favicon.ico?1"
+    = stylesheet_link_tag "application"
     = javascript_include_tag "application"
+    = javascript_include_tag "jquery.tweetable.js"
     = csrf_meta_tags
-  %body
-    = render partial: "devise/session_links"
-    %h1 KidsCodeCamp
-    = yield
+  %body{class: "c-#{params[:controller]} a-#{params[:action]}"}
+    #page
+      %header
+        %h1#logo
+          = link_to('',root_path, :title => 'KidsCodeCamp - Teaching The Kids of Planet Earth To Code')
+      %nav
+        %ul
+          %li= link_to "Home", root_path
+          %li= link_to "About", about_path
+          %li= link_to "Tools & Toys", 'tools_path'
+          %li= link_to "Lessons", 'lessons_path'
+          %li= link_to "Community", 'community_path'
+          %li= link_to "Contact Us", contact_path
+      %section#page-body
+        %section.content= yield
+        = render :partial => "layouts/sidebar"
+      = render :partial => "layouts/footer"

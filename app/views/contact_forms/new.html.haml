@@ -1,0 +1,13 @@
+%h1.section-title Contact Us
+= form_for @contact_form do |f|
+  .field.col.col50
+    = f.label :name, "NAME"
+    = f.text_field :name
+  .field.col.col50.omega
+    = f.label :email, "EMAIL"
+    = f.email_field :email
+  .field
+    = f.label :message, "MESSAGE"
+    = f.text_area :message
+  .actions
+    = image_submit_tag "bt-submit.png"
