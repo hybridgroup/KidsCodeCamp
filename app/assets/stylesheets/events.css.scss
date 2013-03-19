@@ -1,12 +1,11 @@
 // Place all the styles related to the Lessons controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.c-posts.a-index .title {
+.c-events.a-index .blue-title {
 	font-size:18px;
-	font-weight: 600;
+	margin-bottom:30px;
 }
 
-.c-posts.a-index .content > section {
+.c-events.a-index .content > section {
 	margin-bottom:50px;
-
 }

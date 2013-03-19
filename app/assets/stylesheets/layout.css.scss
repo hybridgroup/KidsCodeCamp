@@ -20,6 +20,7 @@ body {
   color:#1F5380;
   font-size:15px;
 }
+
 a {
   @include link-colors(#D35D00,#D35D00 - 85,#D35D00 - 30,#D35D00);
   @include hover-link;
@@ -58,9 +59,7 @@ textarea, select,
   margin-bottom:25px;
 }
 
-.blue-title {
-  color: #1E527D;
-}
+.blue-title { color: #1E527D;font-weight: 600; }
 
 .desc {
   p { margin:0 0 18px; }
@@ -70,6 +69,7 @@ textarea, select,
 }
 
 .more { text-align:right; }
+.preview { margin:0 0 30px; }
 
 ////////////// Blocks
 

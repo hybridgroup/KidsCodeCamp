@@ -10,10 +10,10 @@ User.create([
   { username: 'admin2', email: 'admin2@a.com', password: 'admin123', is_admin: 1 },
   { username: 'admin3', email: 'admin3@a.com', password: 'admin123', is_admin: 0 }
 ])
-Post.create([
-  {title: 'Post 1 lorem ipsum', slug: 'post-1', content: 'Lorem ipsum dolor amet', user_id: 2},
-  {title: 'Post 2 lorem ipsum', slug: 'post-2', content: 'Lorem ipsum dolor amet', user_id: 1},
-  {title: 'Post 3 lorem ipsum', slug: 'post-3', content: 'Lorem ipsum dolor amet', user_id: 1},
-  {title: 'Post 4 lorem ipsum', slug: 'post-4', content: 'Lorem ipsum dolor amet', user_id: 2},
-  {title: 'Post 5 lorem ipsum', slug: 'post-5', content: 'Lorem ipsum dolor amet', user_id: 3}
+Event.create([
+  {title: 'Event 1 lorem ipsum', slug: 'event-1', content: 'Lorem ipsum dolor amet'},
+  {title: 'Event 2 lorem ipsum', slug: 'event-2', content: 'Lorem ipsum dolor amet'},
+  {title: 'Event 3 lorem ipsum', slug: 'event-3', content: 'Lorem ipsum dolor amet'},
+  {title: 'Event 4 lorem ipsum', slug: 'event-4', content: 'Lorem ipsum dolor amet'},
+  {title: 'Event 5 lorem ipsum', slug: 'event-5', content: 'Lorem ipsum dolor amet'}
 ])
