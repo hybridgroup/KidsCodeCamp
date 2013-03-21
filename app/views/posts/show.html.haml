@@ -1,10 +1,13 @@
+= render :partial => "devise/session_links"
 %p= link_to 'Back', posts_path
 
 %table#topics-table
-  = render :partial => @current_post, :locals => { :current_user => @current_user}
+  - if params[:page].blank? || params[:page] == 1
+    = render @current_post
   = render @posts
 
-%h3 Add a response
-= render :partial => 'admin/posts/form'
+- if user_signed_in?
+  %h3 Add a response
+  = render :partial => 'admin/posts/form'
   
 = will_paginate @posts

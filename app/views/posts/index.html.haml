@@ -1,10 +1,11 @@
+= render :partial => "devise/session_links"
 %h1.section-title Community
 %table#topics-table
   %p
   - if !current_user.nil?
     = link_to 'New Post', new_admin_post_path
   - else
-    = link_to 'Login to Post', sign_in_path
+    = link_to 'Login to Post', login_path
 
   %tr
     %th Topic
