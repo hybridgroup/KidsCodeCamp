@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
   def admin?
     controller.class.name.split("::").first=="Admin"
   end
+
+  def user_layout
+    ['new', 'edit'].include?(action_name) && current_user.is_admin.zero? ? 'application' : 'admin'
+  end
   
   private
   def fb(message, type = :debug)

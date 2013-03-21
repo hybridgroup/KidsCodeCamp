@@ -2,8 +2,8 @@ KidsCodeCamp::Application.routes.draw do
   root :to => 'events#index'
   
   match 'about' => 'pages#about'
-  match 'contact' => 'contact_forms#new', :via => :get
-  match 'contact' => 'contact_forms#create', :via => :post
+  match 'contact' => 'contact#new', :via => :get
+  match 'contact' => 'contact#create', :via => :post
   match 'admin' => 'admin/users#dashboard', :as => 'dashboard'
 
   # Devise

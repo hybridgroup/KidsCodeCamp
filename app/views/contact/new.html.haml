@@ -1,5 +1,5 @@
 %h1.section-title Contact Us
-= form_for @contact_form do |f|
+= form_for @contact_form, :url => contact_path do |f|
   .field.col.col50
     = f.label :name, "NAME"
     = f.text_field :name

@@ -1,4 +1,5 @@
 class Admin::PostsController < Admin::AdminController
+  layout :user_layout
   # GET /posts
   # GET /posts.json
   def index
@@ -14,7 +15,6 @@ class Admin::PostsController < Admin::AdminController
   # GET /posts/new.json
   def new
     @post = Post.new
-    fb current_user.inspect
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,7 +35,7 @@ class Admin::PostsController < Admin::AdminController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to :back, notice: 'Post was successfully created.' }
+        format.html { redirect_to :after_save_redirect, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
         format.html { render action: "new" }
@@ -51,7 +51,7 @@ class Admin::PostsController < Admin::AdminController
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
-        format.html { redirect_to :back, notice: 'Post was successfully updated.' }
+        format.html { redirect_to :after_save_redirect, notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -69,6 +69,22 @@ class Admin::PostsController < Admin::AdminController
     respond_to do |format|
       format.html { redirect_to :back }
       format.json { head :no_content }
+    end
+  end
+
+  def after_save_redirect_url
+    if current_user.is_admin.zero?
+      if action_name == 'create'
+        post_path(@post)
+      else
+        post_path(@post)
+      end
+    else
+      if action_name == 'create'
+        admin_posts_path
+      else
+        admin_posts_path
+      end
     end
   end
 end
