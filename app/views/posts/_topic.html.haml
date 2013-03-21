@@ -1,0 +1,6 @@
+- editable = post.user_id == current_user.id && action_name == 'show'
+%tr
+  %td{rowspan:editable ? 3 :2}
+  %td= "#{post.title} #{post.created_at.strftime("%d %b %y")}"
+  %td= "#{post.title} #{post.created_at.strftime("%d %b %y")}"
+  %td= "#{post.title} #{post.created_at.strftime("%d %b %y")}"

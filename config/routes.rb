@@ -1,16 +1,16 @@
 KidsCodeCamp::Application.routes.draw do
   root :to => 'events#index'
   
-  match 'sign_up' => 'users/registrations#new'
-  match 'sing_in' => 'devise/sessions#new'
   match 'about' => 'pages#about'
-
   match 'contact' => 'contact_forms#new', :via => :get
   match 'contact' => 'contact_forms#create', :via => :post
-  match 'admin' => 'admin/users#dashboard'
+  match 'admin' => 'admin/users#dashboard', :as => 'dashboard'
 
   # Devise
-  devise_for :users, :controllers => { :registrations => 'users/registrations' }
+  devise_for :users do
+    match 'sign_up' => 'devise/registrations#new'
+    match 'sign_in' => 'devise/sessions#new'
+  end
 
   # Admin
   namespace :admin , :only => [:new, :create, :edit, :update, :destroy, :index ] do
@@ -25,4 +25,6 @@ KidsCodeCamp::Application.routes.draw do
     resources :posts, :path => 'community'
     resources :users, :events
   end
+=begin
+=end
 end

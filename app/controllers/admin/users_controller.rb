@@ -1,4 +1,5 @@
 class Admin::UsersController < Admin::AdminController
+  #layout Proc.new { |controller| controller.current_user.is_admin.zero? ? 'member' : 'admin' }
   load_and_authorize_resource
   skip_authorize_resource :only => :dashboard
 
