@@ -1,1 +1,5 @@
-= render 'posts/post', :post => @post
+%p= link_to 'Back', :back
+
+%table#topics-table
+  = render @posts
+= will_paginate @posts

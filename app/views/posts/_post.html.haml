@@ -1,7 +1,12 @@
-%article.post
-  %h3.title= link_to post.title, post_path(post)
-  %div.desc= post.content
-  - if action_name == 'show'
-    %p= link_to 'Back', posts_path
-  - else
-    %p.more= link_to 'Read more', post
+- editable = post.user_id == current_user.id && action_name == 'show'
+%tr
+  %td{rowspan:editable ? 3 :2}
+    %h3= post.user.username
+    %p < profile_info >
+  %td= "#{post.title} #{post.created_at.strftime("%d %b %y")}"
+%tr
+  %td= post.content
+- if editable
+  %tr.actions
+    %td= link_to 'Edit', edit_admin_post_path(post)
+    %td= link_to 'Destroy', admin_post_path(post), :method => :delete, :data => { :confirm => 'Are you sure?' }

@@ -1,4 +1,15 @@
-%section
-  %h1.section-title Community
+%h1.section-title Community
+%table#topics-table
+  - if !current_user.nil?
+    %p= link_to 'New Post', new_admin_post_path
 
-  = render partial: 'posts/post', collection: @posts
+  %tr
+    %th Topic
+    %th Author
+    %th Created
+
+  - @posts.each do |post|
+    %tr
+      %td= link_to post.title, post
+      %td= post.user.username
+      %td= post.created_at.strftime("%d %b %y")
