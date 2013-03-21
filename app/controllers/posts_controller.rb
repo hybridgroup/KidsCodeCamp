@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.where(:parent_id => nil).paginate(:page => params[:page], :per_page => 3)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,9 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @posts = Post.paginate(:page => params[:page], :per_page => 3)
+    @current_post = Post.find(params[:id])
+    @posts = Post.where(:parent_id => params[:id]).paginate(:page => params[:page], :per_page => 3)
+    @post = Post.new
 
     respond_to do |format|
       format.html # show.html.erb

@@ -1,5 +1,10 @@
-%p= link_to 'Back', :back
+%p= link_to 'Back', posts_path
 
 %table#topics-table
+  = render :partial => @current_post, :locals => { :current_user => @current_user}
   = render @posts
+
+%h3 Add a response
+= render :partial => 'admin/posts/form'
+  
 = will_paginate @posts

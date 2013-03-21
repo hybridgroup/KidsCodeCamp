@@ -1,4 +1,6 @@
-- editable = post.user_id == current_user.id && action_name == 'show'
+= debug post
+= debug current_user
+- editable = user_signed_in? && post.user_id == current_user.id && action_name == 'show'
 %tr
   %td{rowspan:editable ? 3 :2}
     %h3= post.user.username

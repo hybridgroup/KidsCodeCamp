@@ -14,6 +14,7 @@ class Admin::PostsController < Admin::AdminController
   # GET /posts/new.json
   def new
     @post = Post.new
+    fb current_user.inspect
 
     respond_to do |format|
       format.html # new.html.erb
@@ -29,11 +30,12 @@ class Admin::PostsController < Admin::AdminController
   # POST /posts
   # POST /posts.json
   def create
+    params[:post][:user_id] = current_user.id if params[:post][:user_id].nil?
     @post = Post.new(params[:post])
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to admin_posts_path, notice: 'Post was successfully created.' }
+        format.html { redirect_to :back, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
         format.html { render action: "new" }
@@ -49,7 +51,7 @@ class Admin::PostsController < Admin::AdminController
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
-        format.html { redirect_to admin_posts_path, notice: 'Post was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -65,7 +67,7 @@ class Admin::PostsController < Admin::AdminController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_posts_path }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end

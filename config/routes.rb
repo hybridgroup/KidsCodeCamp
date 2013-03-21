@@ -7,9 +7,10 @@ KidsCodeCamp::Application.routes.draw do
   match 'admin' => 'admin/users#dashboard', :as => 'dashboard'
 
   # Devise
-  devise_for :users do
-    match 'sign_up' => 'devise/registrations#new'
-    match 'sign_in' => 'devise/sessions#new'
+  devise_for :users, :controllers => { :sessions => 'users/sessions', :registrations => 'users/registrations' } do
+    match 'sign_up' => 'users/registrations#new'
+    match 'login' => 'users/sessions#new'
+    match 'logout' => 'users/sessions#destroy', :via => :delete
   end
 
   # Admin

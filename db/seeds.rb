@@ -27,8 +27,5 @@ Post.create([
   {title: 'Post 4 lorem ipsum', slug: 'post-4', content: 'Lorem ipsum dolor amet', user_id: 2},
   {title: 'Post 5 lorem ipsum', slug: 'post-5', content: 'Lorem ipsum dolor amet', user_id: 3},
   {title: 'Post 6 lorem ipsum', slug: 'post-6', content: 'Lorem ipsum dolor amet', user_id: 3},
-  {title: 'Post 7 lorem ipsum', slug: 'post-7', content: 'Lorem ipsum dolor amet', user_id: 4},
-  {title: 'Post 8 lorem ipsum', slug: 'post-8', content: 'Lorem ipsum dolor amet', user_id: 5},
-  {title: 'Post 9 lorem ipsum', slug: 'post-9', content: 'Lorem ipsum dolor amet', user_id: 1},
-  {title: 'Post 10 lorem ipsum', slug: 'post-10', content: 'Lorem ipsum dolor amet', user_id: 2}
+  {title: 'Post 7 lorem ipsum', slug: 'post-7', content: 'Lorem ipsum dolor amet', user_id: 2}
 ])
