@@ -1,7 +1,6 @@
 %div.session_links
   %div.session_actions
     - if user_signed_in?
-      %p= current_user.is_admin
       = link_to('Logout', logout_path, :method=>'delete')
     - elsif action_name != 'new'
       = link_to('Log in', login_path)

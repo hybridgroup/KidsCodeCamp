@@ -24,7 +24,10 @@ KidsCodeCamp::Application.routes.draw do
   
   # Public
   scope :only => [:index, :show] do
-    resources :posts, :path => 'community'
+    resources :posts, :path => 'community' do
+      match '' => 'posts#index', :via => :post, :on => :collection
+      match ':category' => 'posts#index', :on => :collection, :via => :get, :constraints => { :category => /[A-Za-z]/ }
+    end
     resources :users, :events
   end
 =begin

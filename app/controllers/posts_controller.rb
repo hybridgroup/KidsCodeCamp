@@ -2,7 +2,20 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.where(:parent_id => nil).paginate(:page => params[:page], :per_page => 3)
+    conditions = {:parent_id => nil}
+
+    if request.POST[:category].present?
+      if request.POST[:category] == 'All'
+        redirect_to posts_path
+      else
+        redirect_to :category => params[:category]
+      end
+      return
+    elsif params[:category].present?
+      conditions[:category] = params[:category]
+    end
+
+    @posts = Post.where(conditions).paginate(:page => params[:page], :per_page => 8)
 
     respond_to do |format|
       format.html # index.html.erb
