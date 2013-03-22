@@ -8,13 +8,13 @@
         - @post.errors.full_messages.each do |msg|
           %li= msg
 
-  = f.text_field :user_id, :value => current_user.id
+  = f.hidden_field :user_id, :value => current_user.id
 
   //// Dynamic inputs form logic
   - if action_name == 'show'
-    = f.text_field :parent_id, {:value => params[:id]}
+    = f.hidden_field :parent_id, {:value => params[:id]}
   - elsif @post.parent_id.present?
-    = f.text_field :parent_id
+    = f.hidden_field :parent_id
 
   - if current_user.is_admin.zero? # Editor
     - if action_name != 'show'

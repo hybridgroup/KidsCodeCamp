@@ -1,3 +1,4 @@
+= debug post.user
 - editable = user_signed_in? && post.user_id == current_user.id && action_name == 'show'
 %tr.separator
   %td.post_created{colspan:2}= post.created_at.strftime("%a, %b %e %Y at %R")
