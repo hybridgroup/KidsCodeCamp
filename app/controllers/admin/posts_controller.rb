@@ -67,24 +67,36 @@ class Admin::PostsController < Admin::AdminController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_to :after_delete_redirect, notice: 'Post was successfully deleted.' }
       format.json { head :no_content }
     end
   end
 
   def after_save_redirect_url
+    if current_user.is_admin.zero? # Editor
+      if @post.parent_id.present? # Response
+        post_path(@post.parent_id)
+      else
+        post_path(@post)
+      end
+    else # Admin
+      if @post.parent_id.present? # Response
+        post_path(@post.parent_id)
+      else
+        admin_posts_path
+      end
+    end
+  end
+
+  def after_delete_redirect_url
     if current_user.is_admin.zero?
-      if action_name == 'create'
-        post_path(@post)
+      if @post.parent_id.present?
+        post_path(@post.parent_id)
       else
-        post_path(@post)
+        posts_path
       end
-    else
-      if action_name == 'create'
-        admin_posts_path
-      else
-        admin_posts_path
-      end
+    else # Admin
+      admin_posts_path
     end
   end
 end

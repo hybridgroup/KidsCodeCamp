@@ -7,30 +7,26 @@
           %li= msg
 
   .control-group
-    = f.label :email, t("activerecord.attributes.user.email", :default => "email"), :class => 'control-label'
-    .input
-      = f.text_field :email, :class => 'text_field'
+    = f.label :email, "Email"
+    .input.text= f.text_field :email
 
   .control-group
-    = f.label :username, t("activerecord.attributes.user.username", :default => "username"), :class => 'control-label'
-    .input
-      = f.text_field :username, :class => 'text_field', :div => false
+    = f.label :username, "Username"
+    .input.text= f.text_field :username
 
   .control-group
     %label.control-label
-      .input
-        = f.check_box :is_admin, :class => 'check_box'
-      Admin?
+      .input.checkbox
+        = f.check_box :is_admin
+        = f.label :is_admin, "Admin?"
 
   .control-group
-    = f.label :password, t("activerecord.attributes.user.password", :default => "password"), :class => 'control-label'
-    .input
-      = f.password_field :password, :class => 'text_field'
+    = f.label :password, "Password"
+    .input.password= f.password_field :password
 
   .control-group
-    = f.label :password_confirmation, t("activerecord.attributes.user.password_confirmation", :default => "password_confirmation"), :class => 'control-label'
-    .input
-      = f.password_field :password_confirmation, :class => 'text_field'
+    = f.label :password_confirmation, "Password confirmation"
+    .input.password= f.password_field :password_confirmation
 
   .actions
     = f.submit 'Save'
