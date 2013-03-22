@@ -21,11 +21,11 @@ Event.create([
 ])
 
 Post.create([
-  {title: 'Post 1 lorem ipsum', slug: 'post-1', content: 'Lorem ipsum dolor amet', user_id: 2},
-  {title: 'Post 2 lorem ipsum', slug: 'post-2', content: 'Lorem ipsum dolor amet', user_id: 3},
-  {title: 'Post 3 lorem ipsum', slug: 'post-3', content: 'Lorem ipsum dolor amet', user_id: 1},
-  {title: 'Post 4 lorem ipsum', slug: 'post-4', content: 'Lorem ipsum dolor amet', user_id: 2},
-  {title: 'Post 5 lorem ipsum', slug: 'post-5', content: 'Lorem ipsum dolor amet', user_id: 3},
-  {title: 'Post 6 lorem ipsum', slug: 'post-6', content: 'Lorem ipsum dolor amet', user_id: 3},
-  {title: 'Post 7 lorem ipsum', slug: 'post-7', content: 'Lorem ipsum dolor amet', user_id: 2}
+  {title: 'Post 1 lorem ipsum', slug: 'post-1', content: 'Lorem ipsum dolor amet', user_id: 2, category: 'General'},
+  {title: 'Post 2 lorem ipsum', slug: 'post-2', content: 'Lorem ipsum dolor amet', user_id: 3, category: 'Discussion'},
+  {title: 'Post 3 lorem ipsum', slug: 'post-3', content: 'Lorem ipsum dolor amet', user_id: 1, category: 'Teachers'},
+  {title: 'Post 4 lorem ipsum', slug: 'post-4', content: 'Lorem ipsum dolor amet', user_id: 2, category: 'General'},
+  {title: 'Post 5 lorem ipsum', slug: 'post-5', content: 'Lorem ipsum dolor amet', user_id: 3, category: 'Teachers'},
+  {title: 'Post 6 lorem ipsum', slug: 'post-6', content: 'Lorem ipsum dolor amet', user_id: 3, category: 'Teachers'},
+  {title: 'Post 7 lorem ipsum', slug: 'post-7', content: 'Lorem ipsum dolor amet', user_id: 2, category: 'Discussion'}
 ])

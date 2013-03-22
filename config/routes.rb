@@ -7,11 +7,12 @@ KidsCodeCamp::Application.routes.draw do
   match 'admin' => 'admin/users#dashboard', :as => 'dashboard'
 
   # Devise
-  devise_for :users, :controllers => { :sessions => 'users/sessions', :registrations => 'users/registrations' } do
+  devise_scope :user do
     match 'sign_up' => 'users/registrations#new'
     match 'login' => 'users/sessions#new'
     match 'logout' => 'users/sessions#destroy', :via => :delete
   end
+  devise_for :users, :controllers => { :sessions => 'users/sessions', :registrations => 'users/registrations' }
 
   # Admin
   namespace :admin , :only => [:new, :create, :edit, :update, :destroy, :index ] do

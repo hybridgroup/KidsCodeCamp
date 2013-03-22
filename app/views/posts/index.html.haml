@@ -10,11 +10,13 @@
   %tr
     %th Topic
     %th Author
+    %th Category
     %th Created
 
   - @posts.each do |post|
     %tr
       %td= link_to post.title, post
       %td= post.user.username
-      %td= post.created_at.strftime("%d %b %y")
+      %td= post.category
+      %td= post.created_at.strftime("%a, %D at %R")
 = will_paginate @posts

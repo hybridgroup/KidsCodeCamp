@@ -1,3 +1,5 @@
+- cancel_form_path = false
+
 = form_for [:admin,@post], :html => {:class => 'post_form'} do |f|
   - if @post.errors.any?
     #error_explanation
@@ -5,30 +7,43 @@
       %ul
         - @post.errors.full_messages.each do |msg|
           %li= msg
-  - if !current_user.is_admin.zero?
-    .control-group
-      = f.label :user_id, t("activerecord.attributes.post.user_id", :default => "User"), :class => 'control-label'
-      .input
-        = f.collection_select(:user_id, User.all, :id, :username, {:class => 'text_field'})
 
-  - if params[:id].present? && action_name == 'new'
-    = f.hidden_field :parent_id, {:value => params[:id]}
+  = f.text_field :user_id, :value => current_user.id
+
+  - if action_name == 'show'
+    = f.text_field :parent_id, {:value => params[:id]}
+  - elsif @post.parent_id.present?
+    = f.text_field :parent_id
+
+  - if current_user.is_admin.zero? # Editor
+    - if action_name != 'show'
+      - if @post.parent_id.present? # Sub
+        - cancel_form_path = post_path(@post.parent_id)
+      - else # Main
+        .control-group
+          = f.label :category, "Category"
+          .input= f.select :category, options_for_select(['General','Discussion','Teachers'])
+
+        - if action_name == 'edit'
+          - cancel_form_path = post_path(@post)
+        - else
+          - cancel_form_path = posts_path
+  - else
+    - cancel_form_path = admin_posts_path
+    - if action_name != 'show' && @post.parent_id.blank? # new or edit main
+      .control-group
+        = f.label :category, "Category"
+        .input= f.select :category, options_for_select(['General','Discussion','Teachers'])
 
   .control-group
-    = f.label :title, t("activerecord.attributes.post.title", :default => "Title"), :class => 'control-label'
-    .input
-      = f.text_field :title, :class => 'text_field'
+    = f.label :title, "Title"
+    .input= f.text_field :title
 
   .control-group
-    = f.label :slug, t("activerecord.attributes.post.slug", :default => "Slug"), :class => 'control-label'
-    .input
-      = f.text_field :slug, :class => 'text_field'
-
-  .control-group
-    = f.label :content, t("activerecord.attributes.post.content", :default => "Content"), :class => 'control-label'
-    .input
-      = f.text_area :content, :class => 'text_area'
+    = f.label :content, "Content"
+    .input= f.text_area :content
 
   .actions
     = f.submit('Post')
-    = raw ' or ' + link_to('Cancel', posts_path) if action_name != 'show'
+    - if cancel_form_path
+      = raw ' or ' + link_to('Cancel', cancel_form_path)

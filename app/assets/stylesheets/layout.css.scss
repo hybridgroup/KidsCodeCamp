@@ -42,6 +42,12 @@ h1:first-child, h1.alpha,
 h2:first-child, h2.alpha,
 h3:first-child, h3.alpha { margin-top:0; }
 
+form { margin:15px 0 20px; }
+form label {
+  display:block;
+  margin:0 0 6px;
+}
+
 input[type=text],
 input[type=password],
 textarea, select,
@@ -157,6 +163,11 @@ textarea, select,
     overflow:hidden;
     border-bottom-right-radius: 10px;
   }
+}
+
+.c-posts #page-body > .content {
+  padding-left:35px;
+  padding-right:35px;
 }
 
 #page > footer {
