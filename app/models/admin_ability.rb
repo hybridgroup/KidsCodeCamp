@@ -6,7 +6,6 @@ class AdminAbility
       if user.is_admin == 1
         can :manage, :all
       else
-        can :read, :all
         can [:new, :create], Post
         can [:edit, :update, :destroy], Post, :user_id => user.id
       end
