@@ -43,15 +43,21 @@ h2:first-child, h2.alpha,
 h3:first-child, h3.alpha { margin-top:0; }
 
 form { margin:15px 0 20px; }
-form label {
-  display:block;
-  margin:0 0 6px;
+.input {
+  margin:0 0 8px;
+
+  label {
+    display:block;
+    margin:0 0 4px;
+  }
 }
+
+.input.checkbox label { display:inline }
 
 input[type=text],
 input[type=password],
 textarea, select,
-.field input
+.input input
 {
   border:0;
   padding:8px 10px;

@@ -6,27 +6,25 @@
         - @user.errors.full_messages.each do |msg|
           %li= msg
 
-  .control-group
+  .input.text.email
     = f.label :email, "Email"
-    .input.text= f.text_field :email
+    = f.text_field :email
 
-  .control-group
+  .input.text
     = f.label :username, "Username"
-    .input.text= f.text_field :username
+    = f.text_field :username
 
-  .control-group
-    %label.control-label
-      .input.checkbox
-        = f.check_box :is_admin
-        = f.label :is_admin, "Admin?"
+  .input.checkbox
+    = f.check_box :is_admin
+    = f.label :is_admin, "Admin?"
 
-  .control-group
+  .input.text.password
     = f.label :password, "Password"
-    .input.password= f.password_field :password
+    = f.password_field :password
 
-  .control-group
+  .input.text.password
     = f.label :password_confirmation, "Password confirmation"
-    .input.password= f.password_field :password_confirmation
+    = f.password_field :password_confirmation
 
   .actions
     = f.submit 'Save'
