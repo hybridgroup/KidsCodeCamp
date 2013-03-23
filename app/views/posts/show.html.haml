@@ -1,5 +1,5 @@
 = render :partial => "devise/session_links"
-%p= link_to 'Back', posts_path
+%p.back= link_to '< Back', posts_path
 
 %table#topics-table
   - if params[:page].blank? || params[:page] == 1
