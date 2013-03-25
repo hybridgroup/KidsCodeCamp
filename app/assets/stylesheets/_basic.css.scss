@@ -1,0 +1,44 @@
+//////////////// Fonts
+@font-face {
+    font: {
+       family: 'Ranger';
+       weight: 'normal';
+       style: 'normal';
+    }
+    src: asset-url('ranger-webfont.eot', font);
+    src: asset-url('ranger-webfont.eot', font) format('embedded-opentype'),
+         asset-url('ranger-webfont.woff', font) format('woff'),
+         asset-url('ranger-webfont.ttf', font) format('truetype'),
+         asset-url('ranger-webfont.svg#JunctionRegular', font) format('svg')
+}
+
+//////////////// Vars
+
+$c-brown : #330404;
+$c-blue : #1e527d;
+$c-orange : #d35d00;
+$c-grey : #f2edea;
+$c-light-blue: #1f5380;
+$c-medium-blue: #3f729f;
+$c-cream: #ECE3DC;
+$f-ranger: "Ranger", impact, sans-serif;
+$f-helvetica: "Helvetica Neue", helvetica, arial, sans-serif;
+
+///////////// Basic
+
+.title:first-child, .title.alpha,
+h1:first-child, h1.alpha, 
+h2:first-child, h2.alpha,
+h3:first-child, h3.alpha { margin-top:0; }
+
+.col {
+	@include inline-block;
+	margin-right:2%;
+}
+.col.omega { margin-right:0 !important; }
+.col16 { width:14%; }
+.col25 { width:23%; }
+.col33 { width:31%; }
+.col50 { width:48%; }
+.col66 { width:64%; }
+.col75 { width:23%; }
