@@ -1,19 +1,24 @@
 %h2 Manage Posts
 
+.controls= link_to 'New Post', new_admin_post_path
+
 %table
   %tr
-    %th Título
-    %th
-    %th
+    %th Title
+    %th Category
+    %th Created
     %th
 
   - @posts.each do |post|
     %tr
       %td= post.title
-      %td= link_to 'Show', post
-      %td= link_to 'Edit', edit_admin_post_path(post)
-      %td= link_to 'Destroy', admin_post_path(post), :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= post.category
+      %td= post.created_at.strftime("%F %R")
+      %td.actions
+        = link_to 'Show', post
+        \|
+        = link_to 'Edit', edit_admin_post_path(post)
+        \|
+        = link_to 'Destroy', admin_post_path(post), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
-
-= link_to 'New Post', new_admin_post_path
+= will_paginate @posts

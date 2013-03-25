@@ -3,7 +3,7 @@ class Admin::PostsController < Admin::AdminController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.paginate(:page => params[:page], :per_page => 8).order("created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb

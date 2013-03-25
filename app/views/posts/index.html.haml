@@ -23,9 +23,5 @@
       %td= post.user.username
       %td= post.category
       %td= post.created_at.strftime("%a, %D at %R")
-= will_paginate @posts
 
-/ = form_tag(search_path, :method => "get") do
-/   = label_tag(:q, "Search for:")
-/   = text_field_tag(:q)
-/   = submit_tag("Search")
+= will_paginate @posts
