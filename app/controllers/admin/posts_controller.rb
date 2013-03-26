@@ -80,11 +80,11 @@ class Admin::PostsController < Admin::AdminController
         post_path(@post)
       end
     else # Admin
-      if @post.parent_id.present? # Response
-        post_path(@post.parent_id)
-      else
-        admin_posts_path
+      if params[:id].blank? && @post.parent_id.present?
+        return post_path(@post.parent_id)
       end
+
+      admin_posts_path
     end
   end
 
