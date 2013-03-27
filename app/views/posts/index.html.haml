@@ -6,7 +6,7 @@
     = select_tag(:category, options_for_select(['All','General','Discussion','Teachers'],params[:category]))
   %p
     - if !current_user.nil?
-      = link_to 'New Post', new_admin_post_path
+      = link_to 'New Post', :model_name => 'post', :action => :new
     - else
       = link_to 'Login to Post', login_path
 

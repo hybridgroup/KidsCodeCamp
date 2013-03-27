@@ -1,10 +1,11 @@
 KidsCodeCamp::Application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
   root :to => 'events#index'
   
   match 'about' => 'pages#about'
   match 'contact' => 'contact#new', :via => :get
   match 'contact' => 'contact#create', :via => :post
-  match 'admin' => 'admin/users#dashboard', :as => 'dashboard'
 
   # Devise
   devise_scope :user do
@@ -30,6 +31,4 @@ KidsCodeCamp::Application.routes.draw do
     end
     resources :users, :events
   end
-=begin
-=end
 end

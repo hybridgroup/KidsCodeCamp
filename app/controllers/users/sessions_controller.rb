@@ -6,7 +6,7 @@ class Users::SessionsController < Devise::SessionsController
     if current_user.is_admin.zero?
       posts_path
     else
-      dashboard_path
+      rails_admin_path
     end
   end
 
