@@ -17,8 +17,8 @@ KidsCodeCamp::Application.routes.draw do
 
   # Public
   resources :posts, :path => 'community' do
-    match '' => 'posts#index', :via => :post, :on => :collection
-    match ':category' => 'posts#index', :on => :collection, :via => :get, :constraints => { :category => /[A-Za-z]/ }
+    get ':category' => 'posts#index', :on => :collection, :constraints => { :category => /Discussion|General|Teachers/ }
+    post 'filter' => 'posts#filter', :on => :collection
   end
   scope :only => [:index, :show] do
     resources :users, :events
