@@ -4,15 +4,12 @@
 RailsAdmin.config do |config|
 
   ################  Global configuration  ################
-  config.authorize_with :cancan, AdminAbility
+  config.authorize_with :cancan
 
+=begin
   config.actions do
-    dashboard
-    index
-    show do
-      visible false
-    end
   end
+=end
   # Set the admin name here (optional second array element will appear in red). For example:
   config.main_app_name = ['Kids Code Camp', 'Admin']
   # or for a more dynamic name:
