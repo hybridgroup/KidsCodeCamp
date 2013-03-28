@@ -4,7 +4,7 @@
   %td.post_created{colspan:2}= post.created_at.strftime("%a, %b %e %Y at %R")
 %tr
   %td.post_author{rowspan:editable ? 4 :3}
-    %p
+    %p= #post.user.username
 %tr
   %td.post_title
     %h3.blue-title= post.title
