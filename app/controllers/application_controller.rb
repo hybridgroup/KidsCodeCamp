@@ -2,16 +2,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :firebug
 
-  def after_sign_in_path_for(resource)
-    dashboard_admin_users_path
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to main_app.posts_path, :notice => exception.message
   end
 
   def admin?
     controller.class.name.split("::").first=="Admin"
-  end
-
-  def user_layout
-    ['new', 'edit'].include?(action_name) && current_user.is_admin.zero? ? 'application' : 'admin'
   end
   
   private
