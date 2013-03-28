@@ -1,6 +1,6 @@
 - cancel_form_path = false
 
-= form_for @post, :url=> rails_admin.new_path('post'), :html => {:class => 'post_form'} do |f|
+= form_for @post, :html => {:class => 'post_form'} do |f|
   - if @post.errors.any?
     #error_explanation
       %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
