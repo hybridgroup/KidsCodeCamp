@@ -1,20 +1,21 @@
 class PostsController < ApplicationController
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  def filter
+    if request.POST[:category].present? && request.POST[:category] != 'All'
+      redirect_to :action => :index, :category => params[:category]
+    else
+      redirect_to posts_path
+    end
+  end
+  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def index
     conditions = {:parent_id => nil}
 
-    if request.POST[:category].present?
-      if request.POST[:category] == 'All'
-        redirect_to posts_path
-      else
-        redirect_to :category => params[:category]
-      end
-      return
-    elsif params[:category].present?
+    if params[:category].present?
       conditions[:category] = params[:category]
     end
 
-    @posts = Post.where(conditions).paginate(:page => params[:page], :per_page => 8)
+    @posts = Post.where(conditions).paginate(:page => params[:page], :per_page =>12)
 
     respond_to do |format|
       format.html # index.html.erb
