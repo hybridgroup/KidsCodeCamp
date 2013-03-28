@@ -85,4 +85,20 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end 
+  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  def after_save_redirect_url
+    if @post.parent_id.present? # Response
+      post_path(@post.parent_id)
+    else
+      post_path(@post)
+    end
+  end
+  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  def after_delete_redirect_url
+    if @post.parent_id.present? #Response
+      post_path(@post.parent_id)
+    else
+      posts_path
+    end
+  end
 end
