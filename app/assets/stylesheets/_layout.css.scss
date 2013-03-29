@@ -138,6 +138,10 @@ textarea, select,
         font-family: $f-ranger;
         text-decoration:none;
         color:$c-orange;
+
+        &.disabled {
+          color:$c-cream - 40;
+        }
       }
     }
   }

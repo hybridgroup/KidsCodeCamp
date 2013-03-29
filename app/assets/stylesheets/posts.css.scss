@@ -29,3 +29,7 @@
 }
 form.category_select { float:right;width:50%;text-align:right;margin:0; }
 form.category_select select { padding:3px 5px;vertical-align:middle; }
+
+/* Sidebar shrink */
+.c-posts #page-body > .content { width:600px; }
+.c-posts #signup input[type="text"] { width:146px }
