@@ -1,8 +1,10 @@
 class Post < ActiveRecord::Base
+  belongs_to :user
+  has_many :responses, :class_name => 'Post', :foreign_key => 'parent_id', :dependent => :destroy
+  
   validates :category, :inclusion => { :in => %w(General Discussion Teachers) }, :allow_nil => true
   validates :title, :content, :category, :presence => true
   attr_accessible :content, :slug, :title, :user_id, :parent_id, :category
-  belongs_to :user
 
   # Rails Admin
   rails_admin do

@@ -15,7 +15,7 @@ class PostsController < ApplicationController
       conditions[:category] = params[:category]
     end
 
-    @posts = Post.where(conditions).paginate(:page => params[:page], :per_page =>12)
+    @posts = Post.where(conditions).paginate(:page => params[:page], :per_page =>12).order('created_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,7 +25,7 @@ class PostsController < ApplicationController
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def show
     @current_post = Post.find(params[:id])
-    @posts = Post.where(:parent_id => params[:id]).paginate(:page => params[:page], :per_page => 8).order("created_at DESC")
+    @posts = Post.where(:parent_id => params[:id]).paginate(:page => params[:page], :per_page => 8).order("created_at")
     @post = Post.new
 
     respond_to do |format|
