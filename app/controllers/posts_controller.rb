@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def filter
     if request.POST[:category].present? && request.POST[:category] != 'All'
