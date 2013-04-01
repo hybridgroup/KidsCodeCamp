@@ -6,7 +6,7 @@
     = render @current_post
   = render @posts
 
-- if user_signed_in? && @current_post.parent_id.blank?
+- if user_signed_in?
   %h3 Add a response
   = render :partial => 'posts/form'
   

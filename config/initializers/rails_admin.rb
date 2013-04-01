@@ -5,11 +5,6 @@ RailsAdmin.config do |config|
 
   ################  Global configuration  ################
   config.authorize_with :cancan, AdminAbility
-=begin
-  config.authenticate_with do
-    authenticate_user!
-  end
-=end
 
   # Set the admin name here (optional second array element will appear in red). For example:
   config.main_app_name = ['Kids Code Camp', 'Admin']
