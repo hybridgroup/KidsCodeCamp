@@ -7,5 +7,6 @@ class AdminAbility
       can :dashboard              # grant access to the dashboard
       can :manage, :all
     end
+    cannot :show, :all
   end
 end

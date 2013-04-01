@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => :filter
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def filter
     if request.POST[:category].present? && request.POST[:category] != 'All'
@@ -46,11 +46,13 @@ class PostsController < ApplicationController
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def edit
     @post = Post.find(params[:id])
+    #authorize! :edit, @post
   end
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def create
     params[:post][:user_id] = current_user.id if params[:post][:user_id].nil?
     @post = Post.new(params[:post])
+    #authorize! :create, @post
 
     respond_to do |format|
       if @post.save
