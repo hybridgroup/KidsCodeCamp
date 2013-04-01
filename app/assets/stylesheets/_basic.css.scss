@@ -21,6 +21,7 @@ $c-grey : #f2edea;
 $c-light-blue: #1f5380;
 $c-medium-blue: #3f729f;
 $c-cream: #ECE3DC;
+$c-dark-cream: #E9E7E1;
 $f-ranger: "Ranger", impact, sans-serif;
 $f-helvetica: "Helvetica Neue", helvetica, arial, sans-serif;
 
@@ -30,6 +31,8 @@ $f-helvetica: "Helvetica Neue", helvetica, arial, sans-serif;
 h1:first-child, h1.alpha, 
 h2:first-child, h2.alpha,
 h3:first-child, h3.alpha { margin-top:0; }
+
+strong { font-weight: 600; }
 
 .col {
 	@include inline-block;
