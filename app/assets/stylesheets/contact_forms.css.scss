@@ -2,27 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#new_contact_form {
-  .field {
-    margin-bottom:25px;
+.c-contact {
+  .section-title{ margin-bottom:10px; } 
+  #new_contact_form {
+      margin-top:30px;
 
-    label{
-      display: block;
-      color:  #3f729f;
-      font-size: 24px;
-      font-family: $f-ranger;
-      margin-bottom: 10px;
+    .field {
+      margin-bottom:25px;
+
+      label{
+        display: block;
+        color:  #3f729f;
+        font-size: 24px;
+        font-family: $f-ranger;
+        margin-bottom: 10px;
+      }
+
+      input { width:220px; }
+      textarea { width:475px; }
     }
 
-    input, textarea {
-      background-color: #f0f0f0;
-      @include border-radius(10px);
-      @include box-shadow(0px 1px 2px rgba(76, 42, 12, 0.27) inset, 0px 1px 0px rgba(255, 255, 255, 0.25));
-    }
-
-    input { width:220px; }
-    textarea { width:475px; }
+    .actions { text-align:right; }
   }
-
-  .actions { text-align:right; }
 }

@@ -6,8 +6,7 @@ class ContactController < ApplicationController
   def create
     @contact_form = ContactForm.new(params[:contact_form])
     if @contact_form.deliver
-      flash.now[:notice] = 'Thank you!'
-      redirect_to root_path
+      redirect_to({:action => 'new'}, :notice => 'Thank you for contacting us!')
     else
       render :new
     end
