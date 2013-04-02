@@ -1,27 +1,36 @@
 = render :partial => "devise/session_links"
-%h1.section-title Community
+%h1.section-title Our Community
 .community_controls
-  = form_tag(posts_path, :class => 'category_select') do
+  = form_tag(filter_posts_path, :class => 'category_select') do
     = submit_tag "Filter by:"
     = select_tag(:category, options_for_select(['All','General','Discussion','Teachers'],params[:category]))
   %p
     - if !current_user.nil?
-      = link_to 'New Post', new_admin_post_path
+      = link_to 'New Post', new_post_path
     - else
       = link_to 'Login to Post', login_path
 
 %table#topics-table
   %tr
     %th Topic
-    %th Author
     %th Category
     %th Created
+    %th Replies
+    %th Last post by
 
   - @posts.each do |post|
+  - last_resp = post.responses.last
     %tr
-      %td= link_to post.title, post
-      %td= post.user.username
+      %td
+        %h3.title= link_to(post.title, post)
+        by #{content_tag('strong',post.user.username)}
       %td= post.category
-      %td= post.created_at.strftime("%a, %D at %R")
+      %td #{post.created_at.strftime("%a, %D %R")}
+      %td #{post.responses.length}
+      %td
+        - if last_resp
+          #{last_resp.created_at.strftime("%a, %D %R")} by #{content_tag('strong',last_resp.user.username)}
+        - else
+          \–
 
 = will_paginate @posts

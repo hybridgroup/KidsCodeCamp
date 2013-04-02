@@ -1,7 +1,0 @@
-%h1 Editing post
-= render 'form'
-
-- if !current_user.is_admin.zero?
-  = link_to 'Show', @post
-  \|
-  = link_to 'Back', admin_posts_path

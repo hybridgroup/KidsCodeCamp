@@ -37,6 +37,7 @@ form { margin:15px 0 20px; }
 
 input[type=text],
 input[type=password],
+input[type=email],
 textarea, select,
 .input input
 {
@@ -83,6 +84,11 @@ textarea, select,
   float:right;
   width:50%;
   text-align:right;
+}
+
+.back {
+  display:block;
+  margin:0 0 10px;
 }
 
 ////////////// Blocks
@@ -138,6 +144,10 @@ textarea, select,
         font-family: $f-ranger;
         text-decoration:none;
         color:$c-orange;
+
+        &.disabled {
+          color:$c-cream - 40;
+        }
       }
     }
   }
