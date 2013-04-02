@@ -23,13 +23,13 @@
     %tr
       %td
         %h3.title= link_to(post.title, post)
-        by #{content_tag('strong',post.user.username)}
+        by #{content_tag('strong',post.user.try(:username))}
       %td= post.category
       %td #{post.created_at.strftime("%a, %D %R")}
       %td #{post.responses.length}
       %td
         - if last_resp
-          #{last_resp.created_at.strftime("%a, %D %R")} by #{content_tag('strong',last_resp.user.username)}
+          #{last_resp.created_at.strftime("%a, %D %R")} by #{content_tag('strong',last_resp.user.try(:username))}
         - else
           \–
 
