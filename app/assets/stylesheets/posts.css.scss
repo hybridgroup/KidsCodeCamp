@@ -35,10 +35,14 @@
 			.title { margin:0;font-size:18px; }
 		}
 		&.post_content { border-top:0;padding-bottom:15px; }
+		.title {
+			font-size:inherit;
+			margin:0;
+		}
 	}
 }
-.a-show #topics-table td { padding-left:15px;padding-right:15px; }
 
+.a-show #topics-table td { padding-left:15px;padding-right:15px; }
 .community_controls { overflow:hidden; }
 form.category_select {
 	float:right;
