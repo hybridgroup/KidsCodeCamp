@@ -2,47 +2,50 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#topics-table {
-	width:100%;
-	margin:15px 0 20px;
-	font-size:90%;
-	border-collapse:collapse;
+.c-posts #page-body > .content > .pad { padding:30px 35px 30px; }
+.c-posts.a-index .section-title { margin-top:0; }
+.a-show .blue-title { font-size:26px; }
+.topics {
 	border:$c-dark-cream solid 1px;
 	@include border-radius(10px);
-	
-	th { font-weight: 600;padding:5px 10px;background-color:#EFEDE6; }
-	tr.separator { border-top:#ccc solid 1px;padding-bottom:10px; }
-	tr.separator:first-child { border-top:none; }
-	td {
+	margin:15px 0 20px;
+	overflow:hidden;
+
+	table {
+		width:100%;
+		font-size:90%;
+		border-collapse:collapse;
+	}
+		
+	th, .th { font-weight: 600;padding:5px 10px;background-color:#EFEDE6; }
+	td, .td {
 		vertical-align:top;
 		padding:8px 12px;
-		background-color:$c-cream + 25;
+		background-color:$c-cream + 28;
 		border-top:$c-dark-cream solid 1px;
 
-		&.post_created {
-			font-size:12px;
-			padding-top:5px;
-			text-align:left;
-			border-top:0;
-			border-bottom:$c-dark-cream solid 1px;
-			background-color:#EFEDE6;
-		}
-		&.post_title {
-			font-weight: 600;
-			padding-bottom:0;
-			background-color:#EFEDE6;
-
-			.title { margin:0;font-size:18px; }
-		}
-		&.post_content { border-top:0;padding-bottom:15px; }
 		.title {
 			font-size:inherit;
 			margin:0;
 		}
+		&.post_created {
+			font-size:12px;
+			text-align:left;
+			border-top:0;
+			border-bottom:$c-dark-cream solid 1px;
+			background-color:#F6F4ED;
+		}
+		&.post_content { border-top:0;padding-bottom:15px; }
+	}
+	.separator {
+		border-top:#ccc solid 1px;
+		padding-bottom:10px;
+		
+		:first-child { border-top:none; }
 	}
 }
 
-.a-show #topics-table td { padding-left:15px;padding-right:15px; }
+.a-show .topics .td { padding-left:15px;padding-right:15px; }
 .community_controls { overflow:hidden; }
 form.category_select {
 	float:right;
@@ -52,7 +55,7 @@ form.category_select {
 	
 	select { padding:3px 5px;vertical-align:middle; }
 }
-
-/* Sidebar shrink */
-.c-posts #page-body > .content { width:600px; }
-.c-posts #signup input[type="text"] { width:146px }
+.post_form {
+	.title {  }
+	.input textarea { width:580px;height:152px; }
+}

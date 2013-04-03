@@ -23,7 +23,15 @@ h2, .title2 { margin:20px 0 12px 0;font-size:22px; }
 h3, .title3 { margin:16px 0 12px 0;font-size:18px; }
 h4, .title4 { margin:16px 0 12px 0;font-size:14px; }
 
-form { margin:15px 0 20px; }
+form {
+  margin:15px 0 20px;
+
+  .actions {
+    text-align:right;
+
+    input { vertical-align: middle; }
+  }
+}
 .input {
   margin:0 0 8px;
 
@@ -94,7 +102,7 @@ textarea, select,
   em, span, a { padding:4px 6px; }
 }
 
-.session_links { margin-bottom:15px; }
+.session_links { margin-bottom:15px;overflow:hidden; }
 .session_actions {
   float:right;
   width:50%;
@@ -176,21 +184,19 @@ textarea, select,
   
   > .content {
     float:left;
-    width: 500px;
-    padding:45px 60px 30px;
+    width: 670px;
+
+    > .pad { padding:45px 60px 30px; }
   }
-  
+
   > aside {
     background:$c-orange image-url("sidebar.gif") repeat-y left;
     padding:20px;
     overflow:hidden;
     border-bottom-right-radius: 10px;
-  }
-}
 
-.c-posts #page-body > .content {
-  padding-left:35px;
-  padding-right:35px;
+    > .pad { padding:0; }
+  }
 }
 
 #page > footer {
@@ -247,12 +253,11 @@ textarea, select,
     @include border-radius(8px);
     @include box-shadow(rgba(0, 0, 0, 0.35) 0px 1px 2px inset);
 
-    width:185px;
+    width:146px;
   }
 
   input[type="image"] {
     float: right;
-    margin-top: -2px;
     width:image-width("bt-send.png")
   }
 }

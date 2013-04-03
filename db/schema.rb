@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(:version => 20130327200101) do
   end
 
   create_table "posts", :force => true do |t|
-    t.string   "title"
     t.string   "slug"
     t.text     "content"
     t.datetime "created_at",                        :null => false
@@ -30,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20130327200101) do
     t.integer  "user_id"
     t.integer  "parent_id"
     t.string   "category",   :default => "General"
+    t.string   "title"
   end
 
   create_table "rails_admin_histories", :force => true do |t|

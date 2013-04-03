@@ -10,27 +10,28 @@
     - else
       = link_to 'Login to Post', login_path
 
-%table#topics-table
-  %tr
-    %th Topic
-    %th Category
-    %th Created
-    %th Replies
-    %th Last post by
-
-  - @posts.each do |post|
-  - last_resp = post.responses.last
+.topics
+  %table
     %tr
-      %td
-        %h3.title= link_to(post.title, post)
-        by #{content_tag('strong',post.user.username)}
-      %td= post.category
-      %td #{post.created_at.strftime("%a, %D %R")}
-      %td #{post.responses.length}
-      %td
-        - if last_resp
-          #{last_resp.created_at.strftime("%a, %D %R")} by #{content_tag('strong',last_resp.user.username)}
-        - else
-          \–
+      %th Topic
+      %th Category
+      %th Created
+      %th Replies
+      %th Last post by
+
+    - @posts.each do |post|
+    - last_resp = post.responses.last
+      %tr
+        %td
+          %h3.title= link_to(post.title, post)
+          by #{content_tag('strong',post.user.username)}
+        %td= post.category
+        %td #{post.created_at.strftime("%a, %D %R")}
+        %td #{post.responses.length}
+        %td
+          - if last_resp
+            #{last_resp.created_at.strftime("%a, %D %R")} by #{content_tag('strong',last_resp.user.username)}
+          - else
+            \–
 
 = will_paginate @posts
