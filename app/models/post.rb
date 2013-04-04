@@ -3,8 +3,7 @@ class Post < ActiveRecord::Base
   has_many :responses, :class_name => 'Post', :foreign_key => 'parent_id', :dependent => :destroy
   
   validates :category, :inclusion => { :in => %w(General Discussion Teachers) }, :allow_nil => true
-  validates :title, :presence => true, :unless => :parent_id?
-  validates :title, :length => { :in => 2..100 }
+  validates :title, :length => { :in => 2..100 }, :presence => true, :unless => :parent_id?
   validates :content, :category, :presence => true
   attr_accessible :content, :slug, :title, :user_id, :parent_id, :category
 

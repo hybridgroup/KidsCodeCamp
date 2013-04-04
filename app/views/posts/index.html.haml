@@ -1,9 +1,6 @@
 = render :partial => "devise/session_links"
 %h1.section-title Our Community
 .community_controls
-  = form_tag(filter_posts_path, :class => 'category_select') do
-    = submit_tag "Filter by:"
-    = select_tag(:category, options_for_select(['All','General','Discussion','Teachers'],params[:category]))
   %p
     - if !current_user.nil?
       = link_to 'New Post', new_post_path

@@ -27,8 +27,6 @@ form {
   margin:15px 0 20px;
 
   .actions {
-    text-align:right;
-
     input { vertical-align: middle; }
   }
 }
@@ -106,6 +104,10 @@ textarea, select,
 .back {
   display:block;
   margin:0 0 10px;
+  padding:0 0 0 16px;
+  background:transparent image-url('sidebar.gif') no-repeat left center;
+
+  &:hover { background-image:image-url('back-hover.gif'); }
 }
 
 ////////////// Blocks

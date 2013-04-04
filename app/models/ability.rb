@@ -6,7 +6,7 @@ class Ability
     can :about, :pages #TEST
     if user
       can [:new, :create, :index], Post
-      if user.is_admin.zero?
+      if user.is_admin?
         can [:edit, :update, :destroy], Post, :user_id => user.id
       else
         can [:edit, :update, :destroy], Post

@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
       include_fields :username, :email, :is_admin, :created_at, :updated_at
       field :is_admin do
         pretty_value do
-          value.zero? ? 'No' : 'Yes'
+          value ? 'Yes' : 'No'
         end
       end
     end

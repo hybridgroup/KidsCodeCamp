@@ -6,11 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.create([
-  { username: 'admin', email: 'admin@a.com', password: 'admin123', password_confirmation: 'admin123', is_admin: 1 },
-  { username: 'admin2', email: 'admin2@a.com', password: 'admin123', password_confirmation: 'admin123', is_admin: 1 },
-  { username: 'admin3', email: 'admin3@a.com', password: 'admin123', password_confirmation: 'admin123', is_admin: 0 },
-  { username: 'admin4', email: 'admin4@a.com', password: 'admin123', password_confirmation: 'admin123', is_admin: 0 },
-  { username: 'admin5', email: 'admin5@a.com', password: 'admin123', password_confirmation: 'admin123', is_admin: 0 }
+  { username: 'admin', email: 'admin@a.com', password: 'admin123', password_confirmation: 'admin123', is_admin: true },
+  { username: 'admin2', email: 'admin2@a.com', password: 'admin123', password_confirmation: 'admin123', is_admin: true },
+  { username: 'admin3', email: 'admin3@a.com', password: 'admin123', password_confirmation: 'admin123', is_admin: false },
+  { username: 'admin4', email: 'admin4@a.com', password: 'admin123', password_confirmation: 'admin123', is_admin: false },
+  { username: 'admin5', email: 'admin5@a.com', password: 'admin123', password_confirmation: 'admin123', is_admin: false }
 ])
 Event.create([
   {title: 'Event 1 lorem ipsum', slug: 'event-1', content: 'Lorem ipsum Sit minim cillum officia elit occaecat irure sint esse qui dolore dolore deserunt dolor.'},
