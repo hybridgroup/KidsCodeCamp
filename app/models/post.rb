@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   
   validates :category, :inclusion => { :in => %w(General Discussion Teachers) }, :allow_nil => true
   validates :title, :presence => true, :unless => :parent_id?
+  validates :title, :length => { :in => 2..100 }
   validates :content, :category, :presence => true
   attr_accessible :content, :slug, :title, :user_id, :parent_id, :category
 

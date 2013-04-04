@@ -1,6 +1,6 @@
 - editable = user_signed_in? && (current_user.is_admin == 1 || post.user_id == current_user.id) && action_name == 'show'
 .topics
-  .td.post_created Posted by #{content_tag('strong',post.user.username)} – #{post.created_at.strftime("%a, %b %e %Y at %R")}
+  .td.post_created #{gravatar(post.user)} Posted by #{content_tag('strong',post.user.username)} – #{post.created_at.strftime("%a, %b %e %Y at %R")}
   .td.post_content= post.content
   - if editable
     .td.action

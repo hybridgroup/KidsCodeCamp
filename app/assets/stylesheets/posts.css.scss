@@ -34,6 +34,7 @@
 			border-top:0;
 			border-bottom:$c-dark-cream solid 1px;
 			background-color:#F6F4ED;
+
 		}
 		&.post_content { border-top:0;padding-bottom:15px; }
 	}
@@ -44,6 +45,9 @@
 		:first-child { border-top:none; }
 	}
 }
+
+.gravatar { vertical-align:middle;margin:0 4px; }
+.gravatar:first-child { margin-left:0;margin-right:8px; }
 
 .a-show .topics .td { padding-left:15px;padding-right:15px; }
 .community_controls { overflow:hidden; }
