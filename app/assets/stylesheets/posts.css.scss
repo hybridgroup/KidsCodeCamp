@@ -4,7 +4,9 @@
 
 .c-posts #page-body > .content > .pad { padding:30px 35px 30px; }
 .c-posts.a-index .section-title { margin-top:0; }
-.a-show .blue-title { font-size:26px; }
+.a-show .blue-title { font-size:32px;@include pie-clearfix; }
+.a-show .blue-title img { float:left;margin-right:16px;line-height:34px; }	
+.a-show .blue-title span { overflow:hidden;display:block; }
 .topics {
 	border:$c-dark-cream solid 1px;
 	@include border-radius(10px);
@@ -25,7 +27,6 @@
 		border-top:$c-dark-cream solid 1px;
 
 		.title { font-size:inherit;margin:0; }
-		&:first-child { width:180px; }
 		&.post_created {
 			font-size:12px;
 			text-align:left;
@@ -36,6 +37,7 @@
 		}
 		&.post_content { border-top:0;padding-bottom:15px; }
 	}
+	td:first-child { width:180px; } /* Just for tables */
 	.separator {
 		border-top:#ccc solid 1px;
 		padding-bottom:10px;
