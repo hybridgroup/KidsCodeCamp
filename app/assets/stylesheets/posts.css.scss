@@ -38,6 +38,7 @@
 		&.post_content { border-top:0;padding-bottom:15px; }
 	}
 	td:first-child { width:180px; } /* Just for tables */
+	td.categories_name { width:310px; } /* Just categories table */
 	.separator {
 		border-top:#ccc solid 1px;
 		padding-bottom:10px;

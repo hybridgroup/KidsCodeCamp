@@ -9,7 +9,7 @@
   - topics = category.posts.where(:parent_id => nil)
   - last_resp = category.posts.last
   %tr
-    %td
+    %td.categories_name
       %h3.title= link_to category.title, posts_path(:category => category.id)
       .desc= category.description
     /%td #{category.created_at.strftime("%a, %D %R")} by #{gravatar(category.user,:size => '18')} #{content_tag('strong',last_resp.user.username)}
