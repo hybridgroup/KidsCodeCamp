@@ -41,11 +41,11 @@ Post.create([
   {title: 'Post 11 lorem ipsum', slug: 'post-11', content: 'Lorem ipsum Id consectetur velit deserunt commodo minim in adipisicing laboris dolor elit incididunt nisi ullamco labore culpa.', user_id: 3, category_id: 3},
   {title: 'Post 12 lorem ipsum', slug: 'post-12', content: 'Lorem ipsum Cillum velit esse do Excepteur sit quis proident velit nulla cillum dolor qui aliquip Ut cupidatat consectetur Ut commodo.', user_id: 3, category_id: 3},
   {title: 'Post 13 lorem ipsum', slug: 'post-13', content: 'Lorem ipsum Reprehenderit adipisicing mollit cillum laborum officia culpa ea labore magna.', user_id: 2, category_id: 2},
-  {title: 'Post 14 lorem ipsum', slug: 'post-14', content: 'Lorem ipsum Eu quis aliqua adipisicing in mollit officia laboris minim ullamco fugiat dolor dolor non aliquip eiusmod.', user_id: 2, category_id: nil, parent_id: 13},
-  {title: 'Post 15 lorem ipsum', slug: 'post-15', content: 'Lorem ipsum Occaecat Ut quis nulla aute incididunt cillum sint officia dolore dolore dolore nisi reprehenderit officia.', user_id: 3, category_id: nil, parent_id: 7},
-  {title: 'Post 16 lorem ipsum', slug: 'post-16', content: 'Lorem ipsum Fugiat eiusmod ullamco enim ad nostrud qui veniam nisi laboris nisi mollit.', user_id: 1, category_id: nil, parent_id: 7},
-  {title: 'Post 17 lorem ipsum', slug: 'post-17', content: 'Lorem ipsum Eu quis aliqua adipisicing in mollit officia laboris minim ullamco fugiat dolor dolor non aliquip eiusmod.', user_id: 2, category_id: nil, parent_id: 7},
-  {title: 'Post 18 lorem ipsum', slug: 'post-18', content: 'Lorem ipsum Occaecat Ut quis nulla aute incididunt cillum sint officia dolore dolore dolore nisi reprehenderit officia.', user_id: 3, category_id: nil, parent_id: 10},
-  {title: 'Post 19 lorem ipsum', slug: 'post-19', content: 'Lorem ipsum Fugiat eiusmod ullamco enim ad nostrud qui veniam nisi laboris nisi mollit.', user_id: 1, category_id: nil, parent_id: 10},
-  {title: 'Post 20 lorem ipsum', slug: 'post-20', content: 'Lorem ipsum Eu quis aliqua adipisicing in mollit officia laboris minim ullamco fugiat dolor dolor non aliquip eiusmod.', user_id: 2, category_id: nil, parent_id: 10}
+  {title: nil, slug: 'post-14', content: 'Lorem ipsum Eu quis aliqua adipisicing in mollit officia laboris minim ullamco fugiat dolor dolor non aliquip eiusmod.', user_id: 2, category_id: nil, parent_id: 13},
+  {title: nil, slug: 'post-15', content: 'Lorem ipsum Occaecat Ut quis nulla aute incididunt cillum sint officia dolore dolore dolore nisi reprehenderit officia.', user_id: 3, category_id: nil, parent_id: 7},
+  {title: nil, slug: 'post-16', content: 'Lorem ipsum Fugiat eiusmod ullamco enim ad nostrud qui veniam nisi laboris nisi mollit.', user_id: 1, category_id: nil, parent_id: 7},
+  {title: nil, slug: 'post-17', content: 'Lorem ipsum Eu quis aliqua adipisicing in mollit officia laboris minim ullamco fugiat dolor dolor non aliquip eiusmod.', user_id: 2, category_id: nil, parent_id: 7},
+  {title: nil, slug: 'post-18', content: 'Lorem ipsum Occaecat Ut quis nulla aute incididunt cillum sint officia dolore dolore dolore nisi reprehenderit officia.', user_id: 3, category_id: nil, parent_id: 10},
+  {title: nil, slug: 'post-19', content: 'Lorem ipsum Fugiat eiusmod ullamco enim ad nostrud qui veniam nisi laboris nisi mollit.', user_id: 1, category_id: nil, parent_id: 10},
+  {title: nil, slug: 'post-20', content: 'Lorem ipsum Eu quis aliqua adipisicing in mollit officia laboris minim ullamco fugiat dolor dolor non aliquip eiusmod.', user_id: 2, category_id: nil, parent_id: 10}
 ])
