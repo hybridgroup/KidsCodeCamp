@@ -13,7 +13,7 @@
 
 .topics
   %table
-    = render "posts/#{@posts.nil? ? 'categories' : 'posts'}"
+    = render "posts/#{@posts.blank? ? 'categories' : 'posts'}"
 
-- unless @posts.nil?
-  = #will_paginate @posts
+- unless @posts.blank?
+  = will_paginate @posts

@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
   has_many :responses, :class_name => 'Post', :foreign_key => 'parent_id', :dependent => :destroy
   
   validates :title, :length => { :in => 2..100 }, :presence => true, :unless => :parent_id?
-  validates :category_id, :presence => true, :unless => :parent_id?
+  validates :category, :presence => true, :unless => :parent_id?
   validates :content, :user_id, :presence => true
 
   # Rails Admin

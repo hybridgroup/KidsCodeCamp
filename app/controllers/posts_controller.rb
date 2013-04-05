@@ -4,7 +4,6 @@ class PostsController < ApplicationController
 
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def index
-    fb params
     if params[:category].present?
       conditions = {:parent_id => nil, :category_id => params[:category]}
       @posts = Post.where(conditions).paginate(:page => params[:page], :per_page =>12).order('created_at DESC')

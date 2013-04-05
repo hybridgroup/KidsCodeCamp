@@ -24,10 +24,8 @@
 		background-color:$c-cream + 28;
 		border-top:$c-dark-cream solid 1px;
 
-		.title {
-			font-size:inherit;
-			margin:0;
-		}
+		.title { font-size:inherit;margin:0; }
+		&:first-child { width:180px; }
 		&.post_created {
 			font-size:12px;
 			text-align:left;

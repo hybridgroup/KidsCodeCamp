@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
   def about
-    authorize! :about, :pages
   end
 
   def signup
