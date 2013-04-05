@@ -4,7 +4,7 @@ class Category < ActiveRecord::Base
   has_many :posts
 
   validates :title, :length => { :in => 2..100 }, :presence => true
-  validates :content, :presence => true
+  validates :description, :presence => true
 
 
   # Rails Admin
