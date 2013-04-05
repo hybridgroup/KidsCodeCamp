@@ -33,7 +33,7 @@ RailsAdmin.config do |config|
   # config.included_models = ['Event', 'Post', 'User']
 
   # Label methods for model instances:
-  # config.label_methods << :description # Default is [:name, :title]
+  config.label_methods << :username # Default is [:name, :title]
 
 
 

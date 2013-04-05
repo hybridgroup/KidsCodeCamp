@@ -1,43 +1,61 @@
 class Post < ActiveRecord::Base
+  attr_accessible :title, :content, :slug, :user_id, :parent_id, :category_id
+
   belongs_to :user
+  belongs_to :category
   has_many :responses, :class_name => 'Post', :foreign_key => 'parent_id', :dependent => :destroy
   
-  validates :category, :inclusion => { :in => %w(General Discussion Teachers) }, :allow_nil => true
   validates :title, :length => { :in => 2..100 }, :presence => true, :unless => :parent_id?
-  validates :content, :category, :presence => true
-  attr_accessible :content, :slug, :title, :user_id, :parent_id, :category
+  validates :category_id, :presence => true, :unless => :parent_id?
+  validates :content, :user_id, :presence => true
 
   # Rails Admin
   rails_admin do
-
-    list do
-      exclude_fields :slug
+    show do
+      field :category
+      field :title
+      field :content
+      field :user
+      field :created_at
+      field :updated_at
     end
-
+    #=-=-=-=-=-=-=-=-=-=-=-=-=-
+    list do
+      field :title
+      field :category
+      field :user
+      field :created_at
+      field :updated_at
+    end
+    #=-=-=-=-=-=-=-=-=-=-=-=-=-
     edit do
-      configure :user do
-        visible false
-      end
-      configure :responses do
-        visible false
-      end
-      configure :category do
+      field :title
+      field :content
+
+      field :category do
         visible do
           bindings[:object].parent_id.blank?
         end
       end
-      configure :user_id, :hidden do
+
+      field :user do
+        visible false
+      end
+
+      field :user_id, :hidden do
         visible true
         default_value do
-          bindings[:view]._current_user.id if value.blank?
+          bindings[:view]._current_user.id
         end
       end
-      exclude_fields :created_at, :updated_at, :slug, :parent_id
     end
-  end
-
-  # RailsAdmin Enum
-  def category_enum
-    %w(General Discussion Teachers)
+    #=-=-=-=-=-=-=-=-=-=-=-=-=-
+    update do
+      configure :title do
+        visible do
+          bindings[:object].parent_id.blank?
+        end
+      end
+    end
   end
 end

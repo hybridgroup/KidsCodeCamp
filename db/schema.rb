@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130404013230) do
+ActiveRecord::Schema.define(:version => 20130404175354) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "events", :force => true do |t|
     t.string   "title"
@@ -24,12 +32,12 @@ ActiveRecord::Schema.define(:version => 20130404013230) do
   create_table "posts", :force => true do |t|
     t.string   "slug"
     t.text     "content"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "user_id"
     t.integer  "parent_id"
-    t.string   "category",   :default => "General"
     t.string   "title"
+    t.integer  "category_id"
   end
 
   create_table "rails_admin_histories", :force => true do |t|

@@ -1,22 +1,18 @@
 class PostsController < ApplicationController
-  load_and_authorize_resource :except => :filter
-  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  def filter
-    if request.POST[:category].present? && request.POST[:category] != 'All'
-      redirect_to :action => :index, :category => params[:category]
-    else
-      redirect_to posts_path
-    end
-  end
+  load_and_authorize_resource
+  before_filter :carried_params
+
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def index
-    conditions = {:parent_id => nil}
-
+    fb params
     if params[:category].present?
-      conditions[:category] = params[:category]
+      conditions = {:parent_id => nil, :category_id => params[:category]}
+      @posts = Post.where(conditions).paginate(:page => params[:page], :per_page =>12).order('created_at DESC')
+      @categories = nil
+    else
+      @categories = Category.all
+      @posts = nil
     end
-
-    @posts = Post.where(conditions).paginate(:page => params[:page], :per_page =>12).order('created_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -103,5 +99,20 @@ class PostsController < ApplicationController
     else
       posts_path
     end
+  end
+  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  def carried_params
+    @category = params[:category]    
+    @id = params[:id]    
+  end
+  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  def url_options
+    if @category
+      {:category => @category}.merge(super)
+    else
+      super
+    end
+    
+    #url_opts = {:id => @id}.merge(url_opts) if @id
   end
 end

@@ -2,6 +2,10 @@
 %h1.section-title Our Community
 .community_controls
   %p
+    - if @posts.present?
+      = link_to 'Categories', posts_path(:category => nil)
+      \| 
+
     - if !current_user.nil?
       = link_to 'New Post', new_post_path
     - else
@@ -9,26 +13,7 @@
 
 .topics
   %table
-    %tr
-      %th Topic
-      %th Category
-      %th Created
-      %th Replies
-      %th Last post by
+    = render "posts/#{@posts.nil? ? 'categories' : 'posts'}"
 
-    - @posts.each do |post|
-    - last_resp = post.responses.last
-      %tr
-        %td
-          %h3.title= link_to(post.title, post)
-          by #{gravatar(post.user,:size => '18')} #{content_tag('strong',post.user.username)}
-        %td= post.category
-        %td #{post.created_at.strftime("%a, %D %R")}
-        %td #{post.responses.length}
-        %td
-          - if last_resp
-            #{last_resp.created_at.strftime("%a, %D %R")} by #{content_tag('strong',last_resp.user.username)}
-          - else
-            \–
-
-= will_paginate @posts
+- unless @posts.nil?
+  = #will_paginate @posts

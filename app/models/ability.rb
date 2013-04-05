@@ -3,7 +3,6 @@ class Ability
 
   def initialize(user)
     can :read, :all
-    can :about, :pages #TEST
     if user
       can [:new, :create, :index], Post
       if user.is_admin?

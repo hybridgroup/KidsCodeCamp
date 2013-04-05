@@ -3,9 +3,9 @@ KidsCodeCamp::Application.routes.draw do
 
   root :to => 'events#index'
   
-  match 'about' => 'pages#about'
-  match 'contact' => 'contact#new', :via => :get
-  match 'contact' => 'contact#create', :via => :post
+  get 'about' => 'pages#about'
+  get 'contact' => 'contact#new'
+  post 'contact' => 'contact#create'
 
   # Devise
   devise_scope :user do
@@ -17,8 +17,8 @@ KidsCodeCamp::Application.routes.draw do
 
   # Public
   resources :posts, :path => 'community' do
-    get ':category' => 'posts#index', :on => :collection, :constraints => { :category => /Discussion|General|Teachers/ }
-    post 'filter' => 'posts#filter', :on => :collection
+    #get ':category/:id' => 'posts#show', :on => :collection, :as => 'show', :constraints => { :category => /Discussion|General|Teachers/, :id => /[0-9]*/ }
+    #get ':category' => 'posts#index', :on => :collection, :constraints => { :category => /[0-9]*/ }
   end
   scope :only => [:index, :show] do
     resources :users, :events

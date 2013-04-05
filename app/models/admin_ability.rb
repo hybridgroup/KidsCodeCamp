@@ -2,11 +2,12 @@ class AdminAbility
   include CanCan::Ability
 
   def initialize(user)
-    if user && user.is_admin == 1
+    if user && user.is_admin?
       can :access, :rails_admin
-      can :dashboard              # grant access to the dashboard
+      can :dashboard
       can :manage, :all
     end
-    cannot :show, :all
+    cannot :show_in_app, User
+    # cannot :show, :all
   end
 end

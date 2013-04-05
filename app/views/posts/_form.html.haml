@@ -20,9 +20,11 @@
       - if @post.parent_id.present? # Edit Response
         - cancel_form_path = post_path(@post.parent_id)
       - else # New/Edit Main
+        - opts = @post.category_id.blank? && params[:category].present? ? {:selected => params[:category]} : {}
+
         .input.select
           = f.label :category, "Category"
-          = f.select :category, options_for_select(['General','Discussion','Teachers'])
+          = f.collection_select :category_id, Category.all, :id, :title , opts
     
         .input.text
           = f.label :title, "Title"
