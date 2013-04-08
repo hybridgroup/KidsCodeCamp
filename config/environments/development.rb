@@ -17,8 +17,8 @@ KidsCodeCamp::Application.configure do
     :address              => "smtp.gmail.com",
     :port                 => 587,
     :domain               => 'kidscodecamp.com',
-    :user_name            => ENV['GMAIL_USER'],
-    :password             => ENV['GMAIL_PASS'],
+    :user_name            => ENV['USER'],
+    :password             => ENV['PASS'],
     :authentication       => 'plain',
     :enable_starttls_auto => true
   }

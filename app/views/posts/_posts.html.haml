@@ -9,7 +9,7 @@
   - last_resp = post.responses.last
   %tr
     %td
-      %h3.title= link_to post.title, post
+      %h3.title= link_to post.title, category_posts_path(:category => post.category, :id => post)
       by #{gravatar(post.user,:size => '18')} #{content_tag('strong',post.user.username)}
     %td= post.category.title
     %td #{post.created_at.strftime("%a, %D %R")}

@@ -6,6 +6,8 @@ class Category < ActiveRecord::Base
   validates :title, :length => { :in => 2..100 }, :presence => true
   validates :description, :presence => true
 
+  extend FriendlyId
+  friendly_id :title, :use => :slugged
 
   # Rails Admin
   rails_admin do

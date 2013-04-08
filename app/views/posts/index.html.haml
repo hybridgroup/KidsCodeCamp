@@ -2,7 +2,7 @@
 %h1.section-title Our Community
 .community_controls
   %p
-    - if @posts.present?
+    - unless @category_list
       = link_to 'Categories', posts_path(:category => nil)
       \| 
 
@@ -13,7 +13,7 @@
 
 .topics
   %table
-    = render "posts/#{@posts.blank? ? 'categories' : 'posts'}"
+    = render "posts/#{@category_list ? 'categories' : 'posts'}"
 
-- unless @posts.blank?
+- unless @category_list
   = will_paginate @posts

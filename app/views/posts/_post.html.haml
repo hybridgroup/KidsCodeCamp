@@ -1,7 +1,9 @@
 - editable = user_signed_in? && (current_user.is_admin? || post.user_id == current_user.id) && action_name == 'show'
 .topics
   .td.post_created #{gravatar(post.user, :size => 24)} Posted by #{content_tag('strong',post.user.username)} – #{post.created_at.strftime("%a, %b %e %Y at %R")}
-  .td.post_content= post.content
+  .td.post_content
+    :markdown
+      #{post.content}
   - if editable
     .td.action
       = link_to('Edit', edit_post_path(post)) + ' | '

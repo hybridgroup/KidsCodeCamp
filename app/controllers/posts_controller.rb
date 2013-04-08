@@ -1,16 +1,16 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
-  before_filter :carried_params
+  before_filter :carry
 
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def index
+    @category_list = false
     if params[:category].present?
-      conditions = {:parent_id => nil, :category_id => params[:category]}
+      conditions = {:parent_id => nil, :category_id => Category.find(params[:category]).id}
       @posts = Post.where(conditions).paginate(:page => params[:page], :per_page =>12).order('created_at DESC')
-      @categories = nil
     else
       @categories = Category.all
-      @posts = nil
+      @category_list = true
     end
 
     respond_to do |format|
@@ -100,18 +100,11 @@ class PostsController < ApplicationController
     end
   end
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  def carried_params
-    @category = params[:category]    
-    @id = params[:id]    
-  end
-  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def url_options
-    if @category
-      {:category => @category}.merge(super)
+    if @post.parent_id.present? #Response
+      post_path(@post.parent_id)
     else
-      super
+      posts_path
     end
-    
-    #url_opts = {:id => @id}.merge(url_opts) if @id
   end
 end

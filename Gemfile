@@ -17,6 +17,7 @@ group :assets do
   gem 'compass-rails'
   gem "haml"
   gem "haml-rails"
+  gem "redcarpet"
   gem 'jquery-rails'
   gem 'uglifier', '>= 1.0.3'
 end
@@ -27,6 +28,7 @@ group :development do
   gem 'cancan'
   gem 'mail_form'
   gem 'will_paginate', '~> 3.0.0'
+  gem 'friendly_id'
   gem 'rails_admin'
 end
 # To use ActiveModel has_secure_password

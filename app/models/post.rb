@@ -9,6 +9,9 @@ class Post < ActiveRecord::Base
   validates :category, :presence => true, :unless => :parent_id?
   validates :content, :user_id, :presence => true
 
+  extend FriendlyId
+  friendly_id :title, :use => :slugged
+
   # Rails Admin
   rails_admin do
     show do

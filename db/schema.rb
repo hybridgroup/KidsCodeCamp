@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130404175354) do
+ActiveRecord::Schema.define(:version => 20130405234644) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20130404175354) do
     t.datetime "updated_at",  :null => false
   end
 
+  add_index "categories", ["slug"], :name => "index_categories_on_slug", :unique => true
+
   create_table "events", :force => true do |t|
     t.string   "title"
     t.text     "content"
@@ -28,6 +30,8 @@ ActiveRecord::Schema.define(:version => 20130404175354) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "events", ["slug"], :name => "index_events_on_slug", :unique => true
 
   create_table "posts", :force => true do |t|
     t.string   "slug"
@@ -39,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20130404175354) do
     t.string   "title"
     t.integer  "category_id"
   end
+
+  add_index "posts", ["slug"], :name => "index_posts_on_slug", :unique => true
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"

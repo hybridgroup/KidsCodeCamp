@@ -17,8 +17,8 @@ KidsCodeCamp::Application.routes.draw do
 
   # Public
   resources :posts, :path => 'community' do
-    #get ':category/:id' => 'posts#show', :on => :collection, :as => 'show', :constraints => { :category => /Discussion|General|Teachers/, :id => /[0-9]*/ }
-    #get ':category' => 'posts#index', :on => :collection, :constraints => { :category => /[0-9]*/ }
+    get ':category/:id' => 'posts#show', :on => :collection, :as => 'category', :constraints => { :category => /[a-zA-Z0-9\-]+/ }
+    get ':category' => 'posts#index', :on => :collection, :constraints => { :category => /[a-zA-Z0-9\-]+/ }
   end
   scope :only => [:index, :show] do
     resources :users, :events
