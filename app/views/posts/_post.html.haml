@@ -6,5 +6,5 @@
       #{post.content}
   - if editable
     .td.action
-      = link_to('Edit', edit_post_path(post)) + ' | '
-      = link_to 'Destroy', post_path(post), :method => :delete, :data => { :confirm => 'Are you sure?' }
+      = link_to('Edit', edit_category_post_path(@category,post)) + ' | '
+      = link_to 'Destroy', {:category_id => @category, :id => post}, :method => :delete, :data => { :confirm => 'Are you sure?' }

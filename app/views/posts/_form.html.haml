@@ -1,5 +1,5 @@
 - cancel_form_path = false
-= form_for @post, :html => {:class => 'post_form'} do |f|
+= form_for [@category, @post], :html => {:class => 'post_form'} do |f|
   - if @post.errors.any?
     #error_explanation
       %h2.title= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
@@ -11,29 +11,25 @@
 
   //// Dynamic inputs form logic
   - if action_name == 'show'
-    = f.hidden_field :parent_id, {:value => params[:id]}
+    = f.hidden_field :parent_id, { :value => @current_post.id }
   - elsif @post.parent_id.present?
     = f.hidden_field :parent_id
 
   - if user_signed_in?
     - if action_name != 'show' # New/Edit Main or Edit Reponse
       - if @post.parent_id.present? # Edit Response
-        - cancel_form_path = post_path(@post.parent_id)
+        - cancel_form_path = category_post_path(@category,@post.topic)
       - else # New/Edit Main
-        - opts = @post.category_id.blank? && params[:category].present? ? {:selected => params[:category]} : {}
-
-        .input.select
-          = f.label :category, "Category"
-          = f.collection_select :category_id, Category.all, :id, :title , opts
+        = f.hidden_field :category_id, :value => @category.id
     
         .input.text
           = f.label :title, "Title"
           = f.text_field :title
 
         - if action_name == 'edit' # Edit Main
-          - cancel_form_path = post_path(@post)
+          - cancel_form_path = category_post_path(@post.category, @post)
         - else # New Main
-          - cancel_form_path = posts_path
+          - cancel_form_path = category_posts_path(@category)
 
   //// Static inputs
 

@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :category
+  belongs_to :topic, :class_name => 'Post', :foreign_key => 'parent_id'
   has_many :responses, :class_name => 'Post', :foreign_key => 'parent_id', :dependent => :destroy
   
   validates :title, :length => { :in => 2..100 }, :presence => true, :unless => :parent_id?

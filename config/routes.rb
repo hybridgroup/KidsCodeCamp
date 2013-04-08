@@ -16,11 +16,13 @@ KidsCodeCamp::Application.routes.draw do
   devise_for :users, :controllers => { :sessions => 'users/sessions', :registrations => 'users/registrations' }
 
   # Public
-  resources :posts, :path => 'community' do
-    get ':category/:id' => 'posts#show', :on => :collection, :as => 'category', :constraints => { :category => /[a-zA-Z0-9\-]+/ }
-    get ':category' => 'posts#index', :on => :collection, :constraints => { :category => /[a-zA-Z0-9\-]+/ }
+  get '/community' => 'posts#index'
+  resources :categories, :path => "community", :only => [:index] do
+    resources :posts, :path => "/"
   end
+
   scope :only => [:index, :show] do
     resources :users, :events
   end
+
 end

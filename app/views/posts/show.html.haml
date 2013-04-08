@@ -1,5 +1,5 @@
 = render :partial => "devise/session_links"
-= link_to 'Back', posts_path, :class => 'back'
+= link_to 'Back', {:action => 'index'}, :class => 'back'
 
 - if @current_post && (params[:page].blank? || params[:page] == 1)
   %h2.blue-title.title= gravatar(@current_post.user, :size => 48) + content_tag('span',@current_post.title)

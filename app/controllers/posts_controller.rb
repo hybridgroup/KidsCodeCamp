@@ -1,12 +1,12 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
-  before_filter :carry
+  before_filter :set_category
 
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def index
     @category_list = false
-    if params[:category].present?
-      conditions = {:parent_id => nil, :category_id => Category.find(params[:category]).id}
+    if params[:category_id].present?
+      conditions = {:parent_id => nil, :category_id => Category.find(params[:category_id]).id}
       @posts = Post.where(conditions).paginate(:page => params[:page], :per_page =>12).order('created_at DESC')
     else
       @categories = Category.all
@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def show
     @current_post = Post.find(params[:id])
-    @posts = Post.where(:parent_id => params[:id]).paginate(:page => params[:page], :per_page => 8).order("created_at")
+    @posts = Post.where(:parent_id => @current_post.id).paginate(:page => params[:page], :per_page => 8).order("created_at")
     @post = Post.new
 
     respond_to do |format|
@@ -47,7 +47,6 @@ class PostsController < ApplicationController
   def create
     params[:post][:user_id] = current_user.id if params[:post][:user_id].nil?
     @post = Post.new(params[:post])
-    #authorize! :create, @post
 
     respond_to do |format|
       if @post.save
@@ -86,25 +85,22 @@ class PostsController < ApplicationController
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def after_save_redirect_url
     if @post.parent_id.present? # Response
-      post_path(@post.parent_id)
+      category_post_path(@post.topic.category,@post.topic)
     else
-      post_path(@post)
+      category_post_path(@post.category,@post)
     end
   end
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def after_delete_redirect_url
     if @post.parent_id.present? #Response
-      post_path(@post.parent_id)
+      category_post_path(@post.topic.category,@post.topic)
     else
-      posts_path
+      category_posts_path(@post.category)
     end
   end
   #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  def url_options
-    if @post.parent_id.present? #Response
-      post_path(@post.parent_id)
-    else
-      posts_path
-    end
+  def set_category
+    @category = Category.find(params[:category_id]) if params[:category_id].present?
   end
+  
 end

@@ -10,7 +10,7 @@
   - last_resp = category.posts.last
   %tr
     %td.categories_name
-      %h3.title= link_to category.title, :category => category
+      %h3.title= link_to category.title, category_posts_path(category)
       .desc= category.description
     /%td #{category.created_at.strftime("%a, %D %R")} by #{gravatar(category.user,:size => '18')} #{content_tag('strong',last_resp.user.username)}
     %td= topics.count

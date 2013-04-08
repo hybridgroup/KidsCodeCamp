@@ -3,13 +3,9 @@
 .community_controls
   %p
     - unless @category_list
-      = link_to 'Categories', posts_path(:category => nil)
+      = link_to 'Categories', posts_categories_path
       \| 
-
-    - if !current_user.nil?
-      = link_to 'New Post', new_post_path
-    - else
-      = link_to 'Login to Post', login_path
+      = link_to 'New Post', new_category_post_path
 
 .topics
   %table
