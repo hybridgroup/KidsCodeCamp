@@ -61,6 +61,8 @@ textarea, select,
   }
 }
 
+.input.textarea .legend { text-align:right; }
+
 a.cta {
   background-color:#E67C00+30;
   @include inline-block;

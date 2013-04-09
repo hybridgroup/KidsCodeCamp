@@ -6,10 +6,9 @@
         - @event.errors.full_messages.each do |msg|
           %li= msg
 
-  .control-group
+  .input.text
     = f.label :title, "Title", :class => 'control-label'
-    .input
-      = f.text_field :title, :class => 'text_field'
+    = f.text_field :title, :class => 'text_field'
 
   .control-group
     = f.label :slug, "Slug", :class => 'control-label'
@@ -20,6 +19,7 @@
     = f.label :content, "Content", :class => 'control-label'
     .input
       = f.text_area :content, :class => 'text_area'
+      %p.legend= link_to 'Markdown is allowed', 'http://en.wikipedia.org/wiki/Markdown#Syntax_examples', :target => '_blank', :rel => 'nofollow'
 
   .actions
     = f.submit 'Save'
