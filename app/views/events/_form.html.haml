@@ -7,19 +7,17 @@
           %li= msg
 
   .input.text
-    = f.label :title, "Title", :class => 'control-label'
-    = f.text_field :title, :class => 'text_field'
+    = f.label :title, "Title"
+    = f.text_field :title
 
-  .control-group
-    = f.label :slug, "Slug", :class => 'control-label'
-    .input
-      = f.text_field :slug, :class => 'text_field'
+  .input.text
+    = f.label :slug, "Slug"
+    = f.text_field :slug
 
-  .control-group
-    = f.label :content, "Content", :class => 'control-label'
-    .input
-      = f.text_area :content, :class => 'text_area'
-      %p.legend= link_to 'Markdown is allowed', 'http://en.wikipedia.org/wiki/Markdown#Syntax_examples', :target => '_blank', :rel => 'nofollow'
+  .input.textarea
+    = f.label :content, "Content"
+    = f.text_area :content, :class => 'text_area'
+    %p.legend= link_to 'Markdown is allowed', 'http://en.wikipedia.org/wiki/Markdown#Syntax_examples', :target => '_blank', :rel => 'nofollow'
 
   .actions
     = f.submit 'Save'
