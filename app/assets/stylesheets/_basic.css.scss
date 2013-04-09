@@ -45,3 +45,12 @@ strong { font-weight: 600; }
 .col50 { width:48%; }
 .col66 { width:64%; }
 .col75 { width:23%; }
+
+.flash_message { padding:10px 20px;margin:0 0 10px; }
+.alert { background-color:#FFE69F + 20;border:#FFE69F solid 1px;color:#FFE69F - 120; }
+.notice { background-color:#D4EFCC + 20;border:#D4EFCC solid 1px;color:#D4EFCC - 120; }
+.error { background-color:#EBCCCC + 20;border:#EBCCCC solid 1px;color:#EBCCCC - 120; }
+
+input {
+  font-family:"Helvetica Neue",​helvetica,​arial,​sans-serif;
+}

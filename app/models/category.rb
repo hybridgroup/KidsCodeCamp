@@ -2,6 +2,7 @@ class Category < ActiveRecord::Base
   attr_accessible :title, :slug, :description
   
   has_many :posts
+  has_many :responses, :through => :posts
 
   validates :title, :length => { :in => 2..100 }, :presence => true
   validates :description, :presence => true

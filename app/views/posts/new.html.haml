@@ -1,4 +1,5 @@
-= link_to 'Back', category_posts_path, :class => 'back'
+- back_url = @category.blank? ? posts_path : category_posts_path
+= link_to 'Back', back_url, :class => 'cta back'
 %h1 New post
 
 = render 'form'

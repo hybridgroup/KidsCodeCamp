@@ -20,8 +20,13 @@
       - if @post.parent_id.present? # Edit Response
         - cancel_form_path = category_post_path(@category,@post.topic)
       - else # New/Edit Main
-        = f.hidden_field :category_id, :value => @category.id
-    
+        - if @category.blank?
+          .input.select
+            = f.label :category, "Category"
+            = f.collection_select :category_id, Category.all, :id, :title
+        - else
+          = f.hidden_field :category_id, :value => @category.id
+
         .input.text
           = f.label :title, "Title"
           = f.text_field :title

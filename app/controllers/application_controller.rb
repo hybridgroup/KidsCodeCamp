@@ -3,7 +3,11 @@ class ApplicationController < ActionController::Base
   helper_method :firebug
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to main_app.posts_path, :notice => exception.message
+    if user_signed_in?
+      redirect_to main_app.posts_path, :alert => exception.message
+    else
+      redirect_to main_app.login_path, :alert => 'You need to be logged in to post a message.'
+    end
   end
 
   def admin?

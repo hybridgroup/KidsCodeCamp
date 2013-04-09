@@ -2,11 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.session_links { margin-bottom:5px;overflow:hidden; }
+.session_actions {
+  float:right;
+  width:240px;
+  text-align:right;
+  line-height:36px;
+}
+
 .c-posts #page-body > .content > .pad { padding:30px 35px 30px; }
 .c-posts.a-index .section-title { margin-top:0; }
 .a-show .blue-title { font-size:32px;@include pie-clearfix;margin-bottom:25px; }
 .a-show .blue-title img { float:left;margin-right:16px;line-height:34px; }	
 .a-show .blue-title span { overflow:hidden;display:block; }
+
+.new_post_button { float:right; }
+
 .topics {
 	border:$c-dark-cream solid 1px;
 	@include border-radius(10px);
@@ -37,8 +48,8 @@
 		}
 		&.post_content { border-top:0;padding-bottom:15px; }
 	}
-	td:first-child { width:180px; } /* Just for tables */
-	td.categories_name { width:310px; } /* Just categories table */
+	td:first-child { width:250px; } /* Just for tables */
+	td.categories_name { width:300px; } /* Just categories table */
 	.separator {
 		border-top:#ccc solid 1px;
 		padding-bottom:10px;
@@ -51,7 +62,16 @@
 .gravatar:first-child { margin-left:0;margin-right:8px; }
 
 .a-show .topics .td { padding-left:15px;padding-right:15px; }
-.community_controls { overflow:hidden; }
+.community_controls {
+	overflow:hidden;
+	line-height:32px;
+
+	.back {
+		line-height: inherit;
+		margin:0;
+	}
+}
+
 form.category_select {
 	float:right;
 	width:50%;

@@ -1,2 +1,4 @@
+- back_url = @post.parent_id.blank? ? category_post_path(@category,@post) : category_post_path(@category, @post.topic)
+= link_to 'Back', back_url, :class => 'back'
 %h1 Editing post
 = render 'form'

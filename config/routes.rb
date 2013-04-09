@@ -16,7 +16,8 @@ KidsCodeCamp::Application.routes.draw do
   devise_for :users, :controllers => { :sessions => 'users/sessions', :registrations => 'users/registrations' }
 
   # Public
-  get '/community' => 'posts#index'
+  resources :posts, :path => "community", :only => [:index,:new]
+  
   resources :categories, :path => "community", :only => [:index] do
     resources :posts, :path => "/"
   end
