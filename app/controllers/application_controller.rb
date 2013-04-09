@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       redirect_to main_app.posts_path, :alert => exception.message
     else
-      redirect_to main_app.login_path, :alert => 'You need to be logged in to post a message.'
+      redirect_to main_app.login_path, :alert => 'You must be logged in to post a message.'
     end
   end
 

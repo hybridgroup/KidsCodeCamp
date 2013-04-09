@@ -1,9 +1,11 @@
 = render :partial => "devise/session_links"
 = link_to 'Back', {:action => 'index'}, :class => 'back'
 
+%h2.blue-title.title= gravatar(@current_post.user, :size => 48) + content_tag('span',@current_post.title)
 - if @current_post && (params[:page].blank? || params[:page] == 1)
-  %h2.blue-title.title= gravatar(@current_post.user, :size => 48) + content_tag('span',@current_post.title)
   = render @current_post
+- else
+  %h3.title (Page #{params[:page]})
 = render @posts
 
 = will_paginate @posts
