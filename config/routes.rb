@@ -3,7 +3,10 @@ KidsCodeCamp::Application.routes.draw do
 
   root :to => 'events#index'
   
-  get 'about' => 'pages#about'
+  match 'about' => 'editpages#show',:defaults => {:id => 1}
+  match 'tools' => 'editpages#show',:defaults => {:id => 2}
+  match 'lessons' => 'editpages#show',:defaults => {:id => 3}
+
   get 'contact' => 'contact#new'
   post 'contact' => 'contact#create'
 

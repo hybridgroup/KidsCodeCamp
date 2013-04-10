@@ -8,6 +8,6 @@ class AdminAbility
       can :manage, :all
     end
     cannot :show_in_app, User
-    # cannot :show, :all
+    cannot [:destroy,:new,:create], Editpage
   end
 end

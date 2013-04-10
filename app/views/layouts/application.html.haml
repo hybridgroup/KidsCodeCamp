@@ -16,8 +16,8 @@
         %ul
           %li= link_to "Home", root_path
           %li= link_to "About", about_path
-          %li= link_to "Tools & Toys", '#tools_path', :class => 'disabled'
-          %li= link_to "Lessons", '#lessons_path', :class => 'disabled'
+          %li= link_to "Tools & Toys", tools_path
+          %li= link_to "Lessons", lessons_path
           %li= link_to "Community", posts_path(:category => nil)
           %li= link_to "Contact Us", contact_path
       %section#page-body

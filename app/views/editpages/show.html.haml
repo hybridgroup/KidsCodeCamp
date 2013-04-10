@@ -1,0 +1,4 @@
+%h1.section-title= @editpage.title
+.desc
+  :markdown
+    #{@editpage.try(:content)}
