@@ -19,7 +19,10 @@ class Editpage < ActiveRecord::Base
     #=-=-=-=-=-=-=-=-=-=-=-=-=-
     edit do
       field :title
-      field :content
+      field :content do
+        html_attributes rows: 15, cols: 80
+      end
+
     end
     #=-=-=-=-=-=-=-=-=-=-=-=-=-
   end

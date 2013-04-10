@@ -20,11 +20,15 @@ class Category < ActiveRecord::Base
     end
     #=-=-=-=-=-=-=-=-=-=-
     list do
-      include_fields :title, :description,:created_at, :updated_at
+      field :title
+      field :description
+      field :created_at
+      field :updated_at
     end
     #=-=-=-=-=-=-=-=-=-=-
     edit do
-      include_fields :title, :description
+      field :title
+      field :description
     end
   end
 end
