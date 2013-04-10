@@ -3,7 +3,7 @@
 .community_controls
   - unless @category_list
     = link_to 'New Post', {:action => 'new'}, :class => 'cta new_post_button'
-    = link_to 'Categories', posts_categories_path, :class => 'back'
+    = link_to 'Categories', posts_path, :class => 'back'
 
 .topics
   %table
