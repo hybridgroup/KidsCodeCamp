@@ -12,6 +12,9 @@ gem 'mail_form'
 gem 'will_paginate', '~> 3.0.0'
 gem 'friendly_id'
 gem 'rails_admin'
+gem "haml"
+gem "haml-rails"
+gem "redcarpet"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -20,9 +23,6 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem "compass", "~> 0.12.2"
   gem 'compass-rails'
-  gem "haml"
-  gem "haml-rails"
-  gem "redcarpet"
   gem 'jquery-rails'
   gem 'uglifier', '>= 1.0.3'
 end
