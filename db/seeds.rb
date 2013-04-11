@@ -1,7 +1,7 @@
 Editpage.create([
-  { title:'About', content:'Lorem ipsum Quis mollit cupidatat veniam Duis dolor pariatur non eiusmod ut aliqua enim ex cupidatat mollit veniam dolor deserunt ea ea adipisicing minim minim laboris proident esse aute elit nostrud aute ex ut enim proident exercitation adipisicing sed eiusmod velit deserunt esse consequat nostrud consectetur anim veniam Excepteur sit esse non anim labore dolore sed commodo minim exercitation sit sed est voluptate Duis reprehenderit ullamco sit occaecat ex eu Ut dolore laboris reprehenderit anim exercitation aliquip et sunt aliquip nisi nisi consectetur incididunt esse consequat aliqua anim adipisicing adipisicing incididunt in aliqua cillum aute nostrud ad officia non dolor eu dolore sint minim consequat anim ullamco labore ut anim aliqua ut amet qui incididunt sint anim nulla minim consequat dolore proident Duis id qui dolore commodo elit cupidatat reprehenderit proident voluptate mollit laborum in in ut aute nisi ut consectetur sint proident nostrud irure occaecat Ut fugiat deserunt sint exercitation incididunt fugiat eu proident aute est incididunt cillum ex ullamco laboris laboris sint ut qui minim dolore.' },
-  { title:'Tools', content:'Lorem ipsum Quis mollit cupidatat veniam Duis dolor pariatur non eiusmod ut aliqua enim ex cupidatat mollit veniam dolor deserunt ea ea adipisicing minim minim laboris proident esse aute elit nostrud aute ex ut enim proident exercitation adipisicing sed eiusmod velit deserunt esse consequat nostrud consectetur anim veniam Excepteur sit esse non anim labore dolore sed commodo minim exercitation sit sed est voluptate Duis reprehenderit ullamco sit occaecat ex eu Ut dolore laboris reprehenderit anim exercitation aliquip et sunt aliquip nisi nisi consectetur incididunt esse consequat aliqua anim adipisicing adipisicing incididunt in aliqua cillum aute nostrud ad officia non dolor eu dolore sint minim consequat anim ullamco labore ut anim aliqua ut amet qui incididunt sint anim nulla minim consequat dolore proident Duis id qui dolore commodo elit cupidatat reprehenderit proident voluptate mollit laborum in in ut aute nisi ut consectetur sint proident nostrud irure occaecat Ut fugiat deserunt sint exercitation incididunt fugiat eu proident aute est incididunt cillum ex ullamco laboris laboris sint ut qui minim dolore.' },
-  { title:'Lessons', content:'Lorem ipsum Quis mollit cupidatat veniam Duis dolor pariatur non eiusmod ut aliqua enim ex cupidatat mollit veniam dolor deserunt ea ea adipisicing minim minim laboris proident esse aute elit nostrud aute ex ut enim proident exercitation adipisicing sed eiusmod velit deserunt esse consequat nostrud consectetur anim veniam Excepteur sit esse non anim labore dolore sed commodo minim exercitation sit sed est voluptate Duis reprehenderit ullamco sit occaecat ex eu Ut dolore laboris reprehenderit anim exercitation aliquip et sunt aliquip nisi nisi consectetur incididunt esse consequat aliqua anim adipisicing adipisicing incididunt in aliqua cillum aute nostrud ad officia non dolor eu dolore sint minim consequat anim ullamco labore ut anim aliqua ut amet qui incididunt sint anim nulla minim consequat dolore proident Duis id qui dolore commodo elit cupidatat reprehenderit proident voluptate mollit laborum in in ut aute nisi ut consectetur sint proident nostrud irure occaecat Ut fugiat deserunt sint exercitation incididunt fugiat eu proident aute est incididunt cillum ex ullamco laboris laboris sint ut qui minim dolore.' }
+  { title:'About', content:'...' },
+  { title:'Tools', content:'...' },
+  { title:'Lessons', content:'...' }
 ])
 
 User.create([
@@ -9,7 +9,7 @@ User.create([
 ])
 
 Category.create([
-  {title: 'General', description: 'Lorem ipsum Sit minim cillum officia elit occaecat irure sint esse qui dolore dolore deserunt dolor.'},
-  {title: 'Discussion', description: 'Lorem ipsum Sed dolor sint labore deserunt in anim est veniam amet qui id anim aliqua commodo tempor et consequat elit quis.'},
-  {title: 'Teachers', description: 'Lorem ipsum Sunt pariatur in amet velit fugiat sunt deserunt qui officia proident sed sit cupidatat adipisicing.'}
+  {title: 'General', description: '...'},
+  {title: 'Discussion', description: '...'},
+  {title: 'Teachers', description: '...'}
 ])
