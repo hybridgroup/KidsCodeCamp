@@ -5,8 +5,13 @@ gem 'rails', '3.2.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-
+gem 'pg'
+gem 'devise'
+gem 'cancan'
+gem 'mail_form'
+gem 'will_paginate', '~> 3.0.0'
+gem 'friendly_id'
+gem 'rails_admin'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -24,12 +29,7 @@ end
 
 group :development do
   gem 'pry'
-  gem 'devise'
-  gem 'cancan'
-  gem 'mail_form'
-  gem 'will_paginate', '~> 3.0.0'
-  gem 'friendly_id'
-  gem 'rails_admin'
+  gem 'sqlite3'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
