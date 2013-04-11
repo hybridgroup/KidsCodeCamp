@@ -1,5 +1,5 @@
 %h1.section-title Contact Us
-= content_tag('h3',flash[:notice], :class => 'notice') if flash[:notice]
+= content_tag('p',flash[:notice], :class => 'flash_message notice') if flash[:notice]
 - if @contact_form.errors.any?
   #error_explanation
     %h2.title= "#{pluralize(@contact_form.errors.count, "error")} prevented your message from being sent:"
