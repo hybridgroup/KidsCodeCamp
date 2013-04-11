@@ -1,30 +1,24 @@
-.sidebar-container
-  #social-box
-    = link_to image_tag("button_twitter.png"), "http://www.twitter.com/kidscodecamp", :class => "social-media"
-    = link_to image_tag("button_facebook.png"), "https://www.facebook.com/Kidscodecamp"
-    .text
-      FOLLOWERS
-    .text#fans
-      FANS
-  %section.mailinglist
-    .newsletter-text
-      Subscribe to our newsletter to receive the latests news about KidsCodeCamp
+%aside
+  .pad
+    .social
+      = link_to "FOLLOWERS", "http://www.twitter.com/kidscodecamp"
+      = link_to "FANS", "https://www.facebook.com/Kidscodecamp"
     %form#signup{:action => 'http://kanbanpad.us2.list-manage1.com/subscribe/post', :method => 'POST'}
+      %p Subscribe to our newsletter to receive the latests news about KidsCodeCamp
       %input{:autocapitalize => "off", :autocorrect => "off", :name => "MERGE0", :type => "text", :value => ""}
       %input{:name => "u", :type => "hidden", :value => "281b52acbc791fcbe2127e282"}
       %input{:name => "id", :type => "hidden", :value => "67c6dbfbd1"}
-      = image_submit_tag "button_send.png"
-  .twitter-container
-    .twitter-title
-      KIDSCODECAMP on Twitter
-    #tweets
-  .logo-container
-    %p KidsCodeCamp is created by:
-    = link_to image_tag("bw-hybridlogo.png"), "http://hybridgroup.com/", :class => "sponsor"
-    %p KidsCodeCamp is brought to you by:
-    = link_to image_tag("retreat.png", :size => "182x93" ), "http://coderetreat.org", :class => "sponsor"
-    = link_to image_tag("sponsor-att.png", :size => "182x62"), "http://www.att.com/", :class => "sponsor"
-    = link_to image_tag("logo-engineyard-horizontal.png", :size => "182x55"), "https://www.engineyard.com/", :class => "sponsor"
-    = link_to image_tag("sphero.png", :size => "182x56"), "http://www.gosphero.com/", :class => "sponsor"
-    = link_to image_tag("sponsor-famigo.png", :size => "182x56"), "http://www.famigo.com/", :class => "sponsor"
-    = link_to image_tag("ruby-central.png", :size => "182x179"), "http://rubycentral.org/", :class => "sponsor"
+      = image_submit_tag "bt-send.png"
+    .twitter-widget
+      %h3 KIDSCODECAMP on Twitter
+      #tweets
+    .sponsors
+      %p KidsCodeCamp is created by:
+      = link_to image_tag("logo-bw-hybrid.png"), "http://hybridgroup.com/"
+      %p KidsCodeCamp is brought to you by:
+      = link_to image_tag("logo-retreat.png"), "http://coderetreat.org"
+      = link_to image_tag("logo-att.png",:class => 'white-bg'), "http://www.att.com/"
+      = link_to image_tag("logo-engineyard-horizontal.png",:class => 'white-bg'), "https://www.engineyard.com/"
+      = link_to image_tag("logo-sphero.png",:class => 'white-bg'), "http://www.gosphero.com/"
+      = link_to image_tag("logo-famigo.png",:class => 'white-bg'), "http://www.famigo.com/"
+      = link_to image_tag("logo-ruby-central.png"), "http://rubycentral.org/"

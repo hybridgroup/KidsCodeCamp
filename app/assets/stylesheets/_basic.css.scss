@@ -1,0 +1,58 @@
+//////////////// Fonts
+@font-face {
+    font: {
+       family: 'Ranger';
+       weight: 'normal';
+       style: 'normal';
+    }
+    src: asset-url('ranger-webfont.eot', font);
+    src: asset-url('ranger-webfont.eot', font) format('embedded-opentype'),
+         asset-url('ranger-webfont.woff', font) format('woff'),
+         asset-url('ranger-webfont.ttf', font) format('truetype'),
+         asset-url('ranger-webfont.svg#JunctionRegular', font) format('svg')
+}
+
+//////////////// Vars
+
+$c-brown : #330404;
+$c-blue : #1e527d;
+$c-orange : #d35d00;
+$c-grey : #f2edea;
+$c-light-blue: #1f5380;
+$c-medium-blue: #3f729f;
+$c-cream: #ECE3DC;
+$c-dark-cream: #E9E7E1;
+$f-ranger: "Ranger", impact, sans-serif;
+$f-helvetica: "Helvetica Neue", helvetica, arial, sans-serif;
+
+///////////// Basic
+
+.title:first-child, .title.alpha,
+h1:first-child, h1.alpha, 
+h2:first-child, h2.alpha,
+h3:first-child, h3.alpha { margin-top:0; }
+
+strong { font-weight: 600; }
+
+.col {
+	@include inline-block;
+	margin-right:2%;
+}
+.col.omega { margin-right:0 !important; }
+.col16 { width:14%; }
+.col25 { width:23%; }
+.col33 { width:31%; }
+.col50 { width:48%; }
+.col66 { width:64%; }
+.col75 { width:23%; }
+
+.flash_message { padding:10px 20px;margin:0 0 10px; }
+.alert { background-color:#FFE69F + 20;border:#FFE69F solid 1px;color:#FFE69F - 120; }
+.notice { background-color:#D4EFCC + 20;border:#D4EFCC solid 1px;color:#D4EFCC - 120; }
+.error { background-color:#EBCCCC + 20;border:#EBCCCC solid 1px;color:#EBCCCC - 120; }
+
+input {
+  font-family:"Helvetica Neue",​helvetica,​arial,​sans-serif;
+}
+
+.legend { color:#6690B1;font-size:80%; }

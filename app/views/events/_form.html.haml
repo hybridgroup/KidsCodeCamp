@@ -1,0 +1,23 @@
+= form_for [:admin,@event] do |f|
+  - if @event.errors.any?
+    #error_explanation
+      %h2.title= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
+      %ul
+        - @event.errors.full_messages.each do |msg|
+          %li= msg
+
+  .input.text
+    = f.label :title, "Title"
+    = f.text_field :title
+
+  .input.text
+    = f.label :slug, "Slug"
+    = f.text_field :slug
+
+  .input.textarea
+    = f.label :content, "Content"
+    = f.text_area :content, :class => 'text_area'
+    %p.legend= link_to 'Markdown is allowed', 'http://en.wikipedia.org/wiki/Markdown#Syntax_examples', :target => '_blank', :rel => 'nofollow'
+
+  .actions
+    = f.submit 'Save'

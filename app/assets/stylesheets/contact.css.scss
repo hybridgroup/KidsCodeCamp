@@ -1,0 +1,26 @@
+// Place all the styles related to the Lessons controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.c-contact {
+  .section-title{ margin-bottom:10px; } 
+  #new_contact_form {
+      margin-top:30px;
+
+    .field {
+      margin-bottom:25px;
+
+      label{
+        display: block;
+        color:  #3f729f;
+        font-size: 24px;
+        font-family: $f-ranger;
+        margin-bottom: 10px;
+      }
+
+      input { width:244px; }
+      textarea { width:525px;height:152px; }
+    }
+    .actions { text-align:right; }
+  }
+}

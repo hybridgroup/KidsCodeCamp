@@ -1,0 +1,23 @@
+%h2 Sign up
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+  = devise_error_messages!
+  
+  .input.text.email
+    = f.label :email
+    = f.email_field :email, :autofocus => true
+
+  .input.text
+    = f.label :username
+    = f.text_field :username
+  
+  .input.text.password
+    = f.label :password
+    = f.password_field :password
+  
+  .input.text.password
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+  
+  .actions= f.submit "Sign up"
+
+= render "devise/shared/links"

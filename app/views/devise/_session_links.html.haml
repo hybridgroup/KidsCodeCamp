@@ -1,0 +1,11 @@
+%div.session_links
+  - flash.each do |name, msg|
+    = content_tag :div, msg, :class => "flash_message #{name}" if msg.is_a?(String)
+
+%div.session_actions
+  - if user_signed_in?
+    = link_to 'Logout', logout_path, :method=>'delete'
+  - elsif action_name != 'new'
+    = link_to 'Log in', login_path
+    \- or -
+    = link_to 'Sign up', sign_up_path

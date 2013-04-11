@@ -1,0 +1,21 @@
+%h1.section-title Contact Us
+= content_tag('h3',flash[:notice], :class => 'notice') if flash[:notice]
+- if @contact_form.errors.any?
+  #error_explanation
+    %h2.title= "#{pluralize(@contact_form.errors.count, "error")} prevented your message from being sent:"
+    %ul
+      - @contact_form.errors.full_messages.each do |msg|
+        %li= msg
+= form_for @contact_form, :url => contact_path do |f|
+
+  .field.col.col50
+    = f.label :name, "NAME"
+    = f.text_field :name
+  .field.col.col50.omega
+    = f.label :email, "EMAIL"
+    = f.email_field :email
+  .field
+    = f.label :message, "MESSAGE"
+    = f.text_area :message
+  .actions
+    = image_submit_tag "bt-submit.png"

@@ -1,0 +1,13 @@
+= render :partial => "devise/session_links"
+%h1.section-title Our Community
+.community_controls
+  - unless @category_list
+    = link_to 'New Post', {:action => 'new'}, :class => 'cta new_post_button'
+    = link_to 'Categories', posts_path, :class => 'back'
+
+.topics
+  %table
+    = render "posts/#{@category_list ? 'categories' : 'posts'}"
+
+- unless @category_list
+  = will_paginate @posts

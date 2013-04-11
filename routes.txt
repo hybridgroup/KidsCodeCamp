@@ -1,0 +1,25 @@
+					Editor			Admin
+Login				x				x
+Logout				x				x
+Create Main			x				x
+Create Sub			x				x
+Destroy Main		x				x
+Destroy Sub			x				x
+Edit Main			x				x
+Edit Sub			x				x
+New/Cancel			x				x
+New/Redirect		x				x
+Edit/Cancel			x				x
+Edit/Redirect		x				x
+				:id		@post.parent_id		:action		cancel_path				save_path
+-------------------------------------------------------------------------------------------------------------		
+EDITOR ======================================================================================================
+New Main									new			posts_path				post_path(@post.id)
+Editing Main	x							edit		post_path(:id)			post_path(@post.id)
+New Sub			x		:id					show		-						post_path(@post.parent_id)
+Editing Sub		x		x					edit 		post_path(:parent_id)	post_path(@post.parent_id)
+ADMIN ======================================================================================================
+New Main									new			admin_posts_path		admin_posts_path
+Editing Main	x							edit		admin_posts_path		admin_posts_path
+New Sub			x		:id					show		admin_posts_path		admin_posts_path
+Editing Sub		x		x					edit 		admin_posts_path		admin_posts_path

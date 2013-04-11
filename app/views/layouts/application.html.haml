@@ -1,40 +1,35 @@
 !!!
 %html
   %head
-    %title Kids Code Camp - Teaching The Kids of Planet Earth To Code
+    %title KidsCodeCamp - Teaching The Kids of Planet Earth To Code
     = favicon_link_tag "/favicon.ico?1"
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = javascript_include_tag "jquery.tweetable.js"
     = csrf_meta_tags
-  %body
-    .page-header
-      = image_tag "header_logo.png", :class => "header-logo"
-      = image_tag "header_sun.png", :class => "header-sun"
-    .page-nav
-      .page-nav-blue
-      .page-nav-orange
-      .page-nav-items
-        .nav-item
-          = link_to "Home", root_path
-        .nav-item
-          = link_to "About", about_path
-        .nav-item.coming-soon
-          = link_to "Tools & Toys", tools_path
-        .nav-item.coming-soon
-          = link_to "Lessons", lessons_path
-        .nav-item.coming-soon
-          = link_to "Community", community_path
-        .nav-item
-          = link_to "Contact Us", contact_forms_path
-    .page-content
-      = yield
-      = render :partial => "layouts/sidebar"
-    = render :partial => "layouts/footer"
-  :javascript    
+  %body{class: "c-#{params[:controller]} a-#{params[:action]}"}
+    #page
+      %header
+        %h1#logo
+          = link_to('',root_path, :title => 'KidsCodeCamp - Teaching The Kids of Planet Earth To Code')
+      %nav
+        %ul
+          %li= link_to "Home", root_path
+          %li= link_to "About", about_path
+          %li= link_to "Tools & Toys", tools_path
+          %li= link_to "Lessons", lessons_path
+          %li= link_to "Community", posts_path(:category => nil)
+          %li= link_to "Contact Us", contact_path
+      %section#page-body
+        %section.content
+          .pad= yield
+        = render :partial => "layouts/sidebar"
+      = render :partial => "layouts/footer"
+
+  :javascript
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-39441624-1']);
-    _gaq.push(['_setDomainName', 'kidscodecamp.com']);
+    _gaq.push(['_setDomainName', 'none' 'kidscodecamp.com']);
     _gaq.push(['_trackPageview']);
 
     (function() {

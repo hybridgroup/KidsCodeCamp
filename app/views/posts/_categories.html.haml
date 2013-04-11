@@ -1,0 +1,20 @@
+%tr
+  %th Category
+  /%th Created
+  %th Topics
+  %th Posts
+  %th Last post by
+
+- @categories.each do |category|
+  - last_resp = category.posts.last
+  %tr
+    %td.categories_name
+      %h3.title= link_to category.title, category_posts_path(category)
+      .desc= category.description
+    %td= category.posts.length
+    %td= category.posts.length + category.responses.length
+    %td
+      - if last_resp
+        #{last_resp.created_at.strftime("%a, %D %R")} by #{gravatar(last_resp.user,:size => '18')} #{content_tag('strong',last_resp.user.username)}
+      - else
+        \–

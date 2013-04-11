@@ -1,0 +1,50 @@
+- cancel_form_path = false
+= form_for [@category, @post], :html => {:class => 'post_form'} do |f|
+  - if @post.errors.any?
+    #error_explanation
+      %h2.title= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
+      %ul
+        - @post.errors.full_messages.each do |msg|
+          %li= msg
+
+  = f.hidden_field :user_id, :value => current_user.id
+
+  //// Dynamic inputs form logic
+  - if action_name == 'show'
+    = f.hidden_field :parent_id, { :value => @current_post.id }
+  - elsif @post.parent_id.present?
+    = f.hidden_field :parent_id
+
+  - if user_signed_in?
+    - if action_name != 'show' # New/Edit Main or Edit Reponse
+      - if @post.parent_id.present? # Edit Response
+        - cancel_form_path = category_post_path(@category,@post.topic)
+      - else # New/Edit Main
+        - if @category.blank?
+          .input.select
+            = f.label :category, "Category"
+            = f.collection_select :category_id, Category.all, :id, :title
+        - else
+          = f.hidden_field :category_id, :value => @category.id
+
+        .input.text
+          = f.label :title, "Title"
+          = f.text_field :title
+
+        - if action_name == 'edit' # Edit Main
+          - cancel_form_path = category_post_path(@post.category, @post)
+        - else # New Main
+          - cancel_form_path = category_posts_path(@category)
+
+  //// Static inputs
+
+  .input.textarea
+    - if action_name != 'show'
+      = f.label :content, "Content"
+    = f.text_area :content
+    %p.legend= link_to 'Markdown is allowed', 'http://en.wikipedia.org/wiki/Markdown#Syntax_examples', :target => '_blank', :rel => 'nofollow'
+
+  .actions
+    = image_submit_tag "bt-submit.png"
+    - if cancel_form_path
+      = raw ' or ' + link_to('Cancel', cancel_form_path)

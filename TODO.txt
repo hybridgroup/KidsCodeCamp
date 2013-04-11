@@ -1,0 +1,4 @@
+TODO
+
+is_admin to boolean type
+	t.boolean :is_admin, :default => false
