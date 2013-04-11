@@ -5,8 +5,16 @@ gem 'rails', '3.2.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-
+gem 'pg'
+gem 'devise'
+gem 'cancan'
+gem 'mail_form'
+gem 'will_paginate', '~> 3.0.0'
+gem 'friendly_id'
+gem 'rails_admin'
+gem "haml"
+gem "haml-rails"
+gem "redcarpet"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -15,21 +23,13 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem "compass", "~> 0.12.2"
   gem 'compass-rails'
-  gem "haml"
-  gem "haml-rails"
-  gem "redcarpet"
   gem 'jquery-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 
 group :development do
   gem 'pry'
-  gem 'devise'
-  gem 'cancan'
-  gem 'mail_form'
-  gem 'will_paginate', '~> 3.0.0'
-  gem 'friendly_id'
-  gem 'rails_admin'
+  gem 'sqlite3'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
