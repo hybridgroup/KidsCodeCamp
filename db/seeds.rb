@@ -1,7 +1,8 @@
 Editpage.create([
   { title:'About', content:'...' },
   { title:'Tools', content:'...' },
-  { title:'Lessons', content:'...' }
+  { title:'Lessons', content:'...' },
+  { title:'Home', content:'...' }
 ])
 
 User.create([
