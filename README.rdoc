@@ -2,5 +2,5 @@
 
 KidsCodeCamp is a one-day non-profit event created for kids, of all ages, to give them a great first experience in computer coding. We aim to inspire the younger generation to get started in understanding technology and open source coding. KidsCodeCamp is not just about programming but fostering that desire to build imaginative things. During the camp, students will code in KidsRuby, use Artoo to talk to robots, and much more!
 
-Markdown supported for content editting, plus its possible to embed youtube videos using:
+Markdown supported for content edition, plus its possible to embed youtube videos using:
       [youtube VIDEO_ID_HERE]
