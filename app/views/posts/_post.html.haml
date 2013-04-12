@@ -2,8 +2,7 @@
 .topics
   .td.post_created #{gravatar(post.user, :size => 24)} Posted by #{content_tag('strong',post.user.username)} – #{post.created_at.strftime("%a, %b %e %Y at %R")}
   .td.post_content
-    :markdown
-      #{post.content}
+    = markdown(post.content)
   - if editable
     .td.action
       = link_to('Edit', edit_category_post_path(@category,post)) + ' | '
