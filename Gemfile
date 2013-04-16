@@ -32,18 +32,6 @@ group :development do
   gem 'nifty-generators'
 end
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
 # To use debugger
 group :development,:test do
   gem 'debugger'
@@ -54,7 +42,7 @@ end
 
 group :test do
   gem "factory_girl_rails"
-  gem "capybara"
   gem "guard-rspec"
+  gem "capybara"
   gem 'rb-fsevent', '~> 0.9'
 end
