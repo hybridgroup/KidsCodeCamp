@@ -29,8 +29,9 @@ end
 
 group :development do
   gem 'pry'
-  gem 'sqlite3'
+  gem 'nifty-generators'
 end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -44,4 +45,16 @@ end
 # gem 'capistrano'
 
 # To use debugger
-gem 'debugger', group: [:development, :test]
+group :development,:test do
+  gem 'debugger'
+  gem 'sqlite3'
+  gem "rspec-rails"
+  gem "guard-livereload"
+end
+
+group :test do
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "guard-rspec"
+  gem 'rb-fsevent', '~> 0.9'
+end

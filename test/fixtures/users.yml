@@ -1,11 +1,15 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+one:
+  username: MyUser
+  encrypted_password: <%= ::BCrypt::Password.create("admin123", :cost => 10).to_s %>
+  email: correo@a.com
+  created_at: <%= DateTime.now.to_s(:db) %>
+  updated_at: <%= DateTime.now.to_s(:db) %>
+  is_admin: true
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+two:
+  username: MyUser2
+  encrypted_password: <%= ::BCrypt::Password.create("admin123", :cost => 10).to_s %>
+  email: correo2@a.com
+  created_at: <%= DateTime.now.to_s(:db) %>
+  updated_at: <%= DateTime.now.to_s(:db) %>
+  is_admin: false

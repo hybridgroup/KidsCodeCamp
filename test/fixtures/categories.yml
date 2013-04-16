@@ -1,11 +1,13 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+one:
+  title: MyCategory
+  description: MyText
+  slug: my-category
+  created_at: <%= DateTime.now.to_s(:db) %>
+  updated_at: <%= DateTime.now.to_s(:db) %>
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+two:
+  title: MyCategory2
+  description: MyText
+  slug: my-category-2
+  created_at: <%= DateTime.now.to_s(:db) %>
+  updated_at: <%= DateTime.now.to_s(:db) %>

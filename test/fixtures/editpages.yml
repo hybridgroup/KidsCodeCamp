@@ -1,27 +1,23 @@
 one:
-  title: MyPosts
+  title: MyString
   content: MyText
-  slug: my-post
   created_at: <%= DateTime.now.to_s(:db) %>
   updated_at: <%= DateTime.now.to_s(:db) %>
 
 two:
-  title: MyPosts2
+  title: MyString
   content: MyText
-  slug: my-post-2
   created_at: <%= DateTime.now.to_s(:db) %>
   updated_at: <%= DateTime.now.to_s(:db) %>
 
-one:
-  title: MyPosts3
+three:
+  title: MyString
   content: MyText
-  slug: my-post-3
   created_at: <%= DateTime.now.to_s(:db) %>
   updated_at: <%= DateTime.now.to_s(:db) %>
 
-two:
-  title: MyPosts4
+four:
+  title: MyString
   content: MyText
-  slug: my-post-4
   created_at: <%= DateTime.now.to_s(:db) %>
   updated_at: <%= DateTime.now.to_s(:db) %>

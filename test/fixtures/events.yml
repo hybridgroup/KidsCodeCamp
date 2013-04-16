@@ -1,11 +1,13 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
 one:
-  title: MyString
+  title: MyEvent
   content: MyText
-  slug: MyString
+  slug: my-string
+  created_at: <%= DateTime.now.to_s(:db) %>
+  updated_at: <%= DateTime.now.to_s(:db) %>
 
 two:
-  title: MyString
+  title: MyEvent2
   content: MyText
-  slug: MyString
+  slug: my-event-2
+  created_at: <%= DateTime.now.to_s(:db) %>
+  updated_at: <%= DateTime.now.to_s(:db) %>
