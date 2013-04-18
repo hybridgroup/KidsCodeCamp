@@ -1,7 +1,7 @@
 require 'faker'
 
 FactoryGirl.define do
-  factory :user do
+  factory :admin_user do
     username { Faker::Internet.user_name }
     email { Faker::Internet.email }
     password 'ultrasecret'
@@ -9,11 +9,11 @@ FactoryGirl.define do
     is_admin true
   end
 
-  factory :editor_user, parent: :user do
+  factory :user, parent: :admin_user do
     is_admin false
   end
 
-  factory :invalid_user, parent: :user do
+  factory :invalid_user, parent: :admin_user do
     username { Faker::Internet.user_name }
     email "invalid"
   end
