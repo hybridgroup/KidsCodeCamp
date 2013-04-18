@@ -45,4 +45,8 @@ group :test do
   gem "guard-rspec"
   gem "capybara"
   gem 'rb-fsevent', '~> 0.9'
+  gem 'faker'
+  gem "database_cleaner"
+  gem 'mocha'
+  gem 'launchy'
 end

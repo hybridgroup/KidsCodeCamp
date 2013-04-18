@@ -28,6 +28,7 @@ GEM
     activesupport (3.2.12)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    addressable (2.3.4)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.3.1.0)
@@ -56,6 +57,7 @@ GEM
       sass (~> 3.1)
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
+    database_cleaner (0.9.1)
     debugger (1.5.0)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -80,6 +82,8 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
+    faker (1.1.2)
+      i18n (~> 0.5)
     font-awesome-sass-rails (3.0.2.2)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
@@ -120,6 +124,8 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    launchy (2.3.0)
+      addressable (~> 2.3)
     listen (0.7.3)
     lumberjack (1.0.3)
     mail (2.4.4)
@@ -128,8 +134,11 @@ GEM
       treetop (~> 1.4.8)
     mail_form (1.4.1)
       actionmailer (~> 3.0)
+    metaclass (0.0.1)
     method_source (0.8.1)
     mime-types (1.21)
+    mocha (0.13.3)
+      metaclass (~> 0.0.1)
     multi_json (1.6.1)
     nested_form (0.3.1)
     nifty-generators (0.4.6)
@@ -239,16 +248,20 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   compass (~> 0.12.2)
   compass-rails
+  database_cleaner
   debugger
   devise
   factory_girl_rails
+  faker
   friendly_id
   guard-livereload
   guard-rspec
   haml
   haml-rails
   jquery-rails
+  launchy
   mail_form
+  mocha
   nifty-generators
   pg
   pry
