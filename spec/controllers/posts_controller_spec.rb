@@ -6,8 +6,8 @@ describe PostsController do
       it "populates an array of posts" do
         category = create(:category_with_posts)
         get :index, category_id: category
-        
-        assigns(:posts).should eq(category.posts)
+
+        assigns(:posts).should =~ category.posts
         assigns(:categories).should be_nil
       end
       
@@ -18,12 +18,13 @@ describe PostsController do
     end
 
     describe "without selected Category" do
-      it "populates an array of posts" do
-        post = create(:topic)
-        post2 = create(:topic)
+      it "populates an array of categories" do
+        category = create(:category)
+        category2 = create(:category)
+        
         get :index
         assigns(:posts).should be_nil
-        assigns(:posts).should eq([post,post2])
+        assigns(:categories).should =~ [category,category2]
       end
       
       it "renders the :index view" do
