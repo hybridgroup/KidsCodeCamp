@@ -16,7 +16,7 @@ RSpec.configure do |config|
 
   config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
-  config.order = "random"
+  config.order = "default"
 
   config.include FactoryGirl::Syntax::Methods
   #config.include Warden::Test::Helpers, :type => :request

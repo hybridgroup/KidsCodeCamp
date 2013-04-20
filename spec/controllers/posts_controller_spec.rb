@@ -2,96 +2,159 @@ require 'spec_helper'
 
 describe PostsController do
   describe "GET #index" do
-    describe "with selected Category" do
-      it "populates an array of posts" do
+    let(:category) { create(:category) }
+
+    it "render #index" do
+      get :index
+      response.should render_template :index
+    end
+
+    context "with selected Category" do
+      it "@categories.nil? and @posts is a collection" do
         category = create(:category_with_posts)
+
         get :index, category_id: category
 
-        assigns(:posts).should =~ category.posts
         assigns(:categories).should be_nil
-      end
-      
-      it "renders the :index view" do
-        get :index
-        response.should render_template :index
+        assigns(:posts).should =~ category.posts
       end
     end
 
-    describe "without selected Category" do
-      it "populates an array of categories" do
+    context "without selected Category" do
+      it "@posts.nil? and @categories is a collection" do
         category = create(:category)
         category2 = create(:category)
         
         get :index
+
         assigns(:posts).should be_nil
         assigns(:categories).should =~ [category,category2]
-      end
-      
-      it "renders the :index view" do
-        get :index
-        response.should render_template :index
       end
     end
   end
 
 
-=begin
-
   describe "GET #show" do
-    it "assigns the requested post to @post" do
-      post = create(:post)
-      get :show, id: post
-      assigns(:post).should eq(post)
-    end
-    
-    it "renders the #show view" do
-      get :show, id: create(:post)
+    let(:post){ create(:topic) }
+    let(:show_post){ get :show, id: post, category_id: post.category }
+
+    it "render #show" do
+      show_post
       response.should render_template :show
+    end
+
+    it "assigns the requested main post to @current_post" do
+      show_post
+      assigns(:current_post).should eq(post)
+    end
+
+    it "assigns the post's responses to @posts" do
+      show_post
+      assigns(:posts).should =~ post.responses
     end
   end
 
 
   describe "GET #new" do
-    it "" do
-      get :new
-      response.should :success
+    context "user_signed_in?" do
+      before :each do
+        set_user_session(create(:user))
+      end
+
+      context "@category.nil?" do
+        it "redirect_to posts_path" do
+          get :new
+          response.should redirect_to posts_path
+        end
+      end
+
+      context "!@category.nil?" do
+        let(:get_new_post) { get :new, category_id: create(:category) }
+
+        it "response.should be_success" do
+          get_new_post
+          response.should be_success
+        end
+
+        it "render #new" do
+          get_new_post
+          response.should render_template :new
+        end
+
+        it "@post.new_record?" do
+          get_new_post
+          assigns(:post).should be_new_record
+        end
+      end
     end
 
-    it "render #new template" do
-      get :new
-      response.should render_template :new
+    context "!user_signed_in?" do
+      it "redirect_to login_path" do
+        get :new
+        response.should redirect_to login_path
+      end
     end
   end
   
 
   describe "POST #create" do
-    context "with valid attributes" do
-      it "creates a new post" do
-        expect{
-          post :create, post: attributes_for(:post)
-        }.to change(Post,:count).by(1)
+    let(:signed_user){ create(:user) }
+    let(:category){ create(:category) }
+    let(:post_create){ post :create, post: attributes_for(:post, user_id: signed_user, category_id: category.id), category_id: category }
+    let(:post_create_invalid){ post :create, post: attributes_for(:post,:invalid, user_id: signed_user, category_id: category.id), category_id: category }
+
+    context "user_signed_in?" do
+      before :each do
+        set_user_session(signed_user)
       end
-      
-      it "redirects to the new post" do
-        post :create, post: attributes_for(:post)
-        response.should redirect_to post_path(Post.last)
+
+      context "@category.present?" do
+        context "@post.valid?" do
+          it "post.save" do
+            atts = attributes_for(:topic)
+            expect{
+              post_create
+            }.to change(Post,:count).by(1)
+          end
+          
+          it "redirects to the new post" do
+            post_create
+            post = Post.last
+            response.should redirect_to category_post_path(post.category,post)
+          end
+        end
+
+        context "!@post.valid?" do
+          it "!post.save" do
+            expect{
+              post_create_invalid
+            }.to_not change(Post,:count)
+          end
+          
+          it "re-renders #new" do
+            post_create_invalid
+            response.should render_template :new
+          end
+        end
+      end
+
+      context "@category.nil?" do
+        it "redirect_to posts_path" do
+          post :create, post: attributes_for(:post, user_id: signed_user, category_id: category.id), category_id: category
+          response.should_not be_success
+        end
       end
     end
     
-    context "with invalid attributes" do
-      it "does not save the new post" do
-        expect{
-          post :create, post: attributes_for(:invalid_post)
-        }.to_not change(Post,:count)
+    context "!user_signed_in?" do
+      it "redirect_to login_path" do
+        post_create
+        response.should redirect_to login_path
       end
-      
-      it "re-renders the new method" do
-        post :create, post: attributes_for(:invalid_post)
-        response.should render_template :new
-      end
-    end 
+    end
   end
 
+=begin
 
   describe 'PUT update' do
     before :each do
@@ -120,7 +183,7 @@ describe PostsController do
     
     context "invalid attributes" do
       it "locates the requested @post" do
-        put :update, id: @post, post: attributes_for(:invalid_post)
+        put :update, id: @post, post: attributes_for(:post,:invalid)
         assigns(:post).should eq(@post)      
       end
       
@@ -133,7 +196,7 @@ describe PostsController do
       end
       
       it "re-renders the edit method" do
-        put :update, id: @post, post: attributes_for(:invalid_post)
+        put :update, id: @post, post: attributes_for(:post,:invalid)
         response.should render_template :edit
       end
     end
