@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
   before_filter :set_category
-  before_filter :check_category, only: [:new, :edit, :show]
+  before_filter :check_category, only: [:new, :edit, :show, :create, :update]
 
   def index
     if params[:category_id].present?

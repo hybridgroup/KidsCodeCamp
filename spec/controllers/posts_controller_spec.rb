@@ -141,8 +141,9 @@ describe PostsController do
 
       context "@category.nil?" do
         it "redirect_to posts_path" do
-          post :create, post: attributes_for(:post, user_id: signed_user, category_id: category.id), category_id: category
-          response.should_not be_success
+          expect {
+            post :create, post: attributes_for(:post, user_id: signed_user, category_id: category.id)
+          }.to raise_error(ActionController::RoutingError)
         end
       end
     end
@@ -163,8 +164,8 @@ describe PostsController do
     let(:topic_update){ put :update, post: attributes_for(:topic, title: "updated", user_id: signed_user, category_id: category.id), category_id: topic.category, id: topic }
     let(:invalid_topic_update){ put :update, post: attributes_for(:topic, :invalid, title: "updated", user_id: signed_user, category_id: category.id), category_id: topic.category, id: topic }
     
-    let(:response_update){ put :update, post: attributes_for(:response, title: "updated", user_id: signed_user, category_id: category.id), category_id: resp.topic.category, id: resp }
-    let(:invalid_response_update){ put :update, post: attributes_for(:response, :invalid, title: "updated", user_id: signed_user, category_id: category.id), category_id: resp.topic.category, id: resp }
+    let(:response_update){ put :update, post: attributes_for(:response_with_topic, title: "updated", user_id: signed_user, category_id: category.id), category_id: resp.topic.category, id: resp }
+    let(:invalid_response_update){ put :update, post: attributes_for(:response_with_topic, :invalid, title: "updated", user_id: signed_user, category_id: category.id), category_id: resp.topic.category, id: resp }
 
     context "user_signed_in?" do
       before :each do
@@ -209,18 +210,19 @@ describe PostsController do
 
           context "!current_user.is_admin?" do
             context "@post.user == current_user" do
+              let(:topic){ create(:topic, user: signed_user) }
+              let(:resp){ create(:response_with_topic, user: signed_user) }
+
               it "post.title == 'updated'" do
                 expect{
                   topic_update
                   topic.reload
                 }.to change{ topic.title }.to('updated')
-                  debugger
               end
               
               context "@post.parent_id?" do
                 it "redirect_to category_post_path(@post.topic.category,@post.topic)" do
                   response_update
-                  resp.reload
                   response.should redirect_to category_post_path(resp.topic.category,resp.topic)
                 end
               end
@@ -244,33 +246,75 @@ describe PostsController do
         end # @post.valid
 
         context "!@post.valid?" do
-          it "post.title != 'updated'" do
-            expect{
-              invalid_topic_update
-              topic.reload
-            }.to_not change{ topic.title }.to('updated')
-          end
-          
-          context "@post.parent_id?" do
-            it "render_template #update" do
-              invalid_response_update
-              response.should render_template :edit
+          context "current_user.is_admin?" do
+            before :each do
+              set_user_session(signed_admin_user)
             end
-          end
 
-          context "!@post.parent_id?" do
-            it "render_template #update" do
-              invalid_topic_update
-              response.should render_template :edit
+            it "post.title != 'updated'" do
+              expect{
+                invalid_topic_update
+                topic.reload
+              }.to_not change{ topic.title }.to('updated')
             end
-          end
+            
+            context "@post.parent_id?" do
+              it "render_template #update" do
+                invalid_topic_update
+                response.should render_template :edit
+              end
+            end
+
+            context "!@post.parent_id?" do
+              it "render_template #update" do
+                invalid_topic_update
+                response.should render_template :edit
+              end
+            end
+          end # current_user.is_admin?
+          
+          context "!current_user.is_admin?" do
+            context "@post.user == current_user" do
+              let(:topic){ create(:topic, user: signed_user) }
+              let(:resp){ create(:response_with_topic, user: signed_user) }
+
+              it "post.title != 'updated'" do
+                expect{
+                  invalid_topic_update
+                  topic.reload
+                }.to_not change{ topic.title }.to('updated')
+              end
+              
+              context "@post.parent_id?" do
+                it "render_template #update" do
+                  invalid_response_update
+                  response.should render_template :edit
+                end
+              end
+
+              context "!@post.parent_id?" do
+                it "render_template #update" do
+                  invalid_topic_update
+                  response.should render_template :edit
+                end
+              end
+            end # @post.user == current_user
+
+            context "@post.user != current_user" do
+              it "redirect_to posts_path" do
+                topic_update
+                response.should redirect_to posts_path
+              end
+            end # @post.user != current_user
+          end # !current_user.is_admin?
         end
       end
 
       context "@category.nil?" do
         it "redirect_to posts_path" do
-          put :update, post: attributes_for(:topic, user_id: signed_user, category_id: category.id), id: topic
-          response.should_not be_success
+          expect{
+            put :update, post: attributes_for(:topic, user_id: signed_user, category_id: category.id), id: topic
+          }.to raise_error(ActionController::RoutingError)
         end
       end
     end
