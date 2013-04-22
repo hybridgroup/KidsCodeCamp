@@ -3,7 +3,7 @@ require 'faker'
 FactoryGirl.define do
   factory :post do
 
-    title { Faker::Internet.user_name }
+    title { Faker::Name.title }
     content { Faker::Lorem.paragraphs }
     
     user
@@ -17,6 +17,10 @@ FactoryGirl.define do
   
     factory :response do
       title ""
+
+      factory :response_with_topic do
+        topic
+      end
     end
 
     trait :invalid do

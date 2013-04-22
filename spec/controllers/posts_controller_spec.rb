@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe PostsController do
+  let(:signed_user){ create(:user) }
+  let(:signed_admin_user){ create(:user, is_admin: true) }
+
   describe "GET #index" do
     let(:category) { create(:category) }
 
@@ -98,10 +101,9 @@ describe PostsController do
   
 
   describe "POST #create" do
-    let(:signed_user){ create(:user) }
     let(:category){ create(:category) }
-    let(:post_create){ post :create, post: attributes_for(:post, user_id: signed_user, category_id: category.id), category_id: category }
-    let(:post_create_invalid){ post :create, post: attributes_for(:post,:invalid, user_id: signed_user, category_id: category.id), category_id: category }
+    let(:post_create){ put :create, post: attributes_for(:post, user_id: signed_user, category_id: category.id), category_id: category }
+    let(:invalid_post_create){ put :create, post: attributes_for(:post,:invalid, user_id: signed_user, category_id: category.id), category_id: category }
 
     context "user_signed_in?" do
       before :each do
@@ -111,7 +113,6 @@ describe PostsController do
       context "@category.present?" do
         context "@post.valid?" do
           it "post.save" do
-            atts = attributes_for(:topic)
             expect{
               post_create
             }.to change(Post,:count).by(1)
@@ -127,12 +128,12 @@ describe PostsController do
         context "!@post.valid?" do
           it "!post.save" do
             expect{
-              post_create_invalid
+              invalid_post_create
             }.to_not change(Post,:count)
           end
           
           it "re-renders #new" do
-            post_create_invalid
+            invalid_post_create
             response.should render_template :new
           end
         end
@@ -154,53 +155,134 @@ describe PostsController do
     end
   end
 
-=begin
+  describe "PUT #update" do
+    let(:topic){ create(:topic) }
+    let(:resp){ create(:response_with_topic) }
+    let(:category){ create(:category) }
 
-  describe 'PUT update' do
-    before :each do
-      @post = create(:post)
+    let(:topic_update){ put :update, post: attributes_for(:topic, title: "updated", user_id: signed_user, category_id: category.id), category_id: topic.category, id: topic }
+    let(:invalid_topic_update){ put :update, post: attributes_for(:topic, :invalid, title: "updated", user_id: signed_user, category_id: category.id), category_id: topic.category, id: topic }
+    
+    let(:response_update){ put :update, post: attributes_for(:response, title: "updated", user_id: signed_user, category_id: category.id), category_id: resp.topic.category, id: resp }
+    let(:invalid_response_update){ put :update, post: attributes_for(:response, :invalid, title: "updated", user_id: signed_user, category_id: category.id), category_id: resp.topic.category, id: resp }
+
+    context "user_signed_in?" do
+      before :each do
+        set_user_session(signed_user)
+      end
+
+      context "@category.present?" do
+        it "@post == Post.find(params[:id])" do
+          topic_update
+          assigns(:post).should eq(topic)
+        end
+
+        context "@post.valid?" do
+          context "current_user.is_admin?" do
+            before :each do
+              set_user_session(signed_admin_user)
+            end
+
+            it "post.title == 'updated'" do
+              expect{
+                topic_update
+                topic.reload
+              }.to change{ topic.title }.to('updated')
+            end
+            
+            context "@post.parent_id?" do
+              it "redirect_to category_post_path(@post.topic.category,@post.topic)" do
+                response_update
+                resp.reload
+                response.should redirect_to category_post_path(resp.topic.category,resp.topic)
+              end
+            end
+
+            context "!@post.parent_id?" do
+              it "redirect_to category_post_path(@post)" do
+                topic_update
+                topic.reload
+                response.should redirect_to category_post_path(topic.category,topic)
+              end
+            end
+          end # @current_user.is_admin?
+
+          context "!current_user.is_admin?" do
+            context "@post.user == current_user" do
+              it "post.title == 'updated'" do
+                expect{
+                  topic_update
+                  topic.reload
+                }.to change{ topic.title }.to('updated')
+                  debugger
+              end
+              
+              context "@post.parent_id?" do
+                it "redirect_to category_post_path(@post.topic.category,@post.topic)" do
+                  response_update
+                  resp.reload
+                  response.should redirect_to category_post_path(resp.topic.category,resp.topic)
+                end
+              end
+
+              context "!@post.parent_id?" do
+                it "redirect_to category_post_path(@post)" do
+                  topic_update
+                  topic.reload
+                  response.should redirect_to category_post_path(topic.category,topic)
+                end
+              end
+            end # @post.user == current_user
+
+            context "@post.user != current_user" do
+              it "redirect_to posts_path" do
+                topic_update
+                response.should redirect_to posts_path
+              end
+            end
+          end
+        end # @post.valid
+
+        context "!@post.valid?" do
+          it "post.title != 'updated'" do
+            expect{
+              invalid_topic_update
+              topic.reload
+            }.to_not change{ topic.title }.to('updated')
+          end
+          
+          context "@post.parent_id?" do
+            it "render_template #update" do
+              invalid_response_update
+              response.should render_template :edit
+            end
+          end
+
+          context "!@post.parent_id?" do
+            it "render_template #update" do
+              invalid_topic_update
+              response.should render_template :edit
+            end
+          end
+        end
+      end
+
+      context "@category.nil?" do
+        it "redirect_to posts_path" do
+          put :update, post: attributes_for(:topic, user_id: signed_user, category_id: category.id), id: topic
+          response.should_not be_success
+        end
+      end
     end
     
-    context "valid attributes" do
-      it "located the requested @post" do
-        put :update, id: @post, post: attributes_for(:post)
-        assigns(:post).should eq(@post)      
-      end
-    
-      it "changes @post's attributes" do
-        put :update, id: @post, 
-          post: attributes_for(:post, first_name: "Larry", last_name: "Smith")
-        @post.reload
-        @post.first_name.should eq("Larry")
-        @post.last_name.should eq("Smith")
-      end
-    
-      it "redirects to the updated post" do
-        put :update, id: @post, post: attributes_for(:post)
-        response.should redirect_to @post
-      end
-    end
-    
-    context "invalid attributes" do
-      it "locates the requested @post" do
-        put :update, id: @post, post: attributes_for(:post,:invalid)
-        assigns(:post).should eq(@post)      
-      end
-      
-      it "does not change @post's attributes" do
-        put :update, id: @post, 
-          post: attributes_for(:post, first_name: "Larry", last_name: nil)
-        @post.reload
-        @post.first_name.should_not eq("Larry")
-        @post.last_name.should eq("Smith")
-      end
-      
-      it "re-renders the edit method" do
-        put :update, id: @post, post: attributes_for(:post,:invalid)
-        response.should render_template :edit
+    context "!user_signed_in?" do
+      it "redirect_to login_path" do
+        topic_update
+        response.should redirect_to login_path
       end
     end
   end
+=begin
 
   describe 'DELETE destroy' do
     before :each do
