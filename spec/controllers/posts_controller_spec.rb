@@ -326,22 +326,50 @@ describe PostsController do
       end
     end
   end
-=begin
 
   describe 'DELETE destroy' do
-    before :each do
-      @post = create(:post)
-    end
+    let(:post) { create(:post) }
     
-    it "deletes the post" do
-        delete :destroy, id: @post
-        Post.exists?(@post).should be_false
+    context "user_signed_in?" do
+      context "current_user.is_admin?" do
+        it "deletes the post" do
+          delete :destroy, id: post
+          Post.exists?(@post).should be_false
+        end
+          
+        it "redirects to posts#index" do
+          delete :destroy, id: post
+          response.should redirect_to posts_url
+        end
+      end
+
+      context "!current_user.is_admin?" do
+        context "@post.user == current_user" do
+          it "deletes the post" do
+            delete :destroy, id: post
+            Post.exists?(@post).should be_false
+          end
+            
+          it "redirects to posts#index" do
+            delete :destroy, id: post
+            response.should redirect_to posts_url
+          end
+        end
+
+        context "@post.user != current_user" do
+          it "redirect_to posts_path" do
+            delete :destroy, id: post
+            response.should redirect_to posts_url
+          end
+        end
+      end
     end
-      
-    it "redirects to posts#index" do
-      delete :destroy, id: @post
-      response.should redirect_to posts_url
+
+    context "!user_signed_in?" do
+      it "redirect_to posts_path" do
+        delete :destroy, id: post
+        response.should redirect_to posts_url
+      end
     end
   end
-=end
 end
