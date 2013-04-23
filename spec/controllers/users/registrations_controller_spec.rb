@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Users::RegistrationsController do
   render_views
+  let(:user){ create(:user) }
+  let(:admin_user){ create(:user, admin: true) }
  
   before(:each) do
     @request.env["devise.mapping"] = Devise.mappings[:user]
@@ -9,13 +11,26 @@ describe Users::RegistrationsController do
  
   describe "POST #create" do
     context "user_signed_in?" do
-     it "redirect_to root_path" do
-      create_user
-      response.should redirect_to posts_path
-    end
-   end
+      let(:create_user){ post :create, user: attributes_for(:user,:invalid) }
+
+      before do
+        set_user_session(user)
+      end
+
+      it "User.count doesn't change" do
+        expect {
+          create_user
+        }.to_not change(User,:count)
+      end
+
+      it "redirect_to root_path" do
+        create_user
+        response.should redirect_to posts_path
+      end
+    end # user_signed_in?
+
     context "!user_signed_in?" do
-      context "@user.invalid?" do
+      context "!@user.valid?" do
         let(:create_user){ post :create, user: attributes_for(:user,:invalid) }
    
         it "!@user.save" do
@@ -44,34 +59,25 @@ describe Users::RegistrationsController do
           response.should redirect_to posts_path
         end
       end
-    end # user_signed_in?
+    end # !user_signed_in?
   end
  
   describe "PUT 'update'" do
+    let(:update_user){ put :update, user: attributes_for(:user), id: user }
+    let(:update_invalid_user){ put :update, user: attributes_for(:user, :invalid), id: user }
+
     before(:each) do
-      @user = FactoryGirl.create(:user)
-      @user.confirm! # or set a confirmed_at inside the factory. Only necessary if you are using the confirmable module
-      sign_in @user
+      set_user_session(user)
     end
  
-    describe "Failure" do
-      before(:each) do
-        # The following information is valid except for display_name which is too long (max 20 characters)
-        @attr = { :email => @user.email, :display_name => ("t" * 35), :current_password => @user.password }
+    describe "!@user.valid?" do
+      it "@user.email doesn't change" do
+        update_invalid_user
+        response.should render_template('edit')
       end
- 
-      it "should render the 'edit' page" do
-        put :update, :id => subject.current_user, :user => @attr
- 
-        # HAVE PUT THE DEBUGS THAT I'D LIKE TO GET WORKING FIRST
-        # Would like to be able to debug and check I'm getting the error(s) I'm expecting
-        #puts subject.current_user.errors.messages # doesn't show me the errors
-        # Would like to be able to debug what html is being returned:
-        #puts page.html # only return the first line of html
- 
-        # Would like to be able to determine that this test is failing for the right reasons
-        response.body.should include "Display name is too long (maximum is 30 characters)"
-        assigns[:user].errors[:display_name].should include "is too long (maximum is 30 characters)"
+
+      it "render #edit" do
+        update_invalid_user
         response.should render_template('edit')
       end
     end
