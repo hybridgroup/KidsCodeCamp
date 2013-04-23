@@ -11,7 +11,7 @@ describe Users::RegistrationsController do
  
   describe "POST #create" do
     context "user_signed_in?" do
-      let(:create_user){ post :create, user: attributes_for(:user,:invalid) }
+      let(:create_user){ post :create, user: attributes_for(:user) }
 
       before do
         set_user_session(user)
@@ -31,17 +31,17 @@ describe Users::RegistrationsController do
 
     context "!user_signed_in?" do
       context "!@user.valid?" do
-        let(:create_user){ post :create, user: attributes_for(:user,:invalid) }
+        let(:create_invalid_user){ post :create, user: attributes_for(:user,:invalid) }
    
         it "!@user.save" do
           expect {
-            create_user
+            create_invalid_user
           }.to_not change(User, :count)
         end
    
         it "render #new" do
-          create_user
-          response.should render_template('new')
+          create_invalid_user
+          response.should render_template :new
         end
       end
    
@@ -63,34 +63,69 @@ describe Users::RegistrationsController do
   end
  
   describe "PUT 'update'" do
-    let(:update_user){ put :update, user: attributes_for(:user), id: user }
+    let(:update_user){ put :update, user: attributes_for(:user, email: 'updated@a.com'), id: user }
     let(:update_invalid_user){ put :update, user: attributes_for(:user, :invalid), id: user }
-
-    before(:each) do
-      set_user_session(user)
-    end
  
-    describe "!@user.valid?" do
-      it "@user.email doesn't change" do
-        update_invalid_user
-        response.should render_template('edit')
+    context "!user_signed_in?" do
+      it "User.email != 'updated@a.com'" do
+        expect {
+          update_user
+          user.reload
+        }.to_not change{ user.email }.to('updated@a.com')
       end
 
-      it "render #edit" do
-        update_invalid_user
-        response.should render_template('edit')
+      it "redirect_to login_path" do
+        update_user
+        response.should redirect_to login_path
       end
-    end
- 
-    describe "Success" do
-      it "should change the user's display name" do
-        @attr = { :email => @user.email, :display_name => "Test", :current_password => @user.password }
-        put :update, :id => subject.current_user, :user => @attr
-        subject.current_user.reload
-        response.should redirect_to(root_path)
-        subject.current_user.display_name == @attr[:display_name]
+    end # !user_signed_in?
+
+    context "user_signed_in?" do
+      before(:each) do
+        set_user_session(user)
       end
-    end
+
+      context "@user == user" do
+        context "!@user.valid?" do
+          it "@user.email == 'updated@a.com'" do
+            expect {
+              update_invalid_user
+              user.reload
+            }.to_not change{ user.email }.to('invalid')
+          end
+
+          it "render #edit" do
+            update_invalid_user
+            response.should render_template :edit
+          end
+        end
+     
+        context "@user.valid" do
+          it "@user.email == 'new@a.com'" do
+            #@attr = { :email => @user.email, :display_name => "Test", :current_password => @user.password }
+            put :update, :id => user, :user => @attr
+            subject.current_user.reload
+            response.should redirect_to(root_path)
+            subject.current_user.display_name == @attr[:display_name]
+          end
+        end
+      end # @user == user
+
+      context "@user != user" do
+        let(:user){ create(:create) }
+
+        it "@user.email != 'new@a.com'" do
+          expect {
+            update_user
+          }.to response.should redirect_to root_path
+        end
+
+        it "redirect_to login_path" do
+          update_user
+          response.should redirect_to login_path
+        end
+      end # @user != user
+    end # !user_signed_in?
   end
  
   describe "authentication of edit/update pages" do
