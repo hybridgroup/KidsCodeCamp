@@ -8,8 +8,7 @@ FactoryGirl.define do
     password_confirmation { |u| u.password }
     is_admin false
   
-    factory :invalid_user do
-      username { Faker::Internet.user_name }
+    trait :invalid do
       email "invalid"
     end
   end
