@@ -328,47 +328,77 @@ describe PostsController do
   end
 
   describe 'DELETE destroy' do
-    let(:post) { create(:post) }
+    let(:topic) { create(:topic) }
+    let(:resp) { create(:response_with_topic) }
     
     context "user_signed_in?" do
+      before :each do
+        set_user_session(signed_user)
+      end
+
       context "current_user.is_admin?" do
-        it "deletes the post" do
-          delete :destroy, id: post
-          Post.exists?(@post).should be_false
+        before :each do
+          set_user_session(signed_admin_user)
         end
-          
-        it "redirects to posts#index" do
-          delete :destroy, id: post
-          response.should redirect_to posts_url
+
+        it "deletes the post" do
+          delete :destroy, id: topic, category_id: topic.category
+          Post.exists?(topic).should be_false
+        end
+
+        context "post.parent_id?" do
+          it "redirects to posts#index" do
+            delete :destroy, id: resp, category_id: resp.topic.category
+            response.should redirect_to category_post_path(resp.topic.category,resp.topic)
+          end
+        end
+
+        context "!post.parent_id?" do
+          it "redirects to posts#index" do
+            delete :destroy, id: topic, category_id: topic.category
+            response.should redirect_to category_posts_path(topic.category)
+          end
         end
       end
 
       context "!current_user.is_admin?" do
         context "@post.user == current_user" do
+          let(:topic){ create(:topic, user: signed_user) }
+          let(:resp){ create(:response_with_topic, user: signed_user) }
+
           it "deletes the post" do
-            delete :destroy, id: post
-            Post.exists?(@post).should be_false
+            delete :destroy, id: topic, category_id: topic.category
+            Post.exists?(topic).should be_false
           end
-            
-          it "redirects to posts#index" do
-            delete :destroy, id: post
-            response.should redirect_to posts_url
+
+          context "post.parent_id?" do
+            it "redirects to posts#index" do
+              delete :destroy, id: resp, category_id: resp.topic.category
+              response.should redirect_to category_post_path(resp.topic.category,resp.topic)
+            end
+          end
+
+          context "!post.parent_id?" do
+            it "redirects to posts#index" do
+              delete :destroy, id: topic, category_id: topic.category
+              response.should redirect_to category_posts_path(topic.category)
+            end
           end
         end
 
         context "@post.user != current_user" do
           it "redirect_to posts_path" do
-            delete :destroy, id: post
-            response.should redirect_to posts_url
+            delete :destroy, id: topic, category_id: topic.category
+            response.should redirect_to posts_path
           end
         end
       end
     end
 
     context "!user_signed_in?" do
-      it "redirect_to posts_path" do
-        delete :destroy, id: post
-        response.should redirect_to posts_url
+      it "redirect_to login_path" do
+        delete :destroy, id: topic, category_id: topic.category
+        response.should redirect_to login_path
       end
     end
   end
