@@ -1,6 +1,4 @@
 class EventsController < ApplicationController
-  # GET /events
-  # GET /events.json
   def index
     @events = Event.paginate(:page => params[:page], :per_page => 10).order('created_at DESC')
     @editpage = Editpage.find(4)
@@ -11,8 +9,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/1
-  # GET /events/1.json
   def show
     @event = Event.find(params[:id])
 

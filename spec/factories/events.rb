@@ -1,12 +1,12 @@
 require 'faker'
 
 FactoryGirl.define do
-  factory :contact do |f|
-    f.first_name { Faker::Name.first_name }
-    f.last_name { Faker::Name.last_name }
-  end
-  
-  factory :invalid_contact, parent: :contact do |f|
-    f.first_name nil
+  factory :event do
+    title { Faker::Name.title }
+    content { Faker::Lorem.paragraphs }
+    
+    trait :invalid do
+      content ""
+    end
   end
 end
