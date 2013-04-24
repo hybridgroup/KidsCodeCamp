@@ -1,21 +1,39 @@
 require 'spec_helper'
 
 describe Users::RegistrationsController do
-  render_views
-  let(:user){ create(:user) }
-  let(:admin_user){ create(:user, admin: true) }
- 
   before(:each) do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
+
+  let(:user){ create(:user) }
+  let(:admin_user){ create(:user, admin: true) }
  
-  describe "POST #create" do
+  describe "GET #new" do
     context "user_signed_in?" do
-      before do
-        set_user_session(user)
+      before :each do
+        sign_in(user)
       end
 
+      it "redirect_to posts_path" do
+        get :new
+        response.should redirect_to posts_path
+      end
+    end
+
+    context "!user_signed_in?" do
+      it "render #new" do
+        get :new
+        response.should render_template :new
+      end
+    end
+  end
+
+  describe "POST #create" do
+    context "user_signed_in?" do
       let(:create_user){ post :create, user: attributes_for(:user) }
+      before :each do
+        set_user_session(user)
+      end
 
       it "redirect_to root_path" do
         create_user

@@ -25,5 +25,4 @@ RSpec.configure do |config|
   config.extend ControllerMacros, :type => :controller
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers
-
 end
