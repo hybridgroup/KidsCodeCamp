@@ -11,17 +11,11 @@ describe Users::RegistrationsController do
  
   describe "POST #create" do
     context "user_signed_in?" do
-      let(:create_user){ post :create, user: attributes_for(:user) }
-
       before do
         set_user_session(user)
       end
 
-      it "User.count doesn't change" do
-        expect {
-          create_user
-        }.to_not change(User,:count)
-      end
+      let(:create_user){ post :create, user: attributes_for(:user) }
 
       it "redirect_to root_path" do
         create_user
@@ -60,91 +54,5 @@ describe Users::RegistrationsController do
         end
       end
     end # !user_signed_in?
-  end
- 
-  describe "PUT 'update'" do
-    let(:update_user){ put :update, user: attributes_for(:user, email: 'updated@a.com'), id: user }
-    let(:update_invalid_user){ put :update, user: attributes_for(:user, :invalid), id: user }
- 
-    context "!user_signed_in?" do
-      it "User.email != 'updated@a.com'" do
-        expect {
-          update_user
-          user.reload
-        }.to_not change{ user.email }.to('updated@a.com')
-      end
-
-      it "redirect_to login_path" do
-        update_user
-        response.should redirect_to login_path
-      end
-    end # !user_signed_in?
-
-    context "user_signed_in?" do
-      before(:each) do
-        set_user_session(user)
-      end
-
-      context "@user == user" do
-        context "!@user.valid?" do
-          it "@user.email == 'updated@a.com'" do
-            expect {
-              update_invalid_user
-              user.reload
-            }.to_not change{ user.email }.to('invalid')
-          end
-
-          it "render #edit" do
-            update_invalid_user
-            response.should render_template :edit
-          end
-        end
-     
-        context "@user.valid" do
-          it "@user.email == 'new@a.com'" do
-            #@attr = { :email => @user.email, :display_name => "Test", :current_password => @user.password }
-            put :update, :id => user, :user => @attr
-            subject.current_user.reload
-            response.should redirect_to(root_path)
-            subject.current_user.display_name == @attr[:display_name]
-          end
-        end
-      end # @user == user
-
-      context "@user != user" do
-        let(:user){ create(:create) }
-
-        it "@user.email != 'new@a.com'" do
-          expect {
-            update_user
-          }.to response.should redirect_to root_path
-        end
-
-        it "redirect_to login_path" do
-          update_user
-          response.should redirect_to login_path
-        end
-      end # @user != user
-    end # !user_signed_in?
-  end
- 
-  describe "authentication of edit/update pages" do
-    describe "for non-signed-in users" do
-      before(:each) do
-        @user = FactoryGirl.create(:user)
-      end
- 
-      describe "for non-signed-in users" do
-        it "should deny access to 'edit'" do
-          get :edit, :id => @user
-          response.should redirect_to(new_user_session_path)
-        end
- 
-        it "should deny access to 'update'" do
-          put :update, :id => @user, :user => {}
-          response.should redirect_to(new_user_session_path)
-        end
-      end
-    end
   end
 end
