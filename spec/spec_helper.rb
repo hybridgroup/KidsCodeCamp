@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
 require 'database_cleaner'
+require 'email_spec'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -22,5 +23,7 @@ RSpec.configure do |config|
   #config.include Warden::Test::Helpers, :type => :request
   config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
+  config.include EmailSpec::Helpers
+  config.include EmailSpec::Matchers
 
 end

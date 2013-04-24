@@ -49,4 +49,5 @@ group :test do
   gem "database_cleaner"
   gem 'mocha'
   gem 'launchy'
+  gem 'email_spec'
 end
