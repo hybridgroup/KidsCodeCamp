@@ -11,5 +11,12 @@ FactoryGirl.define do
     trait :invalid do
       email "invalid"
     end
+
+    factory :login do
+      ignore do
+        username
+        is_admin
+      end
+    end
   end
 end

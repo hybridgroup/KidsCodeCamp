@@ -11,4 +11,9 @@ module LoginMacros
     fill_in 'Password', with: user.password
     click_button 'Log In'
   end
+  
+  def sign_out
+    visit posts_path
+    click_link 'Logout'
+  end
 end
