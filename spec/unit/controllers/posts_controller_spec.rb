@@ -1,37 +1,42 @@
 require 'spec_helper'
 
-describe PostsController do
+describe PostsController, type: :controller do
   let(:signed_user){ create(:user) }
   let(:signed_admin_user){ create(:user, is_admin: true) }
 
   describe "GET #index" do
-    let(:category) { create(:category) }
+    let(:page_number) { "1" }
+    let(:category_id) { "category-slug" }
+    let(:category) { double('Category') }
+    let(:paginated_posts) { double('paginated_posts') }
+    let(:all_categories) { double('all_categories') }
 
-    it "render #index" do
-      get :index
-      response.should render_template :index
+    before :each do
+      Category.stub(:find).and_return(category)
+      Category.stub(:all).and_return(all_categories)
+
+      Post.stub(:get_paginated_for_category).with(category,anything()).and_return(paginated_posts)
     end
 
     context "with selected Category" do
       it "@categories.nil? and @posts is a collection" do
-        category = create(:category_with_posts)
+        Category.should_receive(:find).with(category_id)
+        Post.should_receive(:get_paginated_for_category).with(category,anything())
 
-        get :index, category_id: category
+        get :index, category_id: category_id
 
-        assigns(:categories).should be_nil
-        assigns(:posts).should =~ category.posts
+        assigns(:posts).should == paginated_posts
       end
     end
 
     context "without selected Category" do
       it "@posts.nil? and @categories is a collection" do
-        category = create(:category)
-        category2 = create(:category)
+        Category.should_receive(:all)
         
         get :index
 
         assigns(:posts).should be_nil
-        assigns(:categories).should =~ [category,category2]
+        assigns(:categories).should == all_categories
       end
     end
   end
@@ -58,6 +63,7 @@ describe PostsController do
   end
 
 
+=begin
   describe "GET #new" do
     context "user_signed_in?" do
       before :each do
@@ -402,4 +408,5 @@ describe PostsController do
       end
     end
   end
+=end
 end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe EventsController, :type => :controller do
+describe EventsController, type: :controller do
   describe "GET #index" do
     let(:page_number){ "1" }
     let(:paginated_events){ double("paginated_events") }
@@ -28,13 +28,13 @@ describe EventsController, :type => :controller do
 
 
   describe "GET #show" do
-    let(:event){ mock_model('Event') }
+    let(:event){ double('Event') }
     let(:event_id){ "some-slug" }
     before :each do
       Event.stub(:find).with(event_id).and_return(event)
     end
 
-    it "render #show" do
+    it "Finds event" do
       Event.should_receive(:find).with(event_id)
 
       get :show, id: event_id

@@ -13,6 +13,10 @@ class Post < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, :use => :slugged
 
+  def self.get_paginated_for_category(category, page = 1)
+    Post.where({:parent_id => nil, :category_id => category}).paginate(:page => page, :per_page =>12).order('created_at DESC')
+  end
+
   # Rails Admin
   rails_admin do
     show do
