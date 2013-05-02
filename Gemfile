@@ -30,6 +30,7 @@ end
 group :development do
   gem 'pry'
   gem 'nifty-generators'
+  gem "better_errors"
 end
 
 # To use debugger

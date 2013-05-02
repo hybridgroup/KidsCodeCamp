@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.paginate(:page => params[:page], :per_page => 10).order('created_at DESC')
-    @editpage = Editpage.find(4)
+    @events = Event.get_paginated(params[:page])
+    @editpage = Editpage.get_page(:home)
 
     respond_to do |format|
       format.html # index.html.erb
