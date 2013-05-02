@@ -1,16 +1,15 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
   before_filter :set_category
+  before_filter :check_category, only: [:new, :edit, :show, :create, :update]
 
-  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   def index
-    @category_list = false
     if params[:category_id].present?
       conditions = {:parent_id => nil, :category_id => Category.find(params[:category_id]).id}
       @posts = Post.where(conditions).paginate(:page => params[:page], :per_page =>12).order('created_at DESC')
     else
+      @posts = nil 
       @categories = Category.all
-      @category_list = true
     end
 
     respond_to do |format|
@@ -18,7 +17,8 @@ class PostsController < ApplicationController
       format.json { render json: @posts }
     end
   end
-  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  
+  
   def show
     @current_post = Post.find(params[:id])
     @posts = Post.where(:parent_id => @current_post.id).paginate(:page => params[:page], :per_page => 8).order("created_at")
@@ -29,7 +29,8 @@ class PostsController < ApplicationController
       format.json { render json: @post }
     end
   end
-  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  
+  
   def new
     @post = Post.new
 
@@ -38,12 +39,14 @@ class PostsController < ApplicationController
       format.json { render json: @post }
     end
   end
-  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  
+  
   def edit
     @post = Post.find(params[:id])
     #authorize! :edit, @post
   end
-  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  
+  
   def create
     params[:post][:user_id] = current_user.id if params[:post][:user_id].nil?
     @post = Post.new(params[:post])
@@ -58,7 +61,8 @@ class PostsController < ApplicationController
       end
     end
   end
-  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  
+  
   def update
     @post = Post.find(params[:id])
 
@@ -72,7 +76,8 @@ class PostsController < ApplicationController
       end
     end
   end
-  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  
+  
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
@@ -82,7 +87,8 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end 
-  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  
+  
   def after_save_redirect_url
     if @post.parent_id.present? # Response
       category_post_path(@post.topic.category,@post.topic)
@@ -90,7 +96,8 @@ class PostsController < ApplicationController
       category_post_path(@post.category,@post)
     end
   end
-  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  
+  
   def after_delete_redirect_url
     if @post.parent_id.present? #Response
       category_post_path(@post.topic.category,@post.topic)
@@ -98,9 +105,14 @@ class PostsController < ApplicationController
       category_posts_path(@post.category)
     end
   end
-  #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  
+  
   def set_category
     @category = Category.find(params[:category_id]) if params[:category_id].present?
+  end
+
+  def check_category
+    redirect_to posts_path if @category.nil?
   end
   
 end

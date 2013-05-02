@@ -30,6 +30,7 @@ end
 group :development do
   gem 'pry'
   gem 'nifty-generators'
+  gem "better_errors"
 end
 
 # To use debugger
@@ -45,4 +46,9 @@ group :test do
   gem "guard-rspec"
   gem "capybara"
   gem 'rb-fsevent', '~> 0.9'
+  gem 'faker'
+  gem "database_cleaner"
+  gem 'mocha'
+  gem 'launchy'
+  gem 'email_spec'
 end

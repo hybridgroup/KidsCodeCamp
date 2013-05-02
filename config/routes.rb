@@ -26,7 +26,7 @@ KidsCodeCamp::Application.routes.draw do
   end
 
   scope :only => [:index, :show] do
-    resources :users, :events
+    resources :events
   end
 
 end

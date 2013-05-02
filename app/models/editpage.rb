@@ -2,6 +2,17 @@ class Editpage < ActiveRecord::Base
   attr_accessible :title, :content
 
   validates :content, :presence => true
+  
+  @@pages = {
+    about: 1,
+    tools: 2,
+    lessons: 3,
+    home: 4
+  }
+
+  def self.get_page(name)
+    Editpage.find(@@pages[name.to_sym])
+  end
 
  # Rails Admin
   rails_admin do
