@@ -20,7 +20,7 @@ end
 
 shared_examples_for "check_category" do
   it "should receive check_category before filter" do
-    controller.should_receive(:check_category)
+    controller.should_receive(:check_category).at_least(:twice)
 
     get :index, category_id: category_id
   end
@@ -91,7 +91,8 @@ describe PostsController, type: :controller do
       Post.stub(:get_paginated_for_topic).with(current_post,anything()).and_return(paginated_responses)
     end
 
-    it_behaves_like "set_category", "check_category"
+    it_behaves_like ["set_category", "check_category"]
+    # it_behaves_like "check_category"
 
     it "assigns the requested main post to @current_post" do
       Post.should_receive(:find).with(post_id).and_return(current_post)
