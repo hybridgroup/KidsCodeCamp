@@ -1,5 +1,33 @@
 require 'spec_helper'
 
+# Before filters
+
+shared_examples_for "set_category" do
+  let(:category){ double('Category') }
+  let(:category_id){ "category-slug" }
+
+  before :each do
+    Category.stub(:find).and_return(category)
+  end
+
+  it "populates @category with the current category" do
+    Category.should_receive(:find).with(category_id)
+
+    get :index, category_id: category_id
+    assigns(:category).should == category
+  end
+end
+
+shared_examples_for "check_category" do
+  it "should receive check_category before filter" do
+    controller.should_receive(:check_category)
+
+    get :index, category_id: category_id
+  end
+end
+
+###
+
 describe PostsController, type: :controller do
   let(:signed_user){ create(:user) }
   let(:signed_admin_user){ create(:user, is_admin: true) }
@@ -17,6 +45,8 @@ describe PostsController, type: :controller do
 
       Post.stub(:get_paginated_for_category).with(category,anything()).and_return(paginated_posts)
     end
+    
+    it_behaves_like "set_category"
 
     context "with selected Category" do
       it "@categories.nil? and @posts is a collection" do
@@ -43,22 +73,45 @@ describe PostsController, type: :controller do
 
 
   describe "GET #show" do
-    let(:post){ create(:topic) }
-    let(:show_post){ get :show, id: post, category_id: post.category }
+    let(:post_id){ "post-slug" }
+    let(:category_id){ "category-slug" }
 
-    it "render #show" do
-      show_post
-      response.should render_template :show
+    let(:category){ double('Category') }
+    let(:new_post){ double('Post') }
+    let(:current_post){ double('Post') }
+    let(:paginated_responses){ double('paginated_responses') }
+    let(:current_post){ double('current_post') }
+    let(:show_post){ get :show, id: post_id, category_id: category_id }
+
+    before :each do
+      Category.stub(:find).with(category_id).and_return(category)
+
+      Post.stub(:find).with(post_id).and_return(current_post)
+      Post.stub(:new).and_return(new_post)
+      Post.stub(:get_paginated_for_topic).with(current_post,anything()).and_return(paginated_responses)
+    end
+
+    it_behaves_like "set_category", "check_category"
+
+    it "assigns the requested main post to @current_post" do
+      Post.should_receive(:find).with(post_id).and_return(current_post)
+      
+      get :show, id: post_id, category_id: category_id
+      assigns(:current_post).should eq(current_post)
+    end
+
+    it "assigns @current_post responses to posts" do
+      Post.should_receive(:get_paginated_for_topic).with(current_post, anything()).and_return(paginated_responses)
+      
+      get :show, id: post_id, category_id: category_id
+      assigns(:posts).should eq(paginated_responses)
     end
 
     it "assigns the requested main post to @current_post" do
-      show_post
-      assigns(:current_post).should eq(post)
-    end
-
-    it "assigns the post's responses to @posts" do
-      show_post
-      assigns(:posts).should =~ post.responses
+      Post.should_receive(:new).and_return(new_post)
+      
+      get :show, id: post_id, category_id: category_id
+      assigns(:post).should eq(new_post)
     end
   end
 

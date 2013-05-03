@@ -1,4 +1,3 @@
-puts 'LoginMacros'
 module LoginMacros
   def set_user_session(user)
     session[:user_id] = controller.stub(:current_user) { user }

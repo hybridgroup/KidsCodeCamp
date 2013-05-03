@@ -5,8 +5,6 @@ class PostsController < ApplicationController
 
   def index
     if params[:category_id].present?
-      # conditions = {:parent_id => nil, :category_id => Category.find(params[:category_id]).id }
-      # @posts = Post.where(conditions).paginate(:page => params[:page], :per_page =>12).order('created_at DESC')
       @posts = Post.get_paginated_for_category(Category.find(params[:category_id]), params[:page])
     else
       @posts = nil 
@@ -22,7 +20,7 @@ class PostsController < ApplicationController
   
   def show
     @current_post = Post.find(params[:id])
-    @posts = Post.where(:parent_id => @current_post.id).paginate(:page => params[:page], :per_page => 8).order("created_at")
+    @posts = Post.get_paginated_for_topic(@current_post, params[:page])
     @post = Post.new
 
     respond_to do |format|

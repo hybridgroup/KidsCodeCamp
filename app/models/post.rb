@@ -17,6 +17,10 @@ class Post < ActiveRecord::Base
     Post.where({:parent_id => nil, :category_id => category}).paginate(:page => page, :per_page =>12).order('created_at DESC')
   end
 
+  def self.get_paginated_for_topic(topic, page = 1)
+    Post.where({:parent_id => topic}).paginate(:page => page, :per_page => 8).order("created_at")
+  end
+
   # Rails Admin
   rails_admin do
     show do
