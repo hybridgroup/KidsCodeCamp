@@ -3,9 +3,6 @@ require 'spec_helper'
 # Before filters
 
 shared_examples_for "set_category" do
-  let(:category){ double('Category') }
-  let(:category_id){ "category-slug" }
-
   before :each do
     Category.stub(:find).and_return(category)
   end
@@ -13,29 +10,37 @@ shared_examples_for "set_category" do
   it "populates @category with the current category" do
     Category.should_receive(:find).with(category_id)
 
-    get :index, category_id: category_id
+    #get action.to_sym, category_id: category_id
+    make_request
     assigns(:category).should == category
   end
 end
 
+=begin
 shared_examples_for "check_category" do
   it "should receive check_category before filter" do
-    controller.should_receive(:check_category).at_least(:twice)
+    controller.should_receive(:check_category)
 
-    get :index, category_id: category_id
+    make_request
   end
 end
+=end
+
 
 ###
 
 describe PostsController, type: :controller do
   let(:signed_user){ create(:user) }
   let(:signed_admin_user){ create(:user, is_admin: true) }
+  let(:category_id) { "category-slug" }
+  let(:category) { double('Category') }
+
+  before :each do
+    Category.stub(:find).with(category_id).and_return(category)
+  end
 
   describe "GET #index" do
     let(:page_number) { "1" }
-    let(:category_id) { "category-slug" }
-    let(:category) { double('Category') }
     let(:paginated_posts) { double('paginated_posts') }
     let(:all_categories) { double('all_categories') }
 
@@ -45,8 +50,10 @@ describe PostsController, type: :controller do
 
       Post.stub(:get_paginated_for_category).with(category,anything()).and_return(paginated_posts)
     end
-    
-    it_behaves_like "set_category"
+
+    it_should_behave_like "set_category" do
+      let(:make_request) { get :index, category_id: category_id }
+    end
 
     context "with selected Category" do
       it "@categories.nil? and @posts is a collection" do
@@ -91,33 +98,33 @@ describe PostsController, type: :controller do
       Post.stub(:get_paginated_for_topic).with(current_post,anything()).and_return(paginated_responses)
     end
 
-    it_behaves_like ["set_category", "check_category"]
-    # it_behaves_like "check_category"
+    it_should_behave_like "set_category" do
+      let(:make_request) { show_post }
+    end
 
     it "assigns the requested main post to @current_post" do
       Post.should_receive(:find).with(post_id).and_return(current_post)
       
-      get :show, id: post_id, category_id: category_id
+      show_post
       assigns(:current_post).should eq(current_post)
     end
 
     it "assigns @current_post responses to posts" do
       Post.should_receive(:get_paginated_for_topic).with(current_post, anything()).and_return(paginated_responses)
       
-      get :show, id: post_id, category_id: category_id
+      show_post
       assigns(:posts).should eq(paginated_responses)
     end
 
-    it "assigns the requested main post to @current_post" do
+    it "assigns empty post to @new_post" do
       Post.should_receive(:new).and_return(new_post)
       
-      get :show, id: post_id, category_id: category_id
+      show_post
       assigns(:post).should eq(new_post)
     end
   end
 
 
-=begin
   describe "GET #new" do
     context "user_signed_in?" do
       before :each do
@@ -159,6 +166,7 @@ describe PostsController, type: :controller do
     end
   end
   
+=begin
 
   describe "POST #create" do
     let(:category){ create(:category) }
