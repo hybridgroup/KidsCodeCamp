@@ -4,35 +4,40 @@ describe User, type: :model do
   before :each do
     @user = User.new(username: 'username', email: 'an@email.com', password: 'hello123', password_confirmation: 'hello123')
   end
+  subject { @user }
 
-  it 'has many posts'
+  it 'must have a unique username'
+
   it 'is invalid without a username' do
-    @user.should be_valid
+    should be_valid
     @user.username = ''
-    @user.should_not be_valid
-  end
-  
-  it 'must have a unique username' do
-    pending
+    should_not be_valid
   end
 
-  it 'must have a password confirmation at creation' do
-    @user.should be_valid
+  it 'is invalid without a password confirmation at creation' do
+    should be_valid
     @user.password_confirmation = ''
-    @user.should_not be_valid
+    should_not be_valid
   end
 
+  it 'has many posts' do
+    should respond_to :posts
+  end
+  it { should respond_to :username }
+  it { should respond_to :email }
+  it { should respond_to :password }
+  it { should respond_to :is_admin }
+
+=begin
   describe "abilities" do
     subject { ability }
     let(:ability){ Ability.new(user) }
     let(:user){ nil }
 
-=begin
     context "when is an account manager" do
       let(:user){ Factory(:accounts_manager) }
 
       it{ should be_able_to(:manage, Account.new) }
     end
 =end
-  end
 end
