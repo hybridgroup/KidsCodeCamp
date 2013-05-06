@@ -1,44 +1,19 @@
 require 'spec_helper'
 
-describe EditpagesController do
-  let(:about_page){ create(:editpage, id: 1) }
-  let(:tools_page){ create(:editpage, id: 2) }
-  let(:lessons_page){ create(:editpage, id: 3) }
-
+describe EditpagesController, type: :controller do
   describe "GET #show" do
-    context 'about page' do
-      it "renders view" do
-        get :show, { id: 1 }
-        response.should be 200
-      end
-
-      it "@editpage.present?" do
-        get :show, { id: 1 }
-        assigns(:editpage).should_not be_nil
-      end
+    let(:editpage){ double('Editpage') }
+    let(:page_name){ "tools" }
+    
+    before :each do
+      Editpage.stub(:get_page).and_return(editpage)
     end
 
-    context 'tools page' do
-      it "renders view" do
-        get :show, { id: 2 }
-        response.should be 200
-      end
-
+    context 'when a valid page is requested' do
       it "@editpage.present?" do
-        get :show, { id: 2 }
-        assigns(:editpage).should_not be_nil
-      end
-    end
-
-    context 'lessons page' do
-      it "renders view" do
-        get :show, { id: 2 }
-        response.should be 200
-      end
-
-      it "@editpage.present?" do
-        get :show, { id: 2 }
-        assigns(:editpage).should_not be_nil
+        Editpage.should_receive(:get_page).with(page_name)
+        get :show, { id: page_name }
+        assigns(:editpage).should eq(editpage)
       end
     end
   end

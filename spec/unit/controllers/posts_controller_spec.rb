@@ -3,37 +3,23 @@ require 'spec_helper'
 # Before filters
 
 shared_examples_for "set_category" do
-  before :each do
-    Category.stub(:find).and_return(category)
-  end
-
   it "populates @category with the current category" do
+
+    Category.stub(:find).and_return(category)
     Category.should_receive(:find).with(category_id)
 
-    #get action.to_sym, category_id: category_id
     make_request
     assigns(:category).should == category
   end
 end
 
-=begin
-shared_examples_for "check_category" do
-  it "should receive check_category before filter" do
-    controller.should_receive(:check_category)
-
-    make_request
-  end
-end
-=end
-
-
 ###
 
 describe PostsController, type: :controller do
-  let(:signed_user){ create(:user) }
-  let(:signed_admin_user){ create(:user, is_admin: true) }
   let(:category_id) { "category-slug" }
+  let(:post_id){ "post-slug" }
   let(:category) { double('Category') }
+  let(:post) { double('Post') }
 
   before :each do
     Category.stub(:find).with(category_id).and_return(category)
@@ -45,7 +31,6 @@ describe PostsController, type: :controller do
     let(:all_categories) { double('all_categories') }
 
     before :each do
-      Category.stub(:find).and_return(category)
       Category.stub(:all).and_return(all_categories)
 
       Post.stub(:get_paginated_for_category).with(category,anything()).and_return(paginated_posts)
@@ -80,10 +65,6 @@ describe PostsController, type: :controller do
 
 
   describe "GET #show" do
-    let(:post_id){ "post-slug" }
-    let(:category_id){ "category-slug" }
-
-    let(:category){ double('Category') }
     let(:new_post){ double('Post') }
     let(:current_post){ double('Post') }
     let(:paginated_responses){ double('paginated_responses') }
@@ -91,8 +72,6 @@ describe PostsController, type: :controller do
     let(:show_post){ get :show, id: post_id, category_id: category_id }
 
     before :each do
-      Category.stub(:find).with(category_id).and_return(category)
-
       Post.stub(:find).with(post_id).and_return(current_post)
       Post.stub(:new).and_return(new_post)
       Post.stub(:get_paginated_for_topic).with(current_post,anything()).and_return(paginated_responses)
@@ -126,9 +105,19 @@ describe PostsController, type: :controller do
 
 
   describe "GET #new" do
+    let(:get_new) { get :new, category_id: category_id }
+
+    before :each do
+      Post.stub(:new).and_return(post)
+    end 
+
     context "user_signed_in?" do
       before :each do
-        set_user_session(create(:user))
+        sign_in
+      end 
+
+      it_should_behave_like "set_category" do
+        let(:make_request) { get_new }
       end
 
       context "@category.nil?" do
@@ -138,27 +127,21 @@ describe PostsController, type: :controller do
         end
       end
 
-      context "!@category.nil?" do
-        let(:get_new_post) { get :new, category_id: create(:category) }
-
-        it "response.should be_success" do
-          get_new_post
-          response.should be_success
-        end
-
+      context "@category.present?" do
         it "render #new" do
-          get_new_post
-          response.should render_template :new
-        end
+          Post.should_receive(:new)
 
-        it "@post.new_record?" do
-          get_new_post
-          assigns(:post).should be_new_record
+          get_new
+          assigns(:post).should == post
         end
       end
     end
 
     context "!user_signed_in?" do
+      before :each do
+        sign_in nil
+      end
+
       it "redirect_to login_path" do
         get :new
         response.should redirect_to login_path

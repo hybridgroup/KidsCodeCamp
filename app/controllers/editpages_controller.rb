@@ -1,6 +1,6 @@
 class EditpagesController < ApplicationController
   def show
-    @editpage = Editpage.find(params[:id])
+    @editpage = Editpage.get_page(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

@@ -12,17 +12,18 @@ require 'email_spec'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
-  include LoginMacros
+  #include LoginMacros
   #config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "default"
 
-  config.include FactoryGirl::Syntax::Methods
-  #config.include Warden::Test::Helpers, :type => :request
+  #config.include FactoryGirl::Syntax::Methods
+  config.include Warden::Test::Helpers, :type => :request
   config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
+  config.include ControllerHelpers, :type => :controller
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers
 end
