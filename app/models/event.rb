@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, :use => :slugged
 
-  def self.get_paginated(page)
+  def self.get_paginated(page = 1)
     Event.paginate(page: page, per_page: 10).order('created_at DESC')
   end
 

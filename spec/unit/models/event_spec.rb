@@ -12,6 +12,12 @@ describe Event, type: :model do
     should_not be_valid
   end
 
+  it 'is invalid with a title more than 100 chars long' do
+    should be_valid
+    @event.title = 'x' * 101
+    should_not be_valid
+  end
+
   it 'is invalid without content' do
     should be_valid
     @event.content = ''
@@ -23,4 +29,20 @@ describe Event, type: :model do
   it { should respond_to :title }
   it { should respond_to :content }
   it { should respond_to :slug }
+  
+  context 'class methods' do
+    let(:page_number){ "1" }
+    let(:events){ double('Event') }
+
+    before :each do
+      Event.stub(:paginate).and_return(events)
+    end
+    
+    it 'returns paginated' do
+      Event.should_receive(:paginate).with(page: page_number, per_page: 10)
+      events.should_receive(:order).with('created_at DESC')
+
+      Event.get_paginated(page_number)
+    end
+  end
 end
