@@ -1,11 +1,8 @@
 require 'spec_helper'
 
-describe 'User management' do
-  it "adds a new user" do
-    admin = create(:admin)
-    sign_in admin
-
-    visit root_path
+feature 'User management' do
+  scenario "adds a new user" do
+    login_admin
     expect{
       click_link 'Users'
       click_link 'New User'

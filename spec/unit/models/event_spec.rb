@@ -30,7 +30,7 @@ describe Event, type: :model do
   it { should respond_to :content }
   it { should respond_to :slug }
   
-  context 'class methods' do
+  context '#get_paginated' do
     let(:page_number){ "1" }
     let(:events){ double('Event') }
 
