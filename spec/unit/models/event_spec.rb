@@ -1,30 +1,27 @@
 require 'spec_helper'
 
 describe Event, type: :model do
-  before :each do
-    @event = Event.new(title: 'username', content: 'This is a content')
-  end
-  subject { @event }
+  let(:event){ Event.new(title: 'username', content: 'This is a content') }
+  subject { event }
 
-  it 'is invalid without a title' do
+  it 'is valid with defined attributes' do
     should be_valid
-    @event.title = ''
+  end
+  
+  it 'is invalid without a title' do
+    subject.title = ''
     should_not be_valid
   end
 
   it 'is invalid with a title more than 100 chars long' do
-    should be_valid
-    @event.title = 'x' * 101
+    subject.title = 'x' * 101
     should_not be_valid
   end
 
   it 'is invalid without content' do
-    should be_valid
-    @event.content = ''
+    subject.content = ''
     should_not be_valid
   end
-
-  it 'autogenerates slug from title'
 
   it { should respond_to :title }
   it { should respond_to :content }

@@ -6,7 +6,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     posts_path
   end
   
+=begin
   def after_sign_in_path_for(resource)
     posts_path
   end
+=end
 end

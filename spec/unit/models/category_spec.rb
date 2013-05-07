@@ -1,30 +1,27 @@
 require 'spec_helper'
 
 describe Category, type: :model do
-  before :each do
-    @category = Category.new(title: 'username', description: 'This is a description')
+  let(:category) { Category.new(title: 'username', description: 'This is a description') }
+  subject { category }
+
+  it 'is valid with defined attributes' do
+    should be_valid
   end
-  subject { @category }
 
   it 'is invalid without a title' do
-    should be_valid
-    @category.title = ''
+    subject.title = ''
     should_not be_valid
   end
 
   it 'is invalid with a title more than 100 chars long' do
-    should be_valid
-    @category.title = 'x' * 101
+    subject.title = 'x' * 101
     should_not be_valid
   end
 
   it 'is invalid without description' do
-    should be_valid
-    @category.description = ''
+    subject.description = ''
     should_not be_valid
   end
-
-  it 'autogenerates slug from title'
 
   it 'has many posts' do
     should respond_to :posts
