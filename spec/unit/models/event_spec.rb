@@ -18,6 +18,12 @@ describe Event, type: :model do
     should_not be_valid
   end
 
+  it 'is invalid with a title less than 2 chars long' do
+    subject.title = 'x'
+    should_not be_valid
+  end
+
+
   it 'is invalid without content' do
     subject.content = ''
     should_not be_valid
@@ -33,6 +39,7 @@ describe Event, type: :model do
 
     before :each do
       Event.stub(:paginate).and_return(events)
+      events.stub(:order).and_return(events)
     end
     
     it 'returns paginated' do
