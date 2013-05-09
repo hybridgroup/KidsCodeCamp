@@ -215,7 +215,7 @@ describe PostsController, type: :controller do
   end
 
 
-  describe "#update", focus: true do
+  describe "#update" do
     let(:valid_atts){ {'title' => 'Updated', 'user_id'=>'1' } }
     let(:mk_req){ put :update, post: valid_atts, category_id: category_id, id: post_id }
 
@@ -236,7 +236,7 @@ describe PostsController, type: :controller do
                 controller.stub(:after_save_redirect).with(resp).and_return(category_post_path(category_id,post_id))
               end
 
-              it "update_attributes and redirects to parent show view" do
+              it "update_attributes and redirects to parent's show view" do
                 resp.should_receive(:update_attributes).with(valid_atts)
                 controller.should_receive(:after_save_redirect).with(resp)
 
@@ -252,7 +252,7 @@ describe PostsController, type: :controller do
                 controller.stub(:after_save_redirect).with(xpost).and_return(category_post_path(category_id,post_id))
               end
 
-              it "update_attributes and redirects to parent show view" do
+              it "update_attributes and redirects to its show view" do
                 xpost.should_receive(:update_attributes).with(valid_atts)
                 controller.should_receive(:after_save_redirect).with(xpost)
 
@@ -277,7 +277,7 @@ describe PostsController, type: :controller do
                   controller.stub(:after_save_redirect).with(resp).and_return(category_post_path(category_id,post_id))
                 end
 
-                it "update_attributes and redirects to parent show view" do
+                it "update_attributes and redirects to parent's show view" do
                   resp.should_receive(:update_attributes).with(valid_atts)
                   controller.should_receive(:after_save_redirect).with(resp)
 
@@ -293,7 +293,7 @@ describe PostsController, type: :controller do
                   controller.stub(:after_save_redirect).with(xpost).and_return(category_post_path(category_id,post_id))
                 end
 
-                it "update_attributes and redirects to parent show view" do
+                it "update_attributes and redirects to its show view" do
                   xpost.should_receive(:update_attributes).with(valid_atts)
                   controller.should_receive(:after_save_redirect).with(xpost)
 
@@ -308,7 +308,7 @@ describe PostsController, type: :controller do
               let(:resp) { mock_model('Post', parent_id: xpost.id, slug: resp_id, user_id: 2) }
 
               before :each do
-                Post.stub(:find).with(post_id).and_return(xpost) # Used by Cancan
+                Post.stub(:find).with(post_id).and_return(xpost) # Needed by Cancan
               end
 
               it "redirect_to posts_path" do
@@ -335,7 +335,7 @@ describe PostsController, type: :controller do
                 resp.stub(:update_attributes).with(invalid_atts).and_return(false)
               end
 
-              it "update_attributes and redirects to parent show view" do
+              it "update_attributes and redirects to parent's show view" do
                 resp.should_receive(:update_attributes).with(invalid_atts)
 
                 mk_req
@@ -351,7 +351,7 @@ describe PostsController, type: :controller do
                 xpost.stub(:update_attributes).with(invalid_atts).and_return(false)
               end
 
-              it "update_attributes and redirects to parent show view" do
+              it "update_attributes and redirects to its show view" do
                 xpost.should_receive(:update_attributes).with(invalid_atts)
 
                 mk_req
@@ -404,7 +404,7 @@ describe PostsController, type: :controller do
               let(:resp) { mock_model('Post', parent_id: xpost.id, slug: resp_id, user_id: 2) }
 
               before :each do
-                Post.stub(:find).with(post_id).and_return(xpost) # Used by Cancan
+                Post.stub(:find).with(post_id).and_return(xpost) # Needed by Cancan
               end
 
               it "redirect_to posts_path" do
@@ -413,14 +413,14 @@ describe PostsController, type: :controller do
               end
             end # @post.user != current_user
           end # !current_user.is_admin?
-        end
-      end
+        end # !post.valid?
+      end # user_signed_in?
 
-      context "!user_signed_in?" do
+      context "!user_signed_in?", focus: true do
         before :each do
-          Post.stub(:find).and_return(xpost) # Used by Cancan
+          Post.stub(:find).with(post_id).and_return(xpost) # Needed by Cancan
         end
-        
+
         it "redirect_to login_path" do
           mk_req
           response.should redirect_to login_path
@@ -435,20 +435,18 @@ describe PostsController, type: :controller do
     end
   end
 
-=begin
 
   describe '#destroy' do
-    let(:topic) { create(:topic) }
-    let(:resp) { create(:response_with_topic) }
+    let(:mk_req){ delete :destroy, id: post_id, category_id: category_id }    
     
     context "user_signed_in?" do
       before :each do
-        set_user_session(signed_user)
+        sign_in 
       end
 
       context "current_user.is_admin?" do
         before :each do
-          set_user_session(signed_admin_user)
+          sign_in mock_model('User', is_admin?: true, id: 1)
         end
 
         it "deletes the post" do
@@ -512,5 +510,6 @@ describe PostsController, type: :controller do
       end
     end
   end
+=begin
 =end
 end
