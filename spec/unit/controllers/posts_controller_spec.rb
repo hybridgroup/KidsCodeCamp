@@ -436,7 +436,7 @@ describe PostsController, type: :controller do
   end
 
 
-  describe '#destroy', focus: true do
+  describe '#destroy' do
     let(:mk_req){ delete :destroy, id: post_id, category_id: category_id }    
     
     context "user_signed_in?" do
