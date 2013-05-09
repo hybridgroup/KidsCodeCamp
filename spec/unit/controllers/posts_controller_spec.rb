@@ -154,7 +154,7 @@ describe PostsController, type: :controller do
           Post.stub(:new).and_return(new_post)
           new_post.stub(:save).and_return(true)
 
-          controller.stub(:after_save_redirect_url).and_return(category_post_path(category_id,post_id))
+          controller.stub(:after_save_redirect).and_return(category_post_path(category_id,post_id))
         end
   
         context "@post.valid?" do
@@ -169,7 +169,7 @@ describe PostsController, type: :controller do
           it "redirects to the new post" do
             Post.should_receive(:new).with(valid_atts)
             new_post.should_receive(:save)
-            controller.should_receive(:after_save_redirect_url)
+            controller.should_receive(:after_save_redirect)
             
             mk_req
             
@@ -416,7 +416,7 @@ describe PostsController, type: :controller do
         end # !post.valid?
       end # user_signed_in?
 
-      context "!user_signed_in?", focus: true do
+      context "!user_signed_in?" do
         before :each do
           Post.stub(:find).with(post_id).and_return(xpost) # Needed by Cancan
         end
@@ -436,67 +436,103 @@ describe PostsController, type: :controller do
   end
 
 
-  describe '#destroy' do
+  describe '#destroy', focus: true do
     let(:mk_req){ delete :destroy, id: post_id, category_id: category_id }    
     
     context "user_signed_in?" do
-      before :each do
-        sign_in 
-      end
-
       context "current_user.is_admin?" do
         before :each do
           sign_in mock_model('User', is_admin?: true, id: 1)
         end
 
-        it "deletes the post" do
-          delete :destroy, id: topic, category_id: topic.category
-          Post.exists?(topic).should be_false
-        end
-
         context "post.parent_id?" do
+          let(:mk_req){ delete :destroy, id: resp_id, category_id: category_id }    
+
+          before :each do
+            Post.stub(:find).with(resp_id).and_return(resp)
+            resp.stub(:destroy).and_return(true)
+            controller.stub(:after_delete_redirect).and_return(category_post_path(category_id,post_id))
+          end
+
           it "redirects to posts#index" do
-            delete :destroy, id: resp, category_id: resp.topic.category
-            response.should redirect_to category_post_path(resp.topic.category,resp.topic)
+            Post.should_receive(:find).with(resp_id)
+            resp.should_receive(:destroy)
+            controller.should_receive(:after_delete_redirect)
+
+            mk_req
+            response.should redirect_to category_post_path(category_id,post_id)
           end
         end
 
         context "!post.parent_id?" do
+          before :each do
+            Post.stub(:find).with(post_id).and_return(xpost)
+            xpost.stub(:destroy).and_return(true)
+            controller.stub(:after_delete_redirect).with(xpost).and_return(category_posts_path(category_id))
+          end
+
           it "redirects to posts#index" do
-            delete :destroy, id: topic, category_id: topic.category
-            response.should redirect_to category_posts_path(topic.category)
+            Post.should_receive(:find).with(post_id)
+            xpost.should_receive(:destroy)
+            controller.should_receive(:after_delete_redirect).with(xpost)
+
+            mk_req
+            response.should redirect_to category_posts_path(category_id)
           end
         end
       end
 
       context "!current_user.is_admin?" do
         context "@post.user == current_user" do
-          let(:topic){ create(:topic, user: signed_user) }
-          let(:resp){ create(:response_with_topic, user: signed_user) }
-
-          it "deletes the post" do
-            delete :destroy, id: topic, category_id: topic.category
-            Post.exists?(topic).should be_false
+          before :each do
+            sign_in mock_model('User', is_admin?: false, id: 1)
           end
 
           context "post.parent_id?" do
+            let(:mk_req){ delete :destroy, id: resp_id, category_id: category_id }    
+            
+            before :each do
+              Post.stub(:find).with(resp_id).and_return(resp)
+              resp.stub(:destroy).and_return(true)
+              controller.stub(:after_delete_redirect).with(resp).and_return(category_post_path(category_id,post_id))
+            end
+
             it "redirects to posts#index" do
-              delete :destroy, id: resp, category_id: resp.topic.category
-              response.should redirect_to category_post_path(resp.topic.category,resp.topic)
+              Post.should_receive(:find).with(resp_id)
+              resp.should_receive(:destroy)
+              controller.should_receive(:after_delete_redirect).with(resp)
+
+              mk_req
+              response.should redirect_to category_post_path(category_id,post_id)
             end
           end
 
           context "!post.parent_id?" do
+            before :each do
+              Post.stub(:find).with(post_id).and_return(xpost)
+              xpost.stub(:destroy).and_return(true)
+              controller.stub(:after_delete_redirect).with(xpost).and_return(category_posts_path(category_id))
+            end
+
             it "redirects to posts#index" do
-              delete :destroy, id: topic, category_id: topic.category
-              response.should redirect_to category_posts_path(topic.category)
+              Post.should_receive(:find).with(post_id)
+              xpost.should_receive(:destroy)
+              controller.should_receive(:after_delete_redirect).with(xpost)
+
+              mk_req
+              response.should redirect_to category_posts_path(category_id)
             end
           end
         end
 
         context "@post.user != current_user" do
+          before :each do
+            sign_in mock_model('User', is_admin?: false, id: 2)
+            Post.stub(:find).with(post_id).and_return(xpost) # Needed for Cancan 
+          end
+
           it "redirect_to posts_path" do
-            delete :destroy, id: topic, category_id: topic.category
+            mk_req
             response.should redirect_to posts_path
           end
         end
@@ -504,12 +540,14 @@ describe PostsController, type: :controller do
     end
 
     context "!user_signed_in?" do
+      before :each do
+        Post.stub(:find).with(post_id).and_return(xpost) # Needed for Cancan 
+      end
+
       it "redirect_to login_path" do
-        delete :destroy, id: topic, category_id: topic.category
+        mk_req
         response.should redirect_to login_path
       end
     end
   end
-=begin
-=end
 end
