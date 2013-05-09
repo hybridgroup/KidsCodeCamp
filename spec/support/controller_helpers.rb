@@ -1,5 +1,5 @@
 module ControllerHelpers
-  def sign_in(user = double('user', is_admin?: true))
+  def sign_in(user = mock_model('User', is_admin?: false, id: 1))
     if user.nil?
       request.env['warden'].stub(:authenticate!).
         and_throw(:warden, {:scope => :user})

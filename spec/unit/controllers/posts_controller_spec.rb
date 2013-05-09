@@ -1,57 +1,49 @@
 require 'spec_helper'
 
-# Before filters
-
-shared_examples_for "set_category" do
-  it "populates @category with the current category" do
-
-    Category.stub(:find).and_return(category)
-    Category.should_receive(:find).with(category_id)
-
-    make_request
-    assigns(:category).should == category
-  end
-end
-
-###
-
 describe PostsController, type: :controller do
+  let(:category) { mock_model('Category', id: 1, slug: category_id) }
   let(:category_id) { "category-slug" }
+
+  let(:xpost) { mock_model('Post', id: 1, slug: post_id, user_id: 1) }
   let(:post_id){ "post-slug" }
-  let(:category) { double('Category') }
-  let(:post) { double('Post') }
+
+  let(:resp){ mock_model('Post', parent_id: xpost.id, slug: resp_id, user_id: 1) }
+  let(:resp_id){ "resp-id" }
+  
+  let(:page_number) { "1" }
+  let(:valid_atts){ {'title'=>'Title', 'content'=>'This is a content', 'user_id'=>'1' , 'category_id'=>'1'} }
 
   before :each do
     Category.stub(:find).with(category_id).and_return(category)
   end
 
-  describe "GET #index" do
-    let(:page_number) { "1" }
+  describe "set_category filter" do
+    it 'assigns @category to the current when category_id is present' do
+      Category.should_receive(:find).with(category_id)
+      
+      get :index, category_id: category_id
+      assigns(:category).should eq(category)
+    end
+
+    it 'assigns @category to nil when no category_id is specified' do
+      Category.should_not_receive(:find)
+
+      get :index
+      assigns(:category).should be_nil
+    end
+  end
+
+
+  describe "#index" do
     let(:paginated_posts) { double('paginated_posts') }
     let(:all_categories) { double('all_categories') }
 
     before :each do
       Category.stub(:all).and_return(all_categories)
-
-      Post.stub(:get_paginated_for_category).with(category,anything()).and_return(paginated_posts)
+      Post.stub(:get_paginated_for_category).with(category,page_number).and_return(paginated_posts)
     end
 
-    it_should_behave_like "set_category" do
-      let(:make_request) { get :index, category_id: category_id }
-    end
-
-    context "with selected Category" do
-      it "@categories.nil? and @posts is a collection" do
-        Category.should_receive(:find).with(category_id)
-        Post.should_receive(:get_paginated_for_category).with(category,anything())
-
-        get :index, category_id: category_id
-
-        assigns(:posts).should == paginated_posts
-      end
-    end
-
-    context "without selected Category" do
+    context "when have selected a category" do
       it "@posts.nil? and @categories is a collection" do
         Category.should_receive(:all)
         
@@ -61,235 +53,266 @@ describe PostsController, type: :controller do
         assigns(:categories).should == all_categories
       end
     end
+
+    context "when have no selected category" do
+      it "@categories.nil? and @posts is a collection" do
+        Category.should_receive(:find).with(category_id)
+        Post.should_receive(:get_paginated_for_category).with(category,page_number)
+
+        get :index, category_id: category_id, page: page_number
+
+        assigns(:posts).should == paginated_posts
+      end
+    end
   end
 
 
-  describe "GET #show" do
-    let(:new_post){ double('Post') }
-    let(:current_post){ double('Post') }
+  describe "#show" do
+    let(:new_post){ mock_model('Post') }
     let(:paginated_responses){ double('paginated_responses') }
-    let(:current_post){ double('current_post') }
-    let(:show_post){ get :show, id: post_id, category_id: category_id }
+    let(:mk_req){ get :show, id: post_id, category_id: category_id, page: page_number }
 
     before :each do
-      Post.stub(:find).with(post_id).and_return(current_post)
+      Post.stub(:find).with(post_id).and_return(xpost)
       Post.stub(:new).and_return(new_post)
-      Post.stub(:get_paginated_for_topic).with(current_post,anything()).and_return(paginated_responses)
-    end
-
-    it_should_behave_like "set_category" do
-      let(:make_request) { show_post }
+      Post.stub(:get_paginated_for_topic).with(xpost,page_number).and_return(paginated_responses)
     end
 
     it "assigns the requested main post to @current_post" do
-      Post.should_receive(:find).with(post_id).and_return(current_post)
+      Post.should_receive(:find).with(post_id).and_return(xpost)
       
-      show_post
-      assigns(:current_post).should eq(current_post)
+      mk_req
+      assigns(:current_post).should eq(xpost)
     end
 
     it "assigns @current_post responses to posts" do
-      Post.should_receive(:get_paginated_for_topic).with(current_post, anything()).and_return(paginated_responses)
+      Post.should_receive(:get_paginated_for_topic).with(xpost, page_number).and_return(paginated_responses)
       
-      show_post
+      mk_req
       assigns(:posts).should eq(paginated_responses)
     end
 
     it "assigns empty post to @new_post" do
       Post.should_receive(:new).and_return(new_post)
-      
-      show_post
+
+      mk_req
       assigns(:post).should eq(new_post)
     end
   end
 
 
-  describe "GET #new" do
-    let(:get_new) { get :new, category_id: category_id }
+  describe "#new" do
+    let(:mk_req) { get :new, category_id: category_id }
 
     before :each do
-      Post.stub(:new).and_return(post)
+      Post.stub(:new).and_return(xpost)
     end 
 
-    context "user_signed_in?" do
-      before :each do
-        sign_in
-      end 
+    context "@category.present?" do
+      context "user_signed_in?" do
+        before :each do
+          sign_in
+        end 
 
-      it_should_behave_like "set_category" do
-        let(:make_request) { get_new }
-      end
-
-      context "@category.nil?" do
-        it "redirect_to posts_path" do
-          get :new
-          response.should redirect_to posts_path
-        end
-      end
-
-      context "@category.present?" do
         it "render #new" do
           Post.should_receive(:new)
 
-          get_new
-          assigns(:post).should == post
+          mk_req
+          assigns(:post).should eq(xpost)
+        end
+      end
+  
+      context "!user_signed_in?" do
+        before :each do
+          sign_in nil
+        end
+
+        it "redirect_to login_path" do
+          mk_req
+          response.should redirect_to login_path
         end
       end
     end
 
-    context "!user_signed_in?" do
-      before :each do
-        sign_in nil
-      end
-
-      it "redirect_to login_path" do
-        get :new
-        response.should redirect_to login_path
+    context "@category.nil?" do
+      it "raises error" do
+        expect{ get :new }.to raise_error
       end
     end
   end
   
-=begin
 
-  describe "POST #create" do
-    let(:category){ create(:category) }
-    let(:post_create){ put :create, post: attributes_for(:post, user_id: signed_user, category_id: category.id), category_id: category }
-    let(:invalid_post_create){ put :create, post: attributes_for(:post,:invalid, user_id: signed_user, category_id: category.id), category_id: category }
+  describe "#create" do
+    let(:new_post){ mock_model('Post').as_new_record }
+    let(:mk_req) { post :create, post: {title: 'Title', content: 'This is a content', user_id: '1', category_id: '1'}, category_id: category_id }
 
-    context "user_signed_in?" do
-      before :each do
-        set_user_session(signed_user)
-      end
+    context "@category.present?" do
+      context "user_signed_in?" do
+        before :each do
+          sign_in
 
-      context "@category.present?" do
+          Post.stub(:new).and_return(new_post)
+          new_post.stub(:save).and_return(true)
+
+          controller.stub(:after_save_redirect_url).and_return(category_post_path(category_id,post_id))
+        end
+  
         context "@post.valid?" do
           it "post.save" do
-            expect{
-              post_create
-            }.to change(Post,:count).by(1)
+            Post.should_receive(:new).with(valid_atts)
+            new_post.should_receive(:save)
+
+            mk_req
+            assigns(:post).should eq(new_post)
           end
           
           it "redirects to the new post" do
-            post_create
-            post = Post.last
-            response.should redirect_to category_post_path(post.category,post)
+            Post.should_receive(:new).with(valid_atts)
+            new_post.should_receive(:save)
+            controller.should_receive(:after_save_redirect_url)
+            
+            mk_req
+            
+            response.should redirect_to category_post_path(category_id,post_id)
           end
         end
 
         context "!@post.valid?" do
-          it "!post.save" do
-            expect{
-              invalid_post_create
-            }.to_not change(Post,:count)
+          let(:mk_req){ post :create, post: {}, category_id: category_id }
+          before :each do
+            new_post.stub(:save).and_return(false)
+          end
+
+          it "@post.new_record?" do
+            Post.should_receive(:new).with({})
+            new_post.should_receive(:save)
+
+            mk_req
+
+            assigns(:post).should be_new_record
           end
           
           it "re-renders #new" do
-            invalid_post_create
+            mk_req
             response.should render_template :new
           end
         end
       end
-
-      context "@category.nil?" do
-        it "redirect_to posts_path" do
-          expect {
-            post :create, post: attributes_for(:post, user_id: signed_user, category_id: category.id)
-          }.to raise_error(ActionController::RoutingError)
+  
+      context "!user_signed_in?" do
+        it "redirect_to login_path" do
+          mk_req
+          response.should redirect_to login_path
         end
       end
     end
-    
-    context "!user_signed_in?" do
-      it "redirect_to login_path" do
-        post_create
-        response.should redirect_to login_path
+
+    context "@category.nil?" do
+      it "raises error" do
+        expect{ post :create, post: valid_atts }.to raise_error
       end
     end
   end
 
-  describe "PUT #update" do
-    let(:topic){ create(:topic) }
-    let(:resp){ create(:response_with_topic) }
-    let(:category){ create(:category) }
 
-    let(:topic_update){ put :update, post: attributes_for(:topic, title: "updated", user_id: signed_user, category_id: category.id), category_id: topic.category, id: topic }
-    let(:invalid_topic_update){ put :update, post: attributes_for(:topic, :invalid, title: "updated", user_id: signed_user, category_id: category.id), category_id: topic.category, id: topic }
-    
-    let(:response_update){ put :update, post: attributes_for(:response_with_topic, title: "updated", user_id: signed_user, category_id: category.id), category_id: resp.topic.category, id: resp }
-    let(:invalid_response_update){ put :update, post: attributes_for(:response_with_topic, :invalid, title: "updated", user_id: signed_user, category_id: category.id), category_id: resp.topic.category, id: resp }
+  describe "#update", focus: true do
+    let(:valid_atts){ {'title' => 'Updated', 'user_id'=>'1' } }
+    let(:mk_req){ put :update, post: valid_atts, category_id: category_id, id: post_id }
 
-    context "user_signed_in?" do
-      before :each do
-        set_user_session(signed_user)
-      end
-
-      context "@category.present?" do
-        it "@post == Post.find(params[:id])" do
-          topic_update
-          assigns(:post).should eq(topic)
-        end
-
+    context "@category.present?" do
+      context "user_signed_in?" do
         context "@post.valid?" do
           context "current_user.is_admin?" do
             before :each do
-              set_user_session(signed_admin_user)
-            end
-
-            it "post.title == 'updated'" do
-              expect{
-                topic_update
-                topic.reload
-              }.to change{ topic.title }.to('updated')
+              sign_in mock_model('User', is_admin?: true)
             end
             
             context "@post.parent_id?" do
-              it "redirect_to category_post_path(@post.topic.category,@post.topic)" do
-                response_update
-                resp.reload
-                response.should redirect_to category_post_path(resp.topic.category,resp.topic)
+              let(:mk_req){ put :update, post: valid_atts, category_id: category_id, id: resp_id }
+
+              before :each do
+                Post.stub(:find).and_return(resp)
+                resp.stub(:update_attributes).with(valid_atts).and_return(true)
+                controller.stub(:after_save_redirect).with(resp).and_return(category_post_path(category_id,post_id))
+              end
+
+              it "update_attributes and redirects to parent show view" do
+                resp.should_receive(:update_attributes).with(valid_atts)
+                controller.should_receive(:after_save_redirect).with(resp)
+
+                mk_req
+                response.should redirect_to category_post_path(category_id,post_id)
               end
             end
 
             context "!@post.parent_id?" do
-              it "redirect_to category_post_path(@post)" do
-                topic_update
-                topic.reload
-                response.should redirect_to category_post_path(topic.category,topic)
+              before :each do
+                Post.stub(:find).and_return(xpost)
+                xpost.stub(:update_attributes).with(valid_atts).and_return(true)
+                controller.stub(:after_save_redirect).with(xpost).and_return(category_post_path(category_id,post_id))
+              end
+
+              it "update_attributes and redirects to parent show view" do
+                xpost.should_receive(:update_attributes).with(valid_atts)
+                controller.should_receive(:after_save_redirect).with(xpost)
+
+                mk_req
+                response.should redirect_to category_post_path(category_id,post_id)
               end
             end
           end # @current_user.is_admin?
 
           context "!current_user.is_admin?" do
-            context "@post.user == current_user" do
-              let(:topic){ create(:topic, user: signed_user) }
-              let(:resp){ create(:response_with_topic, user: signed_user) }
+            before :each do
+              sign_in mock_model('User', is_admin?: false, id: 1)
+            end
 
-              it "post.title == 'updated'" do
-                expect{
-                  topic_update
-                  topic.reload
-                }.to change{ topic.title }.to('updated')
-              end
-              
+            context "@post.user == current_user" do
               context "@post.parent_id?" do
-                it "redirect_to category_post_path(@post.topic.category,@post.topic)" do
-                  response_update
-                  response.should redirect_to category_post_path(resp.topic.category,resp.topic)
+                let(:mk_req){ put :update, post: valid_atts, category_id: category_id, id: resp_id }
+
+                before :each do
+                  Post.stub(:find).and_return(resp)
+                  resp.stub(:update_attributes).with(valid_atts).and_return(true)
+                  controller.stub(:after_save_redirect).with(resp).and_return(category_post_path(category_id,post_id))
+                end
+
+                it "update_attributes and redirects to parent show view" do
+                  resp.should_receive(:update_attributes).with(valid_atts)
+                  controller.should_receive(:after_save_redirect).with(resp)
+
+                  mk_req
+                  response.should redirect_to category_post_path(category_id,post_id)
                 end
               end
 
               context "!@post.parent_id?" do
-                it "redirect_to category_post_path(@post)" do
-                  topic_update
-                  topic.reload
-                  response.should redirect_to category_post_path(topic.category,topic)
+                before :each do
+                  Post.stub(:find).and_return(xpost)
+                  xpost.stub(:update_attributes).with(valid_atts).and_return(true)
+                  controller.stub(:after_save_redirect).with(xpost).and_return(category_post_path(category_id,post_id))
+                end
+
+                it "update_attributes and redirects to parent show view" do
+                  xpost.should_receive(:update_attributes).with(valid_atts)
+                  controller.should_receive(:after_save_redirect).with(xpost)
+
+                  mk_req
+                  response.should redirect_to category_post_path(category_id,post_id)
                 end
               end
             end # @post.user == current_user
 
             context "@post.user != current_user" do
+              let(:xpost) { mock_model('Post', id: 1, slug: post_id, user_id: 2) }
+              let(:resp) { mock_model('Post', parent_id: xpost.id, slug: resp_id, user_id: 2) }
+
+              before :each do
+                Post.stub(:find).with(post_id).and_return(xpost) # Used by Cancan
+              end
+
               it "redirect_to posts_path" do
-                topic_update
+                mk_req
                 response.should redirect_to posts_path
               end
             end
@@ -297,63 +320,95 @@ describe PostsController, type: :controller do
         end # @post.valid
 
         context "!@post.valid?" do
+          let(:invalid_atts){ {'content' => ''} }
+
           context "current_user.is_admin?" do
             before :each do
-              set_user_session(signed_admin_user)
+              sign_in(mock_model('User',is_admin?: true, id: 1))
             end
 
-            it "post.title != 'updated'" do
-              expect{
-                invalid_topic_update
-                topic.reload
-              }.to_not change{ topic.title }.to('updated')
-            end
-            
             context "@post.parent_id?" do
-              it "render_template #update" do
-                invalid_topic_update
+              let(:mk_req){ put :update, post: invalid_atts, category_id: category_id, id: resp_id }
+
+              before :each do
+                Post.stub(:find).and_return(resp)
+                resp.stub(:update_attributes).with(invalid_atts).and_return(false)
+              end
+
+              it "update_attributes and redirects to parent show view" do
+                resp.should_receive(:update_attributes).with(invalid_atts)
+
+                mk_req
                 response.should render_template :edit
               end
             end
 
             context "!@post.parent_id?" do
-              it "render_template #update" do
-                invalid_topic_update
+              let(:mk_req){ put :update, post: invalid_atts, category_id: category_id, id: post_id }
+
+              before :each do
+                Post.stub(:find).and_return(xpost)
+                xpost.stub(:update_attributes).with(invalid_atts).and_return(false)
+              end
+
+              it "update_attributes and redirects to parent show view" do
+                xpost.should_receive(:update_attributes).with(invalid_atts)
+
+                mk_req
                 response.should render_template :edit
               end
             end
           end # current_user.is_admin?
           
           context "!current_user.is_admin?" do
-            context "@post.user == current_user" do
-              let(:topic){ create(:topic, user: signed_user) }
-              let(:resp){ create(:response_with_topic, user: signed_user) }
+            before :each do
+              sign_in mock_model('User', is_admin?: false, id: 1)
+            end
 
-              it "post.title != 'updated'" do
-                expect{
-                  invalid_topic_update
-                  topic.reload
-                }.to_not change{ topic.title }.to('updated')
-              end
-              
+            context "@post.user == current_user" do
               context "@post.parent_id?" do
-                it "render_template #update" do
-                  invalid_response_update
+                let(:mk_req){ put :update, post: invalid_atts, category_id: category_id, id: resp_id }
+
+                before :each do
+                  Post.stub(:find).and_return(resp)
+                  resp.stub(:update_attributes).with(invalid_atts).and_return(false)
+                end
+
+                it "re-renders #edit view" do
+                  resp.should_receive(:update_attributes).with(invalid_atts)
+
+                  mk_req
                   response.should render_template :edit
                 end
               end
 
               context "!@post.parent_id?" do
-                it "render_template #update" do
-                  invalid_topic_update
+                let(:mk_req){ put :update, post: invalid_atts, category_id: category_id, id: post_id }
+
+                before :each do
+                  Post.stub(:find).and_return(xpost)
+                  xpost.stub(:update_attributes).with(invalid_atts).and_return(false)
+                end
+
+                it "re-renders #edit view" do
+                  xpost.should_receive(:update_attributes).with(invalid_atts)
+
+                  mk_req
                   response.should render_template :edit
                 end
               end
             end # @post.user == current_user
 
             context "@post.user != current_user" do
+              let(:xpost) { mock_model('Post', id: 1, slug: post_id, user_id: 2) }
+              let(:resp) { mock_model('Post', parent_id: xpost.id, slug: resp_id, user_id: 2) }
+
+              before :each do
+                Post.stub(:find).with(post_id).and_return(xpost) # Used by Cancan
+              end
+
               it "redirect_to posts_path" do
-                topic_update
+                mk_req
                 response.should redirect_to posts_path
               end
             end # @post.user != current_user
@@ -361,24 +416,28 @@ describe PostsController, type: :controller do
         end
       end
 
-      context "@category.nil?" do
-        it "redirect_to posts_path" do
-          expect{
-            put :update, post: attributes_for(:topic, user_id: signed_user, category_id: category.id), id: topic
-          }.to raise_error(ActionController::RoutingError)
+      context "!user_signed_in?" do
+        before :each do
+          Post.stub(:find).and_return(xpost) # Used by Cancan
+        end
+        
+        it "redirect_to login_path" do
+          mk_req
+          response.should redirect_to login_path
         end
       end
     end
-    
-    context "!user_signed_in?" do
-      it "redirect_to login_path" do
-        topic_update
-        response.should redirect_to login_path
+
+    context "@category.nil?" do
+      it "raises error" do
+        expect{ put :update, post: valid_atts }.to raise_error
       end
     end
   end
 
-  describe 'DELETE destroy' do
+=begin
+
+  describe '#destroy' do
     let(:topic) { create(:topic) }
     let(:resp) { create(:response_with_topic) }
     

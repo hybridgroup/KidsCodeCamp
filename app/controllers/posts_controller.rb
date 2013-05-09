@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
   before_filter :set_category
-  before_filter :check_category, only: [:new, :edit, :show, :create, :update]
+  # before_filter :check_category, only: [:new, :edit, :show, :create, :update]
 
   def index
     if params[:category_id].present?
@@ -42,7 +42,6 @@ class PostsController < ApplicationController
   
   def edit
     @post = Post.find(params[:id])
-    #authorize! :edit, @post
   end
   
   
@@ -52,7 +51,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to :after_save_redirect, notice: 'Post was successfully created.' }
+        format.html { redirect_to after_save_redirect(@post), notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
         format.html { render action: "new" }
@@ -67,7 +66,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
-        format.html { redirect_to :after_save_redirect, notice: 'Post was successfully updated.' }
+        format.html { redirect_to after_save_redirect(@post), notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -82,38 +81,33 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to :after_delete_redirect, notice: 'Post was successfully deleted.' }
+      format.html { redirect_to after_delete_redirect(@post), notice: 'Post was successfully deleted.' }
       format.json { head :no_content }
     end
   end 
   
-  
-  def after_save_redirect_url
-    if @post.parent_id.present? # Response
-      category_post_path(@post.topic.category,@post.topic)
-    else
-      category_post_path(@post.category,@post)
+
+  def after_save_redirect(target)
+    if target.parent_id.present? # Is a response
+      target = target.topic
     end
+    
+    category_post_path(target.category,target)
   end
   
-  
-  def after_delete_redirect_url
-    if @post.parent_id.present? #Response
+
+  def after_delete_redirect(target)
+    if target.parent_id.present? # Is a response
       category_post_path(@post.topic.category,@post.topic)
     else
       category_posts_path(@post.category)
     end
   end
-  
-  
+
+
   def set_category
     if params[:category_id].present?
       @category = Category.find(params[:category_id])
     end
   end
-
-  def check_category
-    redirect_to posts_path if @category.nil?
-  end
-  
 end
