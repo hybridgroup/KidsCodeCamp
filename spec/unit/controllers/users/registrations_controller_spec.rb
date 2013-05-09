@@ -1,28 +1,19 @@
 require 'spec_helper'
 
-describe Users::RegistrationsController do
-  let(:user){ double('User', is_admin: false) }
-  let(:admin_user){ double('User', is_admin: true) }
+describe Users::RegistrationsController, type: :controller, focus: true do
+  let(:user){ mock_model('User', is_admin?: false) }
+  let(:admin_user){ mock_model('User', is_admin?: true) }
 
-  before(:each) do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
-  end
-
-  [:new, :create, :cancel].each do |action|
-    describe "GET #{action}" do
-      context "when not user_signed_in?" do
-        it "render ##{action}" do
-          get action
-          response.should render_template :new
-        end
+  describe "#after_sign_up_path_for" do
+    context "resource.is_admin?" do
+      it "redirects to posts_path" do
+        controller.after_sign_up_path_for(admin_user).should eq(posts_path)
       end
     end
-  end
 
-  [:edit, :update, :destroy].each do |action|
-    describe "GET #{action}" do
-      context "when not user_signed_in?" do
-        it "redirect_to login_path"
+    context "!resource.is_admin?" do
+      it "redirects to posts_path" do
+        controller.after_sign_up_path_for(user).should eq(posts_path)
       end
     end
   end
