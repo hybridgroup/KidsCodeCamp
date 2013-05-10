@@ -23,7 +23,8 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Warden::Test::Helpers
   config.include Devise::TestHelpers, :type => :controller
-  config.extend ControllerMacros
+  #config.extend ControllerMacros, :type => :feature
+  config.include LoginMacros, :type => :feature
   config.include ControllerHelpers, :type => :controller
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers

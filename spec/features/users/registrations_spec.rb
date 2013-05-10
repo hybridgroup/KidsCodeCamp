@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "user registrations" do
+describe "user registrations", type: :feature do
   context "with valid data" do
     it "allows new users to register with an email address, password and username" do
       visit sign_up_path
@@ -17,7 +17,7 @@ describe "user registrations" do
   
 
   context "with invalid data" do
-    it "disallow new users to register" do
+    it "disallows new users to register" do
       visit sign_up_path
 
       fill_in "Username",              :with => ""

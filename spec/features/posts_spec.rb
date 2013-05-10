@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-shared_examples_for 'guest user' do
+shared_examples_for 'public content' do
   it "lists all categories" do
     visit posts_path
     
@@ -18,7 +18,7 @@ shared_examples_for 'guest user' do
 end
 
 shared_examples_for 'logged in user' do
-  it_behaves_like 'guest user'
+  it_behaves_like 'public content'
 
   it "views a post with a comment form" do
     visit category_post_path(category_id: post.category, id: post)
@@ -45,16 +45,16 @@ shared_examples_for 'logged in user' do
   end
 end
 
-describe "Posts" do
+describe "Posts", type: :feature do
   let(:category){ create(:category_with_posts) }
   let(:post){ create(:topic) }
   let(:new_post){ build(:post) }
 
   context 'As a guest user' do
-    it_behaves_like 'guest user'
+    it_behaves_like 'public content'
 
     it "view a post with no comment form" do
-      visit posts_path(category_id: post.category, id: post)
+      visit category_post_path(category_id: post.category, id: post)
       
       page.should have_content(post.title)
       page.should_not have_content('Add a response')

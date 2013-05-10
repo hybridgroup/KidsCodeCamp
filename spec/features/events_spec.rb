@@ -1,18 +1,20 @@
 require 'spec_helper'
 
-describe "Events" do
+describe "Events", type: :feature do
   let(:editpage){ create(:editpage, id: 4) }
   let(:event){ create(:event) }
+  subject { page }
 
-  it "show homepage" do
+  it "shows homepage" do
+    editpage
     visit root_path
     
-    page.should have_content(editpage.content)
+    should have_content(editpage.content)
   end
 
   it "views a event" do
     visit event_path(id: event)
     
-    page.should have_content(event.title)
+    should have_content(event.content)
   end
 end

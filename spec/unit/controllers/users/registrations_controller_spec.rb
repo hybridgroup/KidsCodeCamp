@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Users::RegistrationsController, type: :controller, focus: true do
+describe Users::RegistrationsController, type: :controller do
   let(:user){ mock_model('User', is_admin?: false) }
   let(:admin_user){ mock_model('User', is_admin?: true) }
 
