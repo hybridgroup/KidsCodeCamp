@@ -41,13 +41,13 @@ ActiveRecord::Schema.define(:version => 20130410153955) do
   add_index "events", ["slug"], :name => "index_events_on_slug", :unique => true
 
   create_table "posts", :force => true do |t|
+    t.string   "title"
     t.string   "slug"
     t.text     "content"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "user_id"
     t.integer  "parent_id"
-    t.string   "title"
     t.integer  "category_id"
   end
 
